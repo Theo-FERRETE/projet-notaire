@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist_Mono,
+  Inter,
+  Libre_Caslon_Text,
+  Literata,
+  Manrope,
+} from "next/font/google";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -9,8 +15,25 @@ const siteDescription =
 const heroImage =
   "https://www.figma.com/api/mcp/asset/bc507d92-6017-4cda-ba85-4892fd8079f5.png";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const libreCaslon = Libre_Caslon_Text({
+  variable: "--font-libre-caslon",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
+const literata = Literata({
+  variable: "--font-literata",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -46,7 +69,14 @@ export const metadata: Metadata = {
     siteName,
     title: `${siteName} | Étude notariale à Aix-en-Provence`,
     description: siteDescription,
-    images: [{ url: heroImage, width: 1200, height: 630, alt: "Étude notariale Laila Gssime à Aix-en-Provence" }],
+    images: [
+      {
+        url: heroImage,
+        width: 1200,
+        height: 630,
+        alt: "Étude notariale Laila Gssime à Aix-en-Provence",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -71,7 +101,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${libreCaslon.variable} ${literata.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
