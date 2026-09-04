@@ -35,8 +35,8 @@ const CONTENT = {
   },
   map: {
     heading: 'Nous trouver',
-    // Paste a Google Maps embed URL when the map is available.
-    embedUrl: '',
+    embedUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.8390853931005!2d5.4495929!3d43.5265482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c98d962fff3b4b%3A0x73d8ad4ec13fce8b!2s34%20Cr%20Mirabeau%2C%2013100%20Aix-en-Provence!5e0!3m2!1sen!2sfr!4v1788527296384!5m2!1sen!2sfr',
     mapsLink: 'https://www.google.com/maps/search/?api=1&query=34+cours+Mirabeau+Aix-en-Provence',
   },
 } as const
@@ -247,7 +247,7 @@ export default function ContactPage() {
                 src={CONTENT.map.embedUrl}
                 className="h-full w-full border-0"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             ) : (
