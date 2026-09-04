@@ -21,8 +21,8 @@ export default function SiteFooter() {
         <div className="flex flex-col gap-16 md:flex-row md:justify-center md:gap-16">
           <div className="flex w-full max-w-[362px] flex-col gap-[22.9px]">
             <Image
-              src="/qui-suis-je/logo-gssime.png"
-              alt="Logo de l'étude Laïla Gssime"
+              src="/contact/notaire-logo.svg"
+              alt="Logo Notaire de l’étude Laïla Gssime"
               width={65}
               height={65}
               className="size-[65px] object-cover"
