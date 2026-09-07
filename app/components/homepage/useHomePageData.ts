@@ -12,8 +12,9 @@ export function useHomePageData() {
       ],
       serviceCards: [
         { title: 'Famille', description: 'Accompagnement sur-mesure pour les familles, les successions et les transmissions.', icon: '✦' },
-        { title: 'Immobilier', description: 'Sécurisation des transactions et conseils juridiques pour vos investissements.', icon: '◈' },
-        { title: 'Transmission', description: 'Conseils et accompagnement pour la transmission patrimoniale et les donations.', icon: '◎' },
+        { title: 'Patrimoine', description: 'Structuration et organisation du patrimoine dans le respect des cadres juridique et fiscal.', icon: '▣' },
+        { title: 'Immobilier', description: 'Sécurisation juridique des opérations immobilières, de la préparation à la réalisation.', icon: '▦' },
+        { title: "Transmission d'entreprise", description: 'Conseil et accompagnement des entreprises à chaque étape de leur développement.', icon: '◈' },
         { title: 'Droit international privé', description: 'Réglementation et sécurisation des situations transfrontalières et internationales.', icon: '◍' },
       ],
       footerLinks: {

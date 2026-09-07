@@ -1,28 +1,47 @@
+import Link from 'next/link'
+
 type ServiceCard = { title: string; description: string; icon: string }
 
 const familyImage = 'https://www.figma.com/api/mcp/asset/40875862-0fac-457e-a94f-45ac0be4dab8.png'
 
 export function ServicesSection({ serviceCards }: { serviceCards: ServiceCard[] }) {
+  const family = serviceCards.find((service) => service.title === 'Famille')
+  const patrimoine = serviceCards.find((service) => service.title === 'Patrimoine')
+  const immobilier = serviceCards.find((service) => service.title === 'Immobilier')
+  const transmission = serviceCards.find((service) => service.title === "Transmission d'entreprise")
+  const international = serviceCards.find((service) => service.title === 'Droit international privé')
+
+  const textCard = (service: ServiceCard | undefined, className: string) => service ? (
+    <article className={`flex min-h-[168px] flex-col justify-center border border-white/[.12] bg-[#12172b] p-6 sm:p-7 ${className}`}>
+      <span className="mb-5 text-2xl leading-none text-[#e3c68e]" aria-hidden="true">{service.icon}</span>
+      <h3 className="font-serif text-[22px] leading-[1.2] text-[#f5eee2]">{service.title}</h3>
+      <p className="mt-4 max-w-[290px] text-[13px] leading-[1.55] text-[#c3c6d0]">{service.description}</p>
+    </article>
+  ) : null
+
   return (
-    <section className="bg-[#f4f1e6] px-8 py-24" id="services">
-      <div className="mb-10 flex items-end justify-between gap-6">
+    <section className="bg-[#2A254E] px-6 py-20 text-[#f5eee2] sm:px-8 sm:py-24 lg:px-12" id="services">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.2px] text-[var(--gold-accessible)]">Domaines d’expertise</p>
-          <h2 className="font-serif text-[clamp(34px,4vw,46px)] font-medium leading-[1.25]">Sécuriser vos projets<br />avec rigueur et clarté.</h2>
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.2px] text-[#e3c68e]">Domaines d’expertise</p>
+          <h2 className="font-serif text-[clamp(32px,4vw,46px)] font-medium leading-[1.2]">Sécuriser vos projets avec rigueur et clarté.</h2>
+          <p className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-[#c3c6d0]">Nous collaborons avec d&apos;autres spécialistes et professionnels du droit afin de garantir une approche globale et cohérente.</p>
         </div>
-        <a href="#contact" className="hidden text-[11px] font-bold uppercase tracking-[1px] text-[#0d0070] md:block">Voir tous les services →</a>
-      </div>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {serviceCards.map((service) => (
-          <article key={service.title} className="overflow-hidden border border-black/[.08] bg-[#fdfcf7]">
-            <img src={familyImage} alt="" className="h-[190px] w-full object-cover" />
-            <div className="p-[22px]">
-              <span className="mb-4 grid h-[38px] w-[38px] place-items-center rounded-full border border-[#c4a000] text-[#c4a000]">{service.icon}</span>
-              <h3 className="font-serif text-[25px] font-medium">{service.title}</h3>
-              <p className="mt-3 text-[14px] leading-[1.6] text-[#4d4732]">{service.description}</p>
-            </div>
-          </article>
-        ))}
+        <Link href="/services" className="w-fit text-[11px] font-bold uppercase tracking-[1px] text-[#e3c68e] transition-colors hover:text-white lg:mb-1">Voir tous les services <span aria-hidden="true">→</span></Link>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {family ? <article className="group relative min-h-[280px] overflow-hidden sm:col-span-2 lg:min-h-[236px]">
+            <img src={familyImage} alt="Une famille réunie autour d'un projet patrimonial" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#101527]/70 via-transparent to-transparent" />
+            <h3 className="absolute bottom-6 left-6 font-serif text-[28px] text-white sm:left-7">{family.title}</h3>
+          </article> : null}
+          {textCard(patrimoine, 'lg:col-start-3')}
+          {textCard(immobilier, '')}
+          {textCard(transmission, '')}
+          {textCard(international, '')}
+        </div>
       </div>
     </section>
   )
