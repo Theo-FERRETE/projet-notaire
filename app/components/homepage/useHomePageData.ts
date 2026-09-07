@@ -4,10 +4,11 @@ export function useHomePageData() {
   return useMemo(
     () => ({
       navItems: [
-        { label: 'Office', href: '#office', active: true },
-        { label: 'Services', href: '#services' },
-        { label: 'Team', href: '#team' },
-        { label: 'Contact', href: '#contact' },
+        { label: 'Accueil', href: '/', active: true },
+        { label: 'Services', href: '/services' },
+        { label: 'Qui-suis-je', href: '/qui-suis-je' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Contact', href: '/contact' },
       ],
       serviceCards: [
         { title: 'Famille', description: 'Accompagnement sur-mesure pour les familles, les successions et les transmissions.', icon: '✦' },
