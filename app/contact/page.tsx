@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ContactForm } from '../components/site/ContactForm'
 import { HomeFooter } from '../components/homepage/HomeFooter'
 import { getSiteNavItems, HomeHeader } from '../components/homepage/HomeHeader'
+import { getPageBySlug, getPageSection } from '../../lib/payload'
 
 /**
  * Classic static Contact page.
@@ -157,8 +158,10 @@ const InfoCard = ({
 	</div>
 )
 
-export default function ContactPage() {
+export default async function ContactPage() {
 	const telHref = `tel:${CONTENT.info.phone.replace(/[^\d+]/g, '')}`
+	const page = await getPageBySlug('contact')
+	const hero = getPageSection(page, 'Entrer en relation')
 
 	return (
 		<div className="flex min-h-screen flex-col bg-cream text-ink">
@@ -185,7 +188,7 @@ export default function ContactPage() {
 								{CONTENT.hero.eyebrow}
 							</p>
 							<h1 id="contact-title" className="font-serif text-5xl font-normal leading-tight text-black sm:text-6xl">
-								{CONTENT.hero.heading}
+								{hero?.heading ?? CONTENT.hero.heading}
 							</h1>
 							<div aria-hidden="true" className="h-px w-24 bg-gray-500" />
 							<p className="max-w-2xl text-base leading-relaxed text-[#c5a059]">

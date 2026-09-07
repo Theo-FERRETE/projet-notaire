@@ -18,7 +18,9 @@ export function getSiteNavItems(active: string) {
 
 const heroImage = 'https://www.figma.com/api/mcp/asset/bc507d92-6017-4cda-ba85-4892fd8079f5.png'
 
-export function HomeHeader({ navItems, compact = false }: { navItems: NavItem[]; compact?: boolean }) {
+export function HomeHeader({ navItems, compact = false, heroHeading }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string }) {
+  const heading = heroHeading ?? 'Un notariat humain et de proximité au cœur d’Aix En Provence'
+
   return (
     <header className={`relative text-[#1b1b1b] ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-screen overflow-visible'}`}>
       {!compact ? <img src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" /> : null}
@@ -63,9 +65,7 @@ export function HomeHeader({ navItems, compact = false }: { navItems: NavItem[];
       {!compact ? <div className="relative z-10 w-full px-[4.6vw] pb-32 pt-12 sm:pt-16">
         <div className="w-full max-w-[760px] min-w-0">
           <div className="text-[#c4a000]"><SectionLabel>Excellence juridique</SectionLabel></div>
-          <h1 className="font-display mt-6 max-w-[700px] text-[clamp(38px,5.2vw,64px)] font-semibold leading-[1.12] tracking-[-1.5px] text-[#080808]">
-            Un notariat humain et<br className="hidden sm:block" /> de proximité au cœur<br className="hidden sm:block" /> d’Aix En Provence
-          </h1>
+          <h1 className="font-display mt-6 max-w-[700px] text-[clamp(38px,5.2vw,64px)] font-semibold leading-[1.12] tracking-[-1.5px] text-[#080808]">{heading}</h1>
           {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-[#252525]">
             Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
           </p> */}

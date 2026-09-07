@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { HomeFooter } from "../components/homepage/HomeFooter";
 import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
+import { getPageBySlug, getPageSection } from "../../lib/payload";
 
 import {
   ServiceIcon,
@@ -232,7 +233,10 @@ const structuredData = {
   ],
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const page = await getPageBySlug("services");
+  const hero = getPageSection(page, "L’excellence au service de l’humain");
+
   return (
     <>
       <script
@@ -256,7 +260,7 @@ export default function ServicesPage() {
                 id="services-title"
                 className="mx-auto mb-8 max-w-4xl font-serif text-[40px] leading-[1.2] tracking-[-0.02em] text-ink md:text-[64px] md:leading-[1.1]"
               >
-                Nos Services
+                {hero?.heading ?? "Nos Services"}
               </h1>
               <div aria-hidden="true" className="mx-auto mb-8 h-px w-16 bg-[#c7c7bf]" />
               <p className="mx-auto max-w-3xl font-sans text-lg italic leading-relaxed text-slate-muted">

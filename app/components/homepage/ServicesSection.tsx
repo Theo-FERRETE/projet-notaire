@@ -4,7 +4,7 @@ type ServiceCard = { title: string; description: string; icon: string }
 
 const familyImage = 'https://www.figma.com/api/mcp/asset/40875862-0fac-457e-a94f-45ac0be4dab8.png'
 
-export function ServicesSection({ serviceCards }: { serviceCards: ServiceCard[] }) {
+export function ServicesSection({ serviceCards, heading }: { serviceCards: ServiceCard[]; heading?: string }) {
   const family = serviceCards.find((service) => service.title === 'Famille')
   const patrimoine = serviceCards.find((service) => service.title === 'Patrimoine')
   const immobilier = serviceCards.find((service) => service.title === 'Immobilier')
@@ -25,7 +25,7 @@ export function ServicesSection({ serviceCards }: { serviceCards: ServiceCard[] 
         <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.2px] text-[#e3c68e]">Domaines d’expertise</p>
-          <h2 className="font-serif text-[clamp(32px,4vw,46px)] font-medium leading-[1.2]">Sécuriser vos projets avec rigueur et clarté.</h2>
+          <h2 className="font-serif text-[clamp(32px,4vw,46px)] font-medium leading-[1.2]">{heading ?? 'Sécuriser vos projets avec rigueur et clarté.'}</h2>
           <p className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-[#c3c6d0]">Nous collaborons avec d&apos;autres spécialistes et professionnels du droit afin de garantir une approche globale et cohérente.</p>
         </div>
         <Link href="/services" className="w-fit text-[11px] font-bold uppercase tracking-[1px] text-[#e3c68e] transition-colors hover:text-white lg:mb-1">Voir tous les services <span aria-hidden="true">→</span></Link>

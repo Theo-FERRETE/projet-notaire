@@ -1,8 +1,5 @@
-import { useMemo } from 'react'
-
-export function useHomePageData() {
-  return useMemo(
-    () => ({
+export function getHomePageData() {
+  return {
       navItems: [
         { label: 'Accueil', href: '/', active: true },
         { label: 'Services', href: '/services' },
@@ -21,7 +18,5 @@ export function useHomePageData() {
         navigation: ['Accueil', 'Services', 'Bio', 'Blog'],
         legal: ['Mentions légales', 'Politique de confidentialité', 'CGV'],
       },
-    }),
-    [],
-  )
+  }
 }
