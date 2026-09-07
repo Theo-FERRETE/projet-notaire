@@ -7,12 +7,12 @@ import {
   articleDetails,
   getArticleDetail,
   relatedArticles,
-} from "../../components/blog/article-data";
-import { HomeFooter } from "../../components/homepage/HomeFooter";
+} from "@/app/components/blog/article-data";
+import { HomeFooter } from "@/app/components/homepage/HomeFooter";
 import {
   getSiteNavItems,
   HomeHeader,
-} from "../../components/homepage/HomeHeader";
+} from "@/app/components/homepage/HomeHeader";
 
 export function generateStaticParams() {
   return articleDetails.map((article) => ({ slug: article.slug }));

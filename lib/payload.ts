@@ -1,6 +1,9 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
+import type { Where } from 'payload'
 import type { Page } from '../payload-types'
+import type { Article as PayloadArticle, Media } from '../payload-types'
+import type { Article, BlogCategory } from '../app/components/blog/blog-data'
 
 export async function getPageBySlug(slug: Page['slug']) {
   try {
@@ -25,4 +28,47 @@ export async function getPageBySlug(slug: Page['slug']) {
 
 export function getPageSection(page: Page | null, label: string) {
   return page?.sections?.find((section) => section.label === label && section.enabled !== false) ?? null
+}
+
+function getMediaUrl(image: PayloadArticle['image']) {
+  if (!image || typeof image === 'number') return undefined
+  return (image as Media).url ?? undefined
+}
+
+const categoryLabels: Record<PayloadArticle['category'], Article['category']> = {
+  famille: 'Famille',
+  immobilier: 'Immobilier',
+  patrimoine: 'Patrimoine',
+  international: 'International',
+}
+
+export async function getPublishedArticles(category?: BlogCategory) {
+  try {
+    const payload = await getPayload({ config })
+    const where: Where[] = [
+      { status: { equals: 'published' } },
+      ...(category && category !== 'Tous' ? [{ category: { equals: category.toLowerCase() } }] : []),
+    ]
+    const result = await payload.find({
+      collection: 'articles',
+      where: { and: where },
+      sort: '-publishedAt',
+      depth: 1,
+      limit: 100,
+    })
+
+    if (result.docs.length === 0) return null
+
+    return result.docs.map((article): Article => ({
+      slug: article.slug,
+      category: categoryLabels[article.category],
+      date: article.publishedAt ? new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(article.publishedAt)) : '',
+      title: article.title,
+      excerpt: article.excerpt ?? '',
+      image: getMediaUrl(article.image),
+    }))
+  } catch (error) {
+    console.warn('Payload indisponible pour les articles. Fallback utilisé.', error)
+    return null
+  }
 }

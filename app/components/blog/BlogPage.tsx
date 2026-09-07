@@ -83,9 +83,10 @@ export default function BlogPage({
 
           <section id="articles" className="grid gap-10 pt-2 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 md:grid-cols-3 md:gap-8">
             {articles.map((article) => (
-              <article key={article.title} className="group">
+              <article key={article.slug} className="group">
+                <Link href={`/blog/${article.slug}`} className="block">
                 <div className="relative mb-6 aspect-[1.45] overflow-hidden bg-sand">
-                  <ArticleImage alt={`Illustration de l'article « ${article.title} »`} />
+                  {article.image ? <Image src={article.image} alt={`Illustration de l'article « ${article.title} »`} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" /> : <ArticleImage alt={`Illustration de l'article « ${article.title} »`} />}
                   <span className="absolute left-4 top-4 bg-cream px-3 py-2 text-[9px] font-bold uppercase tracking-[1.1px] text-gold">
                     {article.category}
                   </span>
@@ -94,6 +95,7 @@ export default function BlogPage({
                 <h2 className="font-serif text-[26px] leading-[1.12] transition-colors group-hover:text-gold">{article.title}</h2>
                 <p className="mt-4 text-[13px] leading-6 text-slate-muted">{article.excerpt}</p>
                 <span aria-hidden className="mt-6 block h-px w-12 bg-gold" />
+                </Link>
               </article>
             ))}
             {articles.length === 0 ? (

@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
 
-import { ContactForm } from '../components/site/ContactForm'
-import { HomeFooter } from '../components/homepage/HomeFooter'
-import { getSiteNavItems, HomeHeader } from '../components/homepage/HomeHeader'
-import { getPageBySlug, getPageSection } from '../../lib/payload'
+import { ContactForm } from '@/app/components/site/ContactForm'
+import { HomeFooter } from '@/app/components/homepage/HomeFooter'
+import { getSiteNavItems, HomeHeader } from '@/app/components/homepage/HomeHeader'
+import { getPageBySlug, getPageSection } from '@/lib/payload'
 
 /**
  * Classic static Contact page.

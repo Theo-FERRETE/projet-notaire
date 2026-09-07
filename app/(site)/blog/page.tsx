@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
-import BlogPage from "../components/blog/BlogPage";
+import BlogPage from "@/app/components/blog/BlogPage";
+import { getPublishedArticles } from "@/lib/payload";
 import {
   getArticlesByCategory,
   getBlogCategory,
-} from "../components/blog/blog-data";
+} from "@/app/components/blog/blog-data";
 
 export const metadata: Metadata = {
   title: "Blog juridique | Maître Laïla GSSIME — Notaire",
@@ -31,11 +32,12 @@ export default async function Page({
     ? params.categorie[0]
     : params.categorie;
   const activeCategory = getBlogCategory(categoryParam);
+  const payloadArticles = await getPublishedArticles(activeCategory);
 
   return (
     <BlogPage
       activeCategory={activeCategory}
-      articles={getArticlesByCategory(activeCategory)}
+      articles={payloadArticles ?? getArticlesByCategory(activeCategory)}
     />
   );
 }

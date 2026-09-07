@@ -52,6 +52,10 @@ Les titres principaux sont également connectés pour :
 - `qui-suis-je` : section `L’excellence au service de l’humain` ;
 - `services` : section `L’excellence au service de l’humain`.
 
+La liste `/blog` lit désormais les articles Payload dont le statut est `published`, avec filtre par catégorie. Tant qu’aucun article n’est publié, elle conserve les articles de démonstration existants.
+
+Les cartes du blog pointent vers `/blog/[slug]`. La page détail actuelle de ton collègue utilise encore `article-data.ts` et devra être reliée à Payload pour que les nouveaux articles créés dans l’admin puissent s’ouvrir.
+
 Si Payload est indisponible, les contenus codés actuels sont utilisés en fallback.
 
 ## Fichiers importants
@@ -63,6 +67,7 @@ Si Payload est indisponible, les contenus codés actuels sont utilisés en fallb
 - `lib/payload.ts` : accès serveur aux pages Payload.
 - `scripts/seed-pages.ts` : création des pages initiales.
 - `app/(payload)/` : routes admin et API Payload.
+- `app/(site)/` : routes publiques et layout du site, séparés du layout HTML Payload.
 - `app/components/homepage/HomePage.tsx` : intégration CMS actuelle de la homepage.
 
 ## Suite recommandée
@@ -81,3 +86,9 @@ Si Payload est indisponible, les contenus codés actuels sont utilisés en fallb
 Le CMS contrôle les contenus, images et couleurs de blocs. La structure et la mise en page restent dans les composants React afin d'éviter qu'une modification cliente casse le design ou l'accessibilité.
 
 La collection `Pages` utilise des couleurs hexadécimales libres. Il faudra ajouter un contrôle de contraste avant la production pour éviter des combinaisons illisibles.
+
+## Correction importante de l'admin
+
+Payload génère son propre document HTML (`html`, `data-theme`, `lang`). Il ne doit pas être imbriqué dans le layout global du site. Les routes publiques sont donc dans `app/(site)/`, tandis que Payload garde `app/(payload)/layout.tsx`.
+
+Cette séparation corrige l'erreur React `Hydration failed` et évite le double rendu de la balise `<html>` dans `/admin`.
