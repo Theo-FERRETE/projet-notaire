@@ -28,6 +28,7 @@ export const Pages: CollectionConfig = {
         { label: 'Accueil', value: 'home' },
         { label: 'Qui suis-je', value: 'qui-suis-je' },
         { label: 'Services', value: 'services' },
+        { label: 'Blog', value: 'blog' },
         { label: 'Contact', value: 'contact' },
       ],
       label: 'Page publique',

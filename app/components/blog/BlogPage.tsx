@@ -6,6 +6,7 @@ import { getSiteNavItems, HomeHeader } from "../homepage/HomeHeader";
 import {
   blogCategories,
   type Article,
+  type ArticleImage as ArticleImageSource,
   type BlogCategory,
 } from "./blog-data";
 
@@ -17,7 +18,26 @@ const featuredArticle = {
     "Naviguer entre les législations nationales et les conventions internationales requiert une expertise précise.",
 };
 
-function ArticleImage({ alt }: { alt: string }) {
+/** Visuel de l'article : image Media si Payload en fournit une, sinon illustration par défaut. */
+function ArticleImage({
+  alt,
+  source,
+}: {
+  alt: string;
+  source?: ArticleImageSource | null;
+}) {
+  if (source) {
+    return (
+      <Image
+        src={source.url}
+        alt={source.alt || alt}
+        width={source.width}
+        height={source.height}
+        className="h-full w-full object-cover"
+      />
+    );
+  }
+
   return (
     <Image
       src="/qui-suis-je/expertise-notariale.png"
@@ -29,12 +49,24 @@ function ArticleImage({ alt }: { alt: string }) {
   );
 }
 
+/** Section éditable venant de la collection `Pages` de Payload. */
+type PageSection = {
+  label?: string | null;
+  heading?: string | null;
+  backgroundColor?: string | null;
+  textColor?: string | null;
+} | null;
+
 export default function BlogPage({
   articles,
   activeCategory,
+  hero,
+  newsletter,
 }: {
   articles: Article[];
   activeCategory: BlogCategory;
+  hero?: PageSection;
+  newsletter?: PageSection;
 }) {
   return (
     <div className="flex min-h-full flex-col bg-cream text-ink">
@@ -45,10 +77,10 @@ export default function BlogPage({
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[2px] text-gold sm:text-[11px] sm:tracking-[2.4px]">
-                Actualités &amp; analyses
+                {hero?.label || "Actualités & analyses"}
               </p>
               <h1 className="font-serif text-[40px] leading-[1.08] tracking-[-1px] sm:text-[64px] sm:tracking-[-1.5px]">
-                Éclairages juridiques
+                {hero?.heading || "Éclairages juridiques"}
               </h1>
             </div>
             <nav aria-label="Catégories des articles" className="-mx-1 flex max-w-full gap-6 overflow-x-auto border-b border-line px-1 pb-3 sm:gap-7">
@@ -83,9 +115,12 @@ export default function BlogPage({
 
           <section id="articles" className="grid gap-10 pt-2 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 md:grid-cols-3 md:gap-8">
             {articles.map((article) => (
-              <article key={article.title} className="group">
+              <article key={article.slug ?? article.title} className="group">
                 <div className="relative mb-6 aspect-[1.45] overflow-hidden bg-sand">
-                  <ArticleImage alt={`Illustration de l'article « ${article.title} »`} />
+                  <ArticleImage
+                    alt={`Illustration de l'article « ${article.title} »`}
+                    source={article.image}
+                  />
                   <span className="absolute left-4 top-4 bg-cream px-3 py-2 text-[9px] font-bold uppercase tracking-[1.1px] text-gold">
                     {article.category}
                   </span>
@@ -107,8 +142,12 @@ export default function BlogPage({
         <section className="border-y border-line bg-sand px-4 py-16 sm:px-8 sm:py-20 lg:px-16">
           <div className="mx-auto grid w-full max-w-[1120px] gap-8 sm:gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
-              <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.8px] text-gold">Restez informé</p>
-              <h2 className="max-w-[650px] font-serif text-[36px] leading-[1.12] sm:text-[48px]">Veille juridique &amp; pensée stratégique</h2>
+              <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.8px] text-gold">
+                {newsletter?.label || "Restez informé"}
+              </p>
+              <h2 className="max-w-[650px] font-serif text-[36px] leading-[1.12] sm:text-[48px]">
+                {newsletter?.heading || "Veille juridique & pensée stratégique"}
+              </h2>
               <p className="mt-5 max-w-[520px] text-[15px] leading-7 text-slate-muted">
                 Recevez une sélection mensuelle d&apos;analyses juridiques et d&apos;actualités législatives directement rédigées par le cabinet.
               </p>

@@ -79,6 +79,31 @@ const pages: Array<Pick<Page, 'title' | 'slug' | 'sections' | 'seo'>> = [
     },
   },
   {
+    title: 'Blog',
+    slug: 'blog',
+    sections: [
+      {
+        label: 'Actualités & analyses',
+        heading: 'Éclairages juridiques',
+        backgroundColor: '#FCF9F5',
+        textColor: '#1B1B1B',
+        enabled: true,
+      },
+      {
+        label: 'Restez informé',
+        heading: 'Veille juridique & pensée stratégique',
+        backgroundColor: '#F6F3EF',
+        textColor: '#1B1B1B',
+        enabled: true,
+      },
+    ],
+    seo: {
+      metaTitle: 'Blog juridique | Maître Laïla GSSIME — Notaire',
+      metaDescription:
+        'Les éclairages juridiques de Maître Laïla GSSIME sur la famille, l’immobilier, les successions et le patrimoine.',
+    },
+  },
+  {
     title: 'Contact',
     slug: 'contact',
     sections: [

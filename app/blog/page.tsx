@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 
+import {
+  getPageBySlug,
+  getPageSection,
+  getPublishedArticles,
+} from "../../lib/payload";
 import BlogPage from "../components/blog/BlogPage";
 import {
   getArticlesByCategory,
   getBlogCategory,
+  toArticle,
+  toPayloadCategory,
 } from "../components/blog/blog-data";
 
 export const metadata: Metadata = {
@@ -32,10 +39,26 @@ export default async function Page({
     : params.categorie;
   const activeCategory = getBlogCategory(categoryParam);
 
+  const [documents, page] = await Promise.all([
+    getPublishedArticles(toPayloadCategory(activeCategory)),
+    getPageBySlug("blog"),
+  ]);
+
+  // `null` = Payload injoignable, on retombe sur le contenu de secours.
+  // Un tableau vide reste un résultat valide : aucun article publié.
+  const articles = documents
+    ? documents.map(toArticle)
+    : getArticlesByCategory(activeCategory);
+
+  const hero = getPageSection(page, "Actualités & analyses");
+  const newsletter = getPageSection(page, "Restez informé");
+
   return (
     <BlogPage
       activeCategory={activeCategory}
-      articles={getArticlesByCategory(activeCategory)}
+      articles={articles}
+      hero={hero}
+      newsletter={newsletter}
     />
   );
 }

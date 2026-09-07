@@ -206,7 +206,7 @@ export interface Article {
 export interface Page {
   id: number;
   title: string;
-  slug: 'home' | 'qui-suis-je' | 'services' | 'contact';
+  slug: 'home' | 'qui-suis-je' | 'services' | 'blog' | 'contact';
   sections?:
     | {
         label?: string | null;
