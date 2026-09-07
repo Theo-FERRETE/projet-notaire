@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import {
+  EB_Garamond,
   Geist_Mono,
+  Hanken_Grotesk,
   Inter,
   Libre_Caslon_Text,
   Literata,
@@ -34,6 +36,17 @@ const literata = Literata({
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
+const hankenGrotesk = Hanken_Grotesk({
+  variable: "--font-hanken-grotesk",
   subsets: ["latin"],
 });
 
@@ -101,7 +114,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`${manrope.variable} ${libreCaslon.variable} ${literata.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${libreCaslon.variable} ${literata.variable} ${inter.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

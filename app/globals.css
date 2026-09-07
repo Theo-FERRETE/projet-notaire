@@ -22,10 +22,19 @@
   --color-olive: #4d4732;
   --color-line: rgb(196 199 199 / 0.3);
 
+  /* Palette de la maquette Figma "Contact" */
+  --color-ivory: #fdfcf7;
+  --color-graphite: #6b7280;
+  --color-champagne: #c5a059;
+  --color-noir: #1a1a1a;
+  --color-field: #d1d1cc;
+
   --font-sans: var(--font-manrope);
   --font-serif: var(--font-libre-caslon);
   --font-display: var(--font-literata);
   --font-ui: var(--font-inter);
+  --font-garamond: var(--font-eb-garamond);
+  --font-hanken: var(--font-hanken-grotesk);
   --font-mono: var(--font-geist-mono);
 }
 
