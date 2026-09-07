@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { HomeFooter } from "../components/homepage/HomeFooter";
 import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
+import { getPageBySlug, getPageSection } from "../../lib/payload";
 
 export const metadata: Metadata = {
   title: "Qui suis-je — Maître Laïla GSSIME",
@@ -26,7 +27,10 @@ const expertises = [
 
 const motsCles = ["Patrimoine", "Famille", "Avenir", "Sérénité"];
 
-export default function QuiSuisJePage() {
+export default async function QuiSuisJePage() {
+  const page = await getPageBySlug("qui-suis-je");
+  const hero = getPageSection(page, "L’excellence au service de l’humain");
+
   return (
     <div className="flex flex-1 flex-col bg-cream text-ink">
       <HomeHeader compact navItems={getSiteNavItems("Qui-suis-je")} />
@@ -52,7 +56,7 @@ export default function QuiSuisJePage() {
               L&apos;excellence au service de l&apos;humain
             </p>
             <h1 className="text-center font-serif text-[40px] leading-tight tracking-[-1.28px] text-black sm:text-[52px] lg:text-[64px] lg:leading-[80px]">
-              Maître Laïla GSSIME
+              {hero?.heading ?? "Maître Laïla GSSIME"}
             </h1>
             <span aria-hidden className="h-px w-24 bg-gold" />
             <p className="max-w-[672px] text-center text-[18px] leading-[28.8px] text-slate-muted">

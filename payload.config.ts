@@ -8,6 +8,7 @@ import sharp from 'sharp'
 
 import { Articles } from './collections/Articles'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
@@ -20,7 +21,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname, 'app/(payload)/admin'),
     },
   },
-  collections: [Users, Media, Articles],
+  collections: [Users, Media, Articles, Pages],
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || 'file:./payload.db',
