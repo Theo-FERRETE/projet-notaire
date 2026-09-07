@@ -39,12 +39,18 @@ Le seed crée les quatre pages initiales sans doublons. Il peut être relancé s
 
 ## Ce qui est déjà connecté
 
-La homepage interroge Payload côté serveur via `lib/payload.ts`.
+Les pages publiques interrogent Payload côté serveur via `lib/payload.ts`.
 
-Les champs actuellement lus depuis la page Payload `home` sont :
+Les champs actuellement lus depuis les pages Payload sont :
 
 - section `Excellence juridique` : titre du hero ;
 - section `Domaines d’expertise` : titre de la section expertise.
+
+Les titres principaux sont également connectés pour :
+
+- `contact` : section `Entrer en relation` ;
+- `qui-suis-je` : section `L’excellence au service de l’humain` ;
+- `services` : section `L’excellence au service de l’humain`.
 
 Si Payload est indisponible, les contenus codés actuels sont utilisés en fallback.
 
@@ -61,15 +67,14 @@ Si Payload est indisponible, les contenus codés actuels sont utilisés en fallb
 
 ## Suite recommandée
 
-1. Connecter `qui-suis-je/page.tsx`, `services/page.tsx` et `contact/page.tsx` à `getPageBySlug`.
-2. Remplacer progressivement leurs textes codés en dur par les sections Payload.
-3. Ajouter un renderer partagé pour le contenu Lexical et les images Media.
-4. Connecter la liste publique du blog à la collection `Articles` avec filtre par catégorie.
-5. Laisser la page détail des articles consommer le même modèle `Articles`.
-6. Ajouter une règle de publication : seuls les articles `published` sont visibles publiquement.
-7. Configurer un stockage média persistant avant la mise en production, car `staticDir: 'media'` est adapté au local mais pas à tous les hébergements.
-8. Ajouter un adaptateur email pour les emails de connexion/réinitialisation Payload.
-9. Remplacer le secret de développement par une variable secrète de production.
+1. Remplacer progressivement les autres textes codés en dur par les sections Payload.
+2. Ajouter un renderer partagé pour le contenu Lexical et les images Media.
+3. Connecter la liste publique du blog à la collection `Articles` avec filtre par catégorie.
+4. Laisser la page détail des articles consommer le même modèle `Articles`.
+5. Ajouter une règle de publication : seuls les articles `published` sont visibles publiquement.
+6. Configurer un stockage média persistant avant la mise en production, car `staticDir: 'media'` est adapté au local mais pas à tous les hébergements.
+7. Ajouter un adaptateur email pour les emails de connexion/réinitialisation Payload.
+8. Remplacer le secret de développement par une variable secrète de production.
 
 ## Choix d'architecture
 

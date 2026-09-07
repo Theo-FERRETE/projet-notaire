@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { HomeFooter } from "../components/homepage/HomeFooter";
 import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
-import { getPageBySlug, getPageSection } from "../lib/payload";
+import { getPageBySlug, getPageSection } from "../../lib/payload";
 
 import {
   ServiceIcon,
