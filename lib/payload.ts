@@ -30,6 +30,11 @@ export function getPageSection(page: Page | null, label: string) {
   return page?.sections?.find((section) => section.label === label && section.enabled !== false) ?? null
 }
 
+export function getSectionImageUrl(section: ReturnType<typeof getPageSection>) {
+  if (!section?.image || typeof section.image === 'number') return undefined
+  return section.image.url ?? undefined
+}
+
 function getMediaUrl(image: PayloadArticle['image']) {
   if (!image || typeof image === 'number') return undefined
   return (image as Media).url ?? undefined
@@ -69,6 +74,28 @@ export async function getPublishedArticles(category?: BlogCategory) {
     }))
   } catch (error) {
     console.warn('Payload indisponible pour les articles. Fallback utilisé.', error)
+    return null
+  }
+}
+
+export async function getPublishedArticleBySlug(slug: string) {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'articles',
+      where: {
+        and: [
+          { slug: { equals: slug } },
+          { status: { equals: 'published' } },
+        ],
+      },
+      depth: 1,
+      limit: 1,
+    })
+
+    return result.docs[0] ?? null
+  } catch (error) {
+    console.warn(`Payload indisponible pour l’article ${slug}.`, error)
     return null
   }
 }

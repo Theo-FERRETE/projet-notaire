@@ -2,9 +2,9 @@ import Link from 'next/link'
 
 type ServiceCard = { title: string; description: string; icon: string }
 
-const familyImage = 'https://www.figma.com/api/mcp/asset/40875862-0fac-457e-a94f-45ac0be4dab8.png'
+const familyImage = '/qui-suis-je/expertise-notariale.png'
 
-export function ServicesSection({ serviceCards, heading }: { serviceCards: ServiceCard[]; heading?: string }) {
+export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyImage }: { serviceCards: ServiceCard[]; heading?: string; familyImage?: string }) {
   const family = serviceCards.find((service) => service.title === 'Famille')
   const patrimoine = serviceCards.find((service) => service.title === 'Patrimoine')
   const immobilier = serviceCards.find((service) => service.title === 'Immobilier')
@@ -33,7 +33,7 @@ export function ServicesSection({ serviceCards, heading }: { serviceCards: Servi
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {family ? <article className="group relative min-h-[280px] overflow-hidden sm:col-span-2 lg:min-h-[236px]">
-            <img src={familyImage} alt="Une famille réunie autour d'un projet patrimonial" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+            <img src={cmsFamilyImage ?? familyImage} alt="Une famille réunie autour d'un projet patrimonial" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#101527]/70 via-transparent to-transparent" />
             <h3 className="absolute bottom-6 left-6 font-serif text-[28px] text-white sm:left-7">{family.title}</h3>
           </article> : null}

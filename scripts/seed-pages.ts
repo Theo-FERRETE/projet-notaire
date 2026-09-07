@@ -15,6 +15,13 @@ const pages: Array<Pick<Page, 'title' | 'slug' | 'sections' | 'seo'>> = [
         enabled: true,
       },
       {
+        label: 'À propos',
+        heading: 'La rigueur du droit, l’élégance du service.',
+        backgroundColor: '#FCF9F5',
+        textColor: '#1B1B1B',
+        enabled: true,
+      },
+      {
         label: 'Domaines d’expertise',
         heading: 'Sécuriser vos projets avec rigueur et clarté.',
         backgroundColor: '#101527',
@@ -119,7 +126,23 @@ for (const page of pages) {
   })
 
   if (existing.docs[0]) {
-    console.log(`Page déjà présente : ${page.title}`)
+    const currentPage = existing.docs[0]
+    const missingSections = (page.sections ?? []).filter(
+      (section) => !currentPage.sections?.some((currentSection) => currentSection.label === section.label),
+    )
+
+    if (missingSections.length > 0) {
+      await payload.update({
+        collection: 'pages',
+        id: currentPage.id,
+        data: {
+          sections: [...(currentPage.sections ?? []), ...missingSections],
+        },
+      })
+      console.log(`Sections ajoutées : ${page.title}`)
+    } else {
+      console.log(`Page déjà présente : ${page.title}`)
+    }
     continue
   }
 

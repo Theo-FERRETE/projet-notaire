@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 import {
   articleDetails,
@@ -13,6 +14,7 @@ import {
   getSiteNavItems,
   HomeHeader,
 } from "@/app/components/homepage/HomeHeader";
+import { getPublishedArticleBySlug } from "@/lib/payload";
 
 export function generateStaticParams() {
   return articleDetails.map((article) => ({ slug: article.slug }));
@@ -49,7 +51,31 @@ export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
   const article = getArticleDetail(slug);
 
   if (!article) {
-    notFound();
+    const payloadArticle = await getPublishedArticleBySlug(slug);
+
+    if (!payloadArticle) {
+      notFound();
+    }
+
+    const image = payloadArticle.image && typeof payloadArticle.image !== "number"
+      ? payloadArticle.image.url
+      : null;
+
+    return (
+      <div className="flex min-h-screen flex-col bg-cream text-ink">
+        <HomeHeader compact navItems={getSiteNavItems("Blog")} />
+        <main className="mx-auto w-full max-w-[896px] flex-1 px-6 py-16 sm:px-12">
+          <Link href="/blog" className="text-sm text-slate-muted hover:text-ink">← Retour aux articles</Link>
+          <p className="mt-10 text-xs font-bold uppercase tracking-[2px] text-gold">{payloadArticle.category}</p>
+          <h1 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">{payloadArticle.title}</h1>
+          {payloadArticle.publishedAt ? <time className="mt-4 block text-sm text-slate-muted" dateTime={payloadArticle.publishedAt}>{new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long' }).format(new Date(payloadArticle.publishedAt))}</time> : null}
+          {image ? <div className="relative mt-10 aspect-[16/9] overflow-hidden bg-sand"><Image src={image} alt={payloadArticle.title} fill sizes="(max-width: 896px) 100vw, 896px" className="object-cover" /></div> : null}
+          {payloadArticle.excerpt ? <p className="mt-10 border-l-2 border-gold bg-sand p-6 font-serif text-xl italic leading-8">{payloadArticle.excerpt}</p> : null}
+          {payloadArticle.content ? <div className="prose prose-stone mt-10 max-w-none text-lg leading-8"><RichText data={payloadArticle.content} /></div> : null}
+        </main>
+        <HomeFooter />
+      </div>
+    );
   }
 
   return (
