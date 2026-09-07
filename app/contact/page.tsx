@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import { ContactForm } from '../components/site/ContactForm'
-import SiteFooter from '../components/site-footer'
-import SiteHeader from '../components/site-header'
+import { HomeFooter } from '../components/homepage/HomeFooter'
+import { getSiteNavItems, HomeHeader } from '../components/homepage/HomeHeader'
 
 /**
  * Classic static Contact page.
@@ -161,7 +161,7 @@ export default function ContactPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-cream text-ink">
-      <SiteHeader active="Contact" />
+      <HomeHeader compact navItems={getSiteNavItems('Contact')} />
 
       <a
         href="#contact-content"
@@ -259,7 +259,7 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <SiteFooter />
+      <HomeFooter />
     </div>
   )
 }

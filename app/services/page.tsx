@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+
+import { HomeFooter } from "../components/homepage/HomeFooter";
+import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
 
 import {
   ServiceIcon,
@@ -230,134 +232,6 @@ const structuredData = {
   ],
 };
 
-function SiteHeader() {
-  const navigation = [
-    { label: "Office", href: "/" },
-    { label: "Services", href: "/services", active: true },
-    { label: "Team", href: "/team" },
-    { label: "Contact", href: "/contact" },
-  ];
-
-  return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-cream/95 backdrop-blur-sm">
-      <nav
-        aria-label="Navigation principale"
-        className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-6 px-8 py-6 transition-all md:py-8"
-      >
-        <Link
-          className="font-serif text-2xl uppercase tracking-tight text-ink md:text-3xl"
-          href="/"
-        >
-          Laïla Gssime
-        </Link>
-
-        <ul className="hidden items-center gap-10 md:flex">
-          {navigation.map((item) => (
-            <li key={item.label}>
-              <Link
-                aria-current={item.active ? "page" : undefined}
-                className={`relative font-ui text-[11px] font-bold uppercase tracking-[0.1em] transition-colors hover:text-gold ${
-                  item.active ? "text-ink after:absolute after:-bottom-2 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-gold" : "text-slate-muted"
-                }`}
-                href={item.href}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <Link
-          className="border border-[#c7c7bf] px-6 py-2.5 font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-ink transition-colors hover:border-gold hover:bg-gold hover:text-white md:px-8"
-          href="/contact"
-        >
-          Consultation
-        </Link>
-      </nav>
-    </header>
-  );
-}
-
-function SiteFooter() {
-  return (
-    <footer className="border-t border-[#c7c7bf]/50 bg-[#f2eee2] pt-20">
-      <div className="mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-16 px-8 pb-20 md:grid-cols-3">
-        <div className="space-y-6">
-          <Image
-            src="/qui-suis-je/logo-gssime.png"
-            alt="Logo de Maître Laïla Gssime"
-            width={65}
-            height={65}
-            className="size-[65px] object-cover"
-          />
-          <p className="max-w-xs font-sans text-base italic leading-relaxed text-slate-muted">
-            Excellence, Transparence &amp; Tradition Juridique. Une étude
-            engagée pour votre patrimoine.
-          </p>
-        </div>
-
-        <div>
-          <h2 className="mb-8 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-gold">
-            Contact
-          </h2>
-          <address className="space-y-4 not-italic font-sans text-base text-slate-muted">
-            <p>34 cours Mirabeau</p>
-            <p>13100 Aix-En-Provence</p>
-            <p>
-              <a className="transition-colors hover:text-gold" href="tel:+33422580180">
-                +33 (0)4 22 58 01 80
-              </a>
-            </p>
-            <p>
-              <a
-                className="underline underline-offset-4 transition-colors hover:text-gold"
-                href="mailto:laila.gssime@notaires.fr"
-              >
-                laila.gssime@notaires.fr
-              </a>
-            </p>
-          </address>
-        </div>
-
-        <div>
-          <h2 className="mb-8 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-gold">
-            Mentions
-          </h2>
-          <nav aria-label="Navigation légale">
-            <ul className="space-y-4 font-sans text-base">
-              <li>
-                <Link className="text-slate-muted transition-colors hover:text-gold" href="/mentions-legales">
-                  Mentions légales
-                </Link>
-              </li>
-              <li>
-                <Link className="text-slate-muted transition-colors hover:text-gold" href="/confidentialite">
-                  Politique de confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link className="text-slate-muted transition-colors hover:text-gold" href="/contact">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center justify-between gap-6 border-t border-[#c7c7bf]/20 px-8 py-8 md:flex-row">
-        <p className="font-ui text-[9px] font-bold uppercase tracking-[0.2em] text-slate-muted opacity-60">
-          © 2024 L&amp;E Notaires. Tous droits réservés.
-        </p>
-        <div aria-hidden="true" className="flex gap-6 text-[#c7c7bf]">
-          <span className="text-xl">◈</span>
-          <span className="text-xl">✓</span>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 export default function ServicesPage() {
   return (
     <>
@@ -367,9 +241,9 @@ export default function ServicesPage() {
       />
 
       <div className="min-h-screen bg-cream text-ink selection:bg-[#fcd353] selection:text-[#725a00]">
-        <SiteHeader />
+        <HomeHeader compact navItems={getSiteNavItems("Services")} />
 
-        <main id="content" className="pt-40">
+        <main id="content">
           <section
             aria-labelledby="services-title"
             className="relative mx-auto max-w-[1280px] px-8 py-16 text-center md:py-20"
@@ -504,7 +378,7 @@ export default function ServicesPage() {
 
         </main>
 
-        <SiteFooter />
+        <HomeFooter />
       </div>
     </>
   );

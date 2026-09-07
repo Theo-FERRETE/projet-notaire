@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import SiteFooter from "../components/site-footer";
-import SiteHeader from "../components/site-header";
+import { HomeFooter } from "../components/homepage/HomeFooter";
+import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
 
 export const metadata: Metadata = {
   title: "Qui suis-je — Maître Laïla GSSIME",
@@ -29,7 +29,7 @@ const motsCles = ["Patrimoine", "Famille", "Avenir", "Sérénité"];
 export default function QuiSuisJePage() {
   return (
     <div className="flex flex-1 flex-col bg-cream text-ink">
-      <SiteHeader />
+      <HomeHeader compact navItems={getSiteNavItems("Qui-suis-je")} />
 
       <main className="flex-1">
         {/* Hero */}
@@ -177,7 +177,7 @@ export default function QuiSuisJePage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <HomeFooter />
     </div>
   );
 }

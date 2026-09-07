@@ -1,5 +1,26 @@
 type FooterLinks = { navigation: string[]; legal: string[] }
 
+const defaultFooterLinks: FooterLinks = {
+  navigation: ['Accueil', 'Services', 'Bio', 'Blog'],
+  legal: ['Mentions légales', 'Politique de confidentialité', 'CGV'],
+}
+
+function footerHref(label: string) {
+  const links: Record<string, string> = {
+    Accueil: '/',
+    Services: '/services',
+    Bio: '/qui-suis-je',
+    Blog: '/blog',
+    'Mentions légales': '/mentions-legales',
+    'Mentions Légales': '/mentions-legales',
+    'Politique de confidentialité': '/confidentialite',
+    Confidentialité: '/confidentialite',
+    CGV: '/contact',
+  }
+
+  return links[label] ?? '/contact'
+}
+
 const assets = {
   portrait: 'https://www.figma.com/api/mcp/asset/40875862-0fac-457e-a94f-45ac0be4dab8.png',
   location: 'https://www.figma.com/api/mcp/asset/9f21c261-c427-498f-bfe7-6d6ea0859e5f.svg',
@@ -7,10 +28,10 @@ const assets = {
 }
 
 function FooterColumn({ title, links }: { title: string; links: string[] }) {
-  return <div><h3 className="mb-5 text-[11px] font-bold uppercase tracking-[1.2px] text-black/50">{title}</h3><ul className="grid gap-3 text-[15px] text-[var(--gold-accessible)]">{links.map((link) => <li key={link}><a href="#contact">{link}</a></li>)}</ul></div>
+  return <div><h3 className="mb-5 text-[11px] font-bold uppercase tracking-[1.2px] text-black/50">{title}</h3><ul className="grid gap-3 text-[15px] text-[var(--gold-accessible)]">{links.map((link) => <li key={link}><a href={footerHref(link)}>{link}</a></li>)}</ul></div>
 }
 
-export function HomeFooter({ footerLinks }: { footerLinks: FooterLinks }) {
+export function HomeFooter({ footerLinks = defaultFooterLinks }: { footerLinks?: FooterLinks }) {
   return (
     <footer className="grid gap-14 border-t border-black/10 bg-[#f4f1e6] px-8 pb-20 pt-16 lg:grid-cols-[1.5fr_.7fr_.7fr]" id="contact">
       <div>
