@@ -5,6 +5,19 @@ import type { Page } from '../payload-types'
 import type { Article as PayloadArticle, Media } from '../payload-types'
 import type { Article, BlogCategory } from '../app/components/blog/blog-data'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+/**
+ * En développement, une panne Payload retombe sur les contenus codés en dur afin de
+ * ne pas bloquer le travail. En production l'erreur doit remonter : servir
+ * silencieusement du contenu obsolète masque la panne au lieu de la signaler.
+ */
+function payloadUnavailable(context: string, error: unknown): null {
+  if (isProduction) throw error
+  console.warn(`Payload indisponible pour ${context}. Fallback utilisé.`, error)
+  return null
+}
+
 export async function getPageBySlug(slug: Page['slug']) {
   try {
     const payload = await getPayload({ config })
@@ -21,8 +34,7 @@ export async function getPageBySlug(slug: Page['slug']) {
 
     return result.docs[0] ?? null
   } catch (error) {
-    console.warn(`Payload indisponible pour la page ${slug}. Fallback utilisé.`, error)
-    return null
+    return payloadUnavailable(`la page ${slug}`, error)
   }
 }
 
@@ -62,7 +74,9 @@ export async function getPublishedArticles(category?: BlogCategory) {
       limit: 100,
     })
 
-    if (result.docs.length === 0) return null
+    // Aucun article publié : en production on assume la liste vide plutôt que de
+    // présenter les articles de démonstration comme du contenu réel.
+    if (result.docs.length === 0) return isProduction ? [] : null
 
     return result.docs.map((article): Article => ({
       slug: article.slug,
@@ -73,8 +87,7 @@ export async function getPublishedArticles(category?: BlogCategory) {
       image: getMediaUrl(article.image),
     }))
   } catch (error) {
-    console.warn('Payload indisponible pour les articles. Fallback utilisé.', error)
-    return null
+    return payloadUnavailable('les articles', error)
   }
 }
 
@@ -95,7 +108,6 @@ export async function getPublishedArticleBySlug(slug: string) {
 
     return result.docs[0] ?? null
   } catch (error) {
-    console.warn(`Payload indisponible pour l’article ${slug}.`, error)
-    return null
+    return payloadUnavailable(`l’article ${slug}`, error)
   }
 }
