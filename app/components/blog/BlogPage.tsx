@@ -15,6 +15,7 @@ const featuredArticle = {
   title: "L'anticipation successorale en contexte international",
   excerpt:
     "Naviguer entre les législations nationales et les conventions internationales requiert une expertise précise.",
+  slug: "anticipation-successorale-contexte-international",
 };
 
 function ArticleImage({ alt }: { alt: string }) {
@@ -75,7 +76,10 @@ export default function BlogPage({
                 {featuredArticle.title}
               </h2>
               <p className="max-w-[390px] text-[14px] leading-6 text-slate-muted">{featuredArticle.excerpt}</p>
-              <Link href="#articles" className="w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px]">
+              <Link
+                href={`/blog/${featuredArticle.slug}`}
+                className="w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px] transition-colors hover:text-gold"
+              >
                 Lire l&apos;article <span className="ml-2 text-gold">→</span>
               </Link>
             </div>
@@ -94,7 +98,9 @@ export default function BlogPage({
                 <p className="mb-3 text-[10px] font-bold uppercase tracking-[1.2px] text-slate-muted">{article.date}</p>
                 <h2 className="font-serif text-[26px] leading-[1.12] transition-colors group-hover:text-gold">{article.title}</h2>
                 <p className="mt-4 text-[13px] leading-6 text-slate-muted">{article.excerpt}</p>
-                <span aria-hidden className="mt-6 block h-px w-12 bg-gold" />
+                <span className="mt-6 inline-block w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px] transition-colors group-hover:text-gold">
+                  Lire l&apos;article <span className="ml-2 text-gold">→</span>
+                </span>
                 </Link>
               </article>
             ))}
