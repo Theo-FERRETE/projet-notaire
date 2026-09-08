@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
-
-import { ContactForm } from '../components/site/ContactForm'
-import { HomeFooter } from '../components/homepage/HomeFooter'
-import { getSiteNavItems, HomeHeader } from '../components/homepage/HomeHeader'
-import { getPageBySlug, getPageSection } from '../../lib/payload'
-import { PAGE_SLUGS, SECTION_LABELS } from '../../lib/content-keys'
-import type { Page } from '../../payload-types'
+import { ContactForm } from '@/app/components/site/ContactForm'
+import { HomeFooter } from '@/app/components/homepage/HomeFooter'
+import { getSiteNavItems, HomeHeader } from '@/app/components/homepage/HomeHeader'
+import { getPageBySlug, getPageSection } from '@/lib/payload'
+import { PAGE_SLUGS, SECTION_LABELS } from '@/lib/content-keys'
+import type { Page } from '@/payload-types'
 
 /**
  * Classic static Contact page.
