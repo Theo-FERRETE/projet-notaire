@@ -24,11 +24,11 @@ const SERVICE_ICON_OPTIONS = [
 
 const TOOL_ICON_OPTIONS = [
   { label: 'Calculatrice (prêt)', value: 'simulateur-pret' },
-  { label: 'Pourcentage (mainlevée)', value: 'frais-mainlevee' },
-  { label: 'Tendance (baromètre)', value: 'barometre' },
+  { label: 'Cadenas (mainlevée)', value: 'frais-mainlevee' },
+  { label: 'Sceau (baromètre)', value: 'barometre' },
   { label: "Document (frais d'acte)", value: 'frais-acte' },
-  { label: 'Courbe (plus-value)', value: 'plus-value' },
-  { label: 'Balance (droits de succession)', value: 'droits-succession' },
+  { label: 'Impôts (plus-value)', value: 'plus-value' },
+  { label: 'Arbre généalogique (droits de succession)', value: 'droits-succession' },
 ]
 
 export const Pages: CollectionConfig = {
@@ -231,7 +231,18 @@ export const Pages: CollectionConfig = {
               required: true,
               label: 'Texte du bouton',
               admin: {
-                description: 'Le bouton pointe toujours vers /contact.',
+                description:
+                  'Le bouton ouvre le lien externe de l\u2019outil (voir champ « Lien »).',
+              },
+            },
+            {
+              name: 'link',
+              type: 'text',
+              required: false,
+              label: 'Lien externe',
+              admin: {
+                description:
+                  'URL de l\u2019outil / simulateur externe. Si vide, le lien par défaut de l\u2019outil est utilisé.',
               },
             },
             {
