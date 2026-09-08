@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { CONTACT_FALLBACK } from './contact-data'
 
 type ContactHeroProps = {
@@ -47,7 +49,14 @@ export function ContactHero({
 					color: textColor ?? undefined,
 				}}
 			>
-				<img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+				<Image
+					src={image}
+					alt=""
+					aria-hidden="true"
+					fill
+					sizes="100vw"
+					className="object-cover"
+				/>
 				<div aria-hidden="true" className="absolute inset-0 bg-white/90" />
 				<div className="relative z-10 mx-auto max-w-6xl px-6 sm:px-12">{content}</div>
 			</section>

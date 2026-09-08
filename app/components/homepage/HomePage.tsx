@@ -1,4 +1,4 @@
-import { getPageBySlug, getPageSection, getSectionImageUrl } from '../../../lib/payload'
+import { getPageBySlug, getPageSection, getSectionImageUrl } from '../../../lib/payload-server'
 import { AboutSection } from './AboutSection'
 import { HomeFooter } from './HomeFooter'
 import { HomeHeader } from './HomeHeader'

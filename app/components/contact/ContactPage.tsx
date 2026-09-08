@@ -1,4 +1,4 @@
-import { getPageBySlug, getPageSection, getSectionImageUrl } from '@/lib/payload'
+import { getPageBySlug, getPageSection, getSectionImageUrl } from '@/lib/payload-server'
 import { PAGE_SLUGS, SECTION_LABELS } from '@/lib/content-keys'
 import { HomeFooter } from '@/app/components/homepage/HomeFooter'
 import { getSiteNavItems, HomeHeader } from '@/app/components/homepage/HomeHeader'

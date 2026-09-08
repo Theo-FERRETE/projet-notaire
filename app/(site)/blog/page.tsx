@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import BlogPage from "@/app/components/blog/BlogPage";
-import { getPublishedArticles } from "@/lib/payload";
+import { getPublishedArticles } from "@/lib/payload-server";
 import {
   getArticlesByCategory,
   getBlogCategory,
