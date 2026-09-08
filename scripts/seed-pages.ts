@@ -187,6 +187,8 @@ const contactContentSeed: NonNullable<Page['contactContent']> = {
 	quoteText:
 		'“La précision dans la pratique, l’autorité dans le conseil. Notre étude reflète les normes rigoureuses que nous appliquons à chaque dossier juridique.”',
 	quoteCite: 'Droit Notaires',
+	formHeading: 'Envoyer une demande',
+	mapsLinkLabel: 'Ouvrir dans Google Maps',
 }
 
 const pages: PageSeed[] = [
@@ -395,6 +397,8 @@ async function ensurePageContent(payload: Payload, seed: PageSeed, page: Page) {
 			'mapsLink',
 			'quoteText',
 			'quoteCite',
+			'formHeading',
+			'mapsLinkLabel',
 		] as const
 
 		for (const key of contactKeys) {

@@ -12,8 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const siteName = "Laila Gssime";
 const siteDescription =
   "Étude notariale à Aix-en-Provence : un accompagnement humain, rigoureux et personnalisé pour vos projets de vie, votre patrimoine et vos transmissions.";
-const heroImage =
-  "https://www.figma.com/api/mcp/asset/bc507d92-6017-4cda-ba85-4892fd8079f5.png";
+const heroImage = "/qui-suis-je/home-hero.png";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -72,8 +71,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        width: 1200,
-        height: 630,
+        width: 2752,
+        height: 1536,
         alt: "Étude notariale Laila Gssime à Aix-en-Provence",
       },
     ],

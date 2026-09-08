@@ -347,6 +347,18 @@ export const Pages: CollectionConfig = {
           defaultValue: 'Droit Notaires',
           label: 'Auteur de la citation',
         },
+        {
+          name: 'formHeading',
+          type: 'text',
+          defaultValue: 'Envoyer une demande',
+          label: 'Titre du formulaire',
+        },
+        {
+          name: 'mapsLinkLabel',
+          type: 'text',
+          defaultValue: 'Ouvrir dans Google Maps',
+          label: 'Libellé du lien Google Maps',
+        },
       ],
     },
     {
