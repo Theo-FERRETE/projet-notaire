@@ -12,6 +12,20 @@ const slugify = (value: string) =>
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true
+
+      return {
+        status: {
+          equals: 'published',
+        },
+      }
+    },
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'status', 'publishedAt'],
