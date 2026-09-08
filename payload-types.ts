@@ -307,9 +307,13 @@ export interface Page {
           title: string;
           description: string;
           /**
-           * Le bouton pointe toujours vers /contact.
+           * Le bouton ouvre le lien externe de l’outil (voir champ « Lien »).
            */
           label: string;
+          /**
+           * URL de l’outil / simulateur externe. Si vide, le lien par défaut de l’outil est utilisé.
+           */
+          link?: string | null;
           icon: 'simulateur-pret' | 'frais-mainlevee' | 'barometre' | 'frais-acte' | 'plus-value' | 'droits-succession';
           id?: string | null;
         }[]
@@ -541,6 +545,7 @@ export interface PagesSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               label?: T;
+              link?: T;
               icon?: T;
               id?: T;
             };

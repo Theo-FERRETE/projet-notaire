@@ -14,6 +14,7 @@ export type ToolView = {
 	description: string;
 	label: string;
 	icon: ToolIconName;
+	href: string;
 };
 
 /** Forme brute d'un domaine d'intervention tel que stocké dans Payload. */
@@ -32,6 +33,7 @@ export type ToolCardRow = {
 	description?: string | null;
 	label?: string | null;
 	icon?: string | null;
+	link?: string | null;
 };
 
 export const FALLBACK_SERVICES_HERO = {
@@ -111,6 +113,22 @@ export const FALLBACK_SERVICES: ServiceView[] = [
 	},
 ];
 
+/** Lien externe par défaut de chaque outil / simulateur. */
+export const DEFAULT_TOOL_LINKS: Record<string, string> = {
+	"simulateur-pret":
+		"https://www.immobilier.notaires.fr/fr/simulation-emprunt-immobilier",
+	"frais-mainlevee":
+		"https://notairesdugrandparis.fr/fr/outils-et-services/calcul-des-frais-main-levee",
+	barometre:
+		"https://www.immobilier.notaires.fr/fr/prix-immobilier?typeLocalisation=FRANCE&neuf=A",
+	"frais-acte":
+		"https://notairesdugrandparis.fr/fr/outils-et-services/calcul-de-frais-d-achat",
+	"plus-value":
+		"https://notairesdugrandparis.fr/fr/outils-et-services/calcul-des-plus-values",
+	"droits-succession":
+		"https://notairesdugrandparis.fr/fr/outils-et-services/calcul-des-droits-de-succession",
+};
+
 export const FALLBACK_TOOLS: ToolView[] = [
 	{
 		id: "simulateur-pret",
@@ -119,6 +137,7 @@ export const FALLBACK_TOOLS: ToolView[] = [
 			"Estimez votre capacité d'emprunt et vos mensualités pour votre futur projet immobilier.",
 		label: "Accéder au simulateur",
 		icon: "simulateur-pret",
+		href: DEFAULT_TOOL_LINKS["simulateur-pret"],
 	},
 	{
 		id: "frais-mainlevee",
@@ -127,6 +146,7 @@ export const FALLBACK_TOOLS: ToolView[] = [
 			"Calculez le coût de la radiation d'une hypothèque suite au remboursement de votre crédit.",
 		label: "Lancer le calcul",
 		icon: "frais-mainlevee",
+		href: DEFAULT_TOOL_LINKS["frais-mainlevee"],
 	},
 	{
 		id: "barometre",
@@ -135,6 +155,7 @@ export const FALLBACK_TOOLS: ToolView[] = [
 			"Consultez les tendances du marché et les prix au m² pour orienter votre transaction.",
 		label: "Voir les statistiques",
 		icon: "barometre",
+		href: DEFAULT_TOOL_LINKS.barometre,
 	},
 	{
 		id: "frais-acte",
@@ -143,6 +164,7 @@ export const FALLBACK_TOOLS: ToolView[] = [
 			"Obtenez une estimation précise des frais d'acquisition pour votre achat immobilier.",
 		label: "Estimer mes frais",
 		icon: "frais-acte",
+		href: DEFAULT_TOOL_LINKS["frais-acte"],
 	},
 	{
 		id: "plus-value",
@@ -151,6 +173,7 @@ export const FALLBACK_TOOLS: ToolView[] = [
 			"Anticipez l'imposition lors de la revente de votre bien immobilier hors résidence principale.",
 		label: "Calculer l'impôt",
 		icon: "plus-value",
+		href: DEFAULT_TOOL_LINKS["plus-value"],
 	},
 	{
 		id: "droits-succession",
@@ -159,6 +182,7 @@ export const FALLBACK_TOOLS: ToolView[] = [
 			"Évaluez le montant des droits à payer selon le lien de parenté et l'actif successoral.",
 		label: "Simuler les droits",
 		icon: "droits-succession",
+		href: DEFAULT_TOOL_LINKS["droits-succession"],
 	},
 ];
 
@@ -182,6 +206,8 @@ export function toToolViews(docs: ToolCardRow[]): ToolView[] {
 		description: doc.description ?? "",
 		label: doc.label ?? "",
 		icon: (doc.icon ?? "simulateur-pret") as ToolIconName,
+		href:
+			doc.link ?? DEFAULT_TOOL_LINKS[doc.slug ?? ""] ?? DEFAULT_TOOL_LINKS["simulateur-pret"],
 	}));
 }
 

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { ToolIcon } from "@/app/components/icons/ServicesIcons";
 import { FALLBACK_TOOLS_INTRO } from "./services-data";
 import type { ToolView } from "./services-data";
@@ -74,13 +72,15 @@ export function ToolsBand({
 							<p className="mb-8 flex-1 font-sans text-base leading-relaxed text-slate-muted">
 								{tool.description}
 							</p>
-							<Link
+							<a
 								aria-label={`${tool.label} — ${tool.title}`}
 								className="inline-flex w-full items-center justify-center bg-ink px-6 py-3 font-ui text-[10px] font-bold uppercase tracking-widest text-cream transition-colors hover:bg-gold"
-								href="/contact"
+								href={tool.href}
+								target="_blank"
+								rel="noopener noreferrer"
 							>
 								{tool.label}
-							</Link>
+							</a>
 						</article>
 					))}
 				</div>
