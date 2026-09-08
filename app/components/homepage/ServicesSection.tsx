@@ -4,7 +4,7 @@ type ServiceCard = { title: string; description: string; icon: string }
 
 const familyImage = '/qui-suis-je/expertise-notariale.png'
 
-export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyImage }: { serviceCards: ServiceCard[]; heading?: string; familyImage?: string }) {
+export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyImage, backgroundColor, textColor }: { serviceCards: ServiceCard[]; heading?: string; familyImage?: string; backgroundColor?: string | null; textColor?: string | null }) {
   const family = serviceCards.find((service) => service.title === 'Famille')
   const patrimoine = serviceCards.find((service) => service.title === 'Patrimoine')
   const immobilier = serviceCards.find((service) => service.title === 'Immobilier')
@@ -20,7 +20,7 @@ export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyI
   ) : null
 
   return (
-    <section className="bg-[#2A254E] px-6 py-20 text-[#f5eee2] sm:px-8 sm:py-24 lg:px-12" id="services">
+    <section className="bg-[#2A254E] px-6 py-20 text-[#f5eee2] sm:px-8 sm:py-24 lg:px-12" id="services" style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}>
       <div className="mx-auto max-w-[1280px]">
         <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
         <div>

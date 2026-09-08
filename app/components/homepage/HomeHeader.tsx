@@ -18,12 +18,15 @@ export function getSiteNavItems(active: string) {
 
 const heroImage = '/qui-suis-je/expertise-notariale.png'
 
-export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string }) {
+export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, backgroundColor, textColor }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; backgroundColor?: string | null; textColor?: string | null }) {
   const heading = heroHeading ?? 'Un notariat humain et de proximité au cœur d’Aix En Provence'
   const image = cmsHeroImage ?? heroImage
 
   return (
-    <header className={`relative text-[#1b1b1b] ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-screen overflow-visible'}`}>
+    <header
+      className={`relative text-[#1b1b1b] ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-screen overflow-visible'}`}
+      style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
+    >
       {!compact ? <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" /> : null}
       {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
 
@@ -66,7 +69,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
       {!compact ? <div className="relative z-10 w-full px-[4.6vw] pb-32 pt-12 sm:pt-16">
         <div className="w-full max-w-[760px] min-w-0">
           <div className="text-[#c4a000]"><SectionLabel>Excellence juridique</SectionLabel></div>
-          <h1 className="font-display mt-6 max-w-[700px] text-[clamp(38px,5.2vw,64px)] font-semibold leading-[1.12] tracking-[-1.5px] text-[#080808]">{heading}</h1>
+          <h1 className="font-display mt-6 max-w-[700px] text-[clamp(38px,5.2vw,64px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
           {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-[#252525]">
             Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
           </p> */}

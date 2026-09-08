@@ -1,9 +1,9 @@
 const studioImage = '/qui-suis-je/expertise-notariale.png'
 const brandMark = '/contact/notaire-logo.svg'
 
-export function AboutSection({ heading, image }: { heading?: string; image?: string }) {
+export function AboutSection({ heading, image, backgroundColor, textColor }: { heading?: string; image?: string; backgroundColor?: string | null; textColor?: string | null }) {
   return (
-    <section className="grid items-center gap-16 bg-[#fdfcf7] px-8 py-28 lg:grid-cols-2" id="office">
+    <section className="grid items-center gap-16 bg-[#fdfcf7] px-8 py-28 lg:grid-cols-2" id="office" style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}>
       <div>
         <h2 className="mb-8 font-serif text-[clamp(34px,4vw,46px)] font-medium leading-[1.25]">
           {heading ?? <><span>La rigueur du droit,</span><br /><em className="font-normal">l’élégance du service.</em></>}
