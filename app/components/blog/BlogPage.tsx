@@ -16,6 +16,7 @@ const featuredArticle = {
   title: "L'anticipation successorale en contexte international",
   excerpt:
     "Naviguer entre les législations nationales et les conventions internationales requiert une expertise précise.",
+  slug: "anticipation-successorale-contexte-international",
 };
 
 /** Visuel de l'article : image Media si Payload en fournit une, sinon illustration par défaut. */
@@ -107,7 +108,10 @@ export default function BlogPage({
                 {featuredArticle.title}
               </h2>
               <p className="max-w-[390px] text-[14px] leading-6 text-slate-muted">{featuredArticle.excerpt}</p>
-              <Link href="#articles" className="w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px]">
+              <Link
+                href={`/blog/${featuredArticle.slug}`}
+                className="w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px] transition-colors hover:text-gold"
+              >
                 Lire l&apos;article <span className="ml-2 text-gold">→</span>
               </Link>
             </div>

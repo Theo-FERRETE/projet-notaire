@@ -122,6 +122,14 @@ export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
         {/* Corps de l'article */}
         <article className="mx-auto w-full max-w-[896px] px-6 py-16 sm:px-12 lg:px-0">
           <div className="flex flex-col gap-8">
+            <Link
+              href="/blog"
+              className="flex w-fit items-center gap-1.5 font-serif text-xs uppercase leading-4 tracking-[2.4px] text-slate-muted transition-colors hover:text-ink"
+            >
+              <span aria-hidden>←</span>
+              Retour aux éclairages
+            </Link>
+
             <figure className="m-0 flex flex-col gap-[14px]">
               <div className="border border-line bg-sand p-px">
                 <div className="relative h-[440px] w-full overflow-hidden">
