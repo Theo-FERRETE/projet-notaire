@@ -256,9 +256,9 @@ export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
                       />
                     </div>
                   </div>
-                  {media.alt ? (
+                  {media.caption ? (
                     <figcaption className="border-b border-line pb-[13px] text-center font-serif text-xs uppercase leading-4 tracking-[1.68px] text-slate-muted">
-                      {media.alt}
+                      {media.caption}
                     </figcaption>
                   ) : null}
                 </figure>

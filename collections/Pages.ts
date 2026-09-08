@@ -33,6 +33,12 @@ const TOOL_ICON_OPTIONS = [
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  access: {
+    read: () => true,
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
