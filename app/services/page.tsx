@@ -4,6 +4,7 @@ import Link from "next/link";
 import { HomeFooter } from "../components/homepage/HomeFooter";
 import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
 import { getPageBySlug, getPageSection } from "../../lib/payload";
+import { PAGE_SLUGS, SECTION_LABELS } from "../../lib/content-keys";
 
 import {
   ServiceIcon,
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   },
 };
 
-type Service = {
+type ServiceView = {
   title: string;
   icon: ServiceIconName;
   paragraphs: string[];
@@ -54,7 +55,7 @@ type Service = {
   conclusion?: string;
 };
 
-const services: Service[] = [
+const STATIC_SERVICES: ServiceView[] = [
   {
     title: "Acheter / Vendre",
     icon: "home",
@@ -121,7 +122,7 @@ const services: Service[] = [
   },
 ];
 
-type Tool = {
+type ToolView = {
   id: string;
   title: string;
   description: string;
@@ -129,7 +130,7 @@ type Tool = {
   icon: ToolIconName;
 };
 
-const tools: Tool[] = [
+const STATIC_TOOLS: ToolView[] = [
   {
     id: "simulateur-pret",
     title: "Simulateur de prêt",
@@ -180,6 +181,55 @@ const tools: Tool[] = [
   },
 ];
 
+const STATIC_SERVICES_HERO = {
+  eyebrow: "L'excellence au service de l'humain",
+  heading: "Nos Services",
+  intro:
+    "Nous vous accompagnons à chaque étape de votre projet, en collaboration avec des professionnels complémentaires (avocats, experts-comptables, agents immobiliers, CGPI…), afin de sécuriser l’ensemble de votre opération.",
+};
+
+const STATIC_TOOLS_BAND_INTRO =
+  "Préparez vos projets avec nos outils de calcul en ligne pour une vision claire de votre patrimoine.";
+
+type ServiceItemRow = {
+  title?: string | null;
+  icon?: string | null;
+  paragraphs?: Array<{ paragraph: string }> | null;
+  bullets?: Array<{ bullet: string }> | null;
+  conclusion?: string | null;
+};
+
+type ToolCardRow = {
+  slug?: string | null;
+  title?: string | null;
+  description?: string | null;
+  label?: string | null;
+  icon?: string | null;
+};
+
+function toServiceViews(docs: ServiceItemRow[]): ServiceView[] {
+  return docs.map((doc) => ({
+    title: doc.title ?? "",
+    icon: (doc.icon ?? "home") as ServiceIconName,
+    paragraphs: (doc.paragraphs ?? []).map((paragraph) => paragraph.paragraph),
+    bullets:
+      doc.bullets && doc.bullets.length > 0
+        ? doc.bullets.map((bullet) => bullet.bullet)
+        : undefined,
+    conclusion: doc.conclusion ?? undefined,
+  }));
+}
+
+function toToolViews(docs: ToolCardRow[]): ToolView[] {
+  return docs.map((doc) => ({
+    id: doc.slug ?? "",
+    title: doc.title ?? "",
+    description: doc.description ?? "",
+    label: doc.label ?? "",
+    icon: (doc.icon ?? "simulateur-pret") as ToolIconName,
+  }));
+}
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -204,7 +254,7 @@ const structuredData = {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Services notariaux",
-        itemListElement: services.map((service) => ({
+        itemListElement: STATIC_SERVICES.map((service) => ({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
@@ -234,8 +284,15 @@ const structuredData = {
 };
 
 export default async function ServicesPage() {
-  const page = await getPageBySlug("services");
-  const hero = getPageSection(page, "L’excellence au service de l’humain");
+  const page = await getPageBySlug(PAGE_SLUGS.services);
+  const hero = getPageSection(page, SECTION_LABELS.servicesHero);
+  const toolsBand = getPageSection(page, SECTION_LABELS.servicesToolsBand);
+  const serviceItems = page?.servicesContent?.serviceItems;
+  const toolCards = page?.servicesContent?.toolCards;
+
+  const services =
+    serviceItems && serviceItems.length > 0 ? toServiceViews(serviceItems) : STATIC_SERVICES;
+  const tools = toolCards && toolCards.length > 0 ? toToolViews(toolCards) : STATIC_TOOLS;
 
   return (
     <>
@@ -254,20 +311,17 @@ export default async function ServicesPage() {
           >
             <div className="mb-8">
               <p className="mb-4 block font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
-                L&apos;excellence au service de l&apos;humain
+                {hero?.label ?? STATIC_SERVICES_HERO.eyebrow}
               </p>
               <h1
                 id="services-title"
                 className="mx-auto mb-8 max-w-4xl font-serif text-[40px] leading-[1.2] tracking-[-0.02em] text-ink md:text-[64px] md:leading-[1.1]"
               >
-                {hero?.heading ?? "Nos Services"}
+                {hero?.heading ?? STATIC_SERVICES_HERO.heading}
               </h1>
               <div aria-hidden="true" className="mx-auto mb-8 h-px w-16 bg-[#c7c7bf]" />
               <p className="mx-auto max-w-3xl font-sans text-lg italic leading-relaxed text-slate-muted">
-                Nous vous accompagnons à chaque étape de votre projet, en
-                collaboration avec des professionnels complémentaires
-                (avocats, experts-comptables, agents immobiliers, CGPI…), afin
-                de sécuriser l’ensemble de votre opération.
+                {hero?.intro ?? STATIC_SERVICES_HERO.intro}
               </p>
             </div>
           </section>
@@ -336,18 +390,17 @@ export default async function ServicesPage() {
             <div className="mx-auto max-w-[1280px] px-8">
               <div className="mb-16 text-center md:mb-20">
                 <p className="mb-4 block font-ui text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
-                  Expertise digitale
+                  {toolsBand?.label ?? "Expertise digitale"}
                 </p>
                 <h2
                   id="tools-title"
                   className="mb-6 font-serif text-[40px] leading-[1.2] text-ink md:text-5xl"
                 >
-                  Outils et Simulateurs
+                  {toolsBand?.heading ?? "Outils et Simulateurs"}
                 </h2>
                 <div aria-hidden="true" className="mx-auto mb-6 h-px w-12 bg-[#c7c7bf]" />
                 <p className="mx-auto max-w-xl font-sans text-base leading-relaxed text-slate-muted">
-                  Préparez vos projets avec nos outils de calcul en ligne pour
-                  une vision claire de votre patrimoine.
+                  {toolsBand?.intro ?? STATIC_TOOLS_BAND_INTRO}
                 </p>
               </div>
 

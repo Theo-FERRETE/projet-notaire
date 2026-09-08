@@ -211,6 +211,10 @@ export interface Page {
     | {
         label?: string | null;
         heading?: string | null;
+        /**
+         * Courte description affichée sous le titre de la section (paragraphe d'introduction).
+         */
+        intro?: string | null;
         body?: {
           root: {
             type: string;
@@ -239,6 +243,98 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Contenu propre à la page Services : les 7 domaines d'intervention et les outils & simulateurs.
+   */
+  servicesContent?: {
+    /**
+     * Chaque domaine peut être ajouté, supprimé et personnalisé par son contenu.
+     */
+    serviceItems?:
+      | {
+          title: string;
+          /**
+           * Choix parmi les icônes SVG existantes du site (aucun upload).
+           */
+          icon?:
+            | (
+                | 'home'
+                | 'scroll'
+                | 'heart-crack'
+                | 'heart'
+                | 'gift'
+                | 'building'
+                | 'globe'
+                | 'scale'
+                | 'landmark'
+                | 'calculator'
+                | 'percent'
+                | 'trending-up'
+                | 'line-chart'
+                | 'file-text'
+              )
+            | null;
+          paragraphs: {
+            paragraph: string;
+            id?: string | null;
+          }[];
+          bullets?:
+            | {
+                bullet: string;
+                id?: string | null;
+              }[]
+            | null;
+          conclusion?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Les cartes restent éditables par leur texte et peuvent être ajoutées sans remplacer les précédentes.
+     */
+    toolCards?:
+      | {
+          /**
+           * Identifiant stable utilisé comme ancre HTML, ex. simulateur-pret.
+           */
+          slug: string;
+          title: string;
+          description: string;
+          /**
+           * Le bouton pointe toujours vers /contact.
+           */
+          label: string;
+          icon: 'simulateur-pret' | 'frais-mainlevee' | 'barometre' | 'frais-acte' | 'plus-value' | 'droits-succession';
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Contenu propre à la page Contact : coordonnées, carte Google Maps et citation. Les titres des sections restent dans « Sections de la page ».
+   */
+  contactContent?: {
+    addressLabel?: string | null;
+    address?: string | null;
+    phoneLabel?: string | null;
+    /**
+     * Le lien tel: est dérivé automatiquement (chiffres uniquement).
+     */
+    phone?: string | null;
+    emailLabel?: string | null;
+    /**
+     * Le lien mailto: est dérivé automatiquement.
+     */
+    email?: string | null;
+    hoursLabel?: string | null;
+    hours?: string | null;
+    mapEmbedUrl?: string | null;
+    mapsLink?: string | null;
+    /**
+     * Laisser vide pour utiliser l'image actuelle du site (/contact/status.png).
+     */
+    quoteImage?: (number | null) | Media;
+    quoteText?: string | null;
+    quoteCite?: string | null;
+  };
   seo?: {
     metaTitle?: string | null;
     metaDescription?: string | null;
@@ -397,12 +493,64 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         label?: T;
         heading?: T;
+        intro?: T;
         body?: T;
         image?: T;
         backgroundColor?: T;
         textColor?: T;
         enabled?: T;
         id?: T;
+      };
+  servicesContent?:
+    | T
+    | {
+        serviceItems?:
+          | T
+          | {
+              title?: T;
+              icon?: T;
+              paragraphs?:
+                | T
+                | {
+                    paragraph?: T;
+                    id?: T;
+                  };
+              bullets?:
+                | T
+                | {
+                    bullet?: T;
+                    id?: T;
+                  };
+              conclusion?: T;
+              id?: T;
+            };
+        toolCards?:
+          | T
+          | {
+              slug?: T;
+              title?: T;
+              description?: T;
+              label?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  contactContent?:
+    | T
+    | {
+        addressLabel?: T;
+        address?: T;
+        phoneLabel?: T;
+        phone?: T;
+        emailLabel?: T;
+        email?: T;
+        hoursLabel?: T;
+        hours?: T;
+        mapEmbedUrl?: T;
+        mapsLink?: T;
+        quoteImage?: T;
+        quoteText?: T;
+        quoteCite?: T;
       };
   seo?:
     | T
