@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
-
 import { ContactForm } from '@/app/components/site/ContactForm'
 import { HomeFooter } from '@/app/components/homepage/HomeFooter'
 import { getSiteNavItems, HomeHeader } from '@/app/components/homepage/HomeHeader'
 import { getPageBySlug, getPageSection } from '@/lib/payload'
+import { PAGE_SLUGS, SECTION_LABELS } from '@/lib/content-keys'
+import type { Page } from '@/payload-types'
 
 /**
  * Classic static Contact page.
@@ -44,6 +45,17 @@ const CONTENT = {
 } as const
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
+function getContactQuoteImage(contactContent: Page['contactContent']): { src: string; alt: string } | null {
+	const image = contactContent?.quoteImage
+	if (image && typeof image === 'object' && 'url' in image && typeof image.url === 'string') {
+		return {
+			src: image.url,
+			alt: typeof image.alt === 'string' ? image.alt : '',
+		}
+	}
+	return null
+}
 
 export const metadata: Metadata = {
 	title: 'Contact',
@@ -159,9 +171,11 @@ const InfoCard = ({
 )
 
 export default async function ContactPage() {
-	const telHref = `tel:${CONTENT.info.phone.replace(/[^\d+]/g, '')}`
-	const page = await getPageBySlug('contact')
-	const hero = getPageSection(page, 'Entrer en relation')
+	const page = await getPageBySlug(PAGE_SLUGS.contact)
+	const hero = getPageSection(page, SECTION_LABELS.contactHero)
+	const mapBand = getPageSection(page, SECTION_LABELS.contactMapBand)
+	const contactContent = page?.contactContent
+	const telHref = `tel:${(contactContent?.phone ?? CONTENT.info.phone).replace(/[^\d+]/g, '')}`
 
 	return (
 		<div className="flex min-h-screen flex-col bg-cream text-ink">
@@ -185,14 +199,14 @@ export default async function ContactPage() {
 					<div className="mx-auto max-w-6xl px-6 sm:px-12">
 						<div className="space-y-4">
 							<p className="text-sm font-normal uppercase tracking-[0.1em] text-gray-500">
-								{CONTENT.hero.eyebrow}
+								{hero?.label ?? CONTENT.hero.eyebrow}
 							</p>
 							<h1 id="contact-title" className="font-serif text-5xl font-normal leading-tight text-black sm:text-6xl">
 								{hero?.heading ?? CONTENT.hero.heading}
 							</h1>
 							<div aria-hidden="true" className="h-px w-24 bg-gray-500" />
 							<p className="max-w-2xl text-base leading-relaxed text-[#c5a059]">
-								{CONTENT.hero.description}
+								{hero?.intro ?? CONTENT.hero.description}
 							</p>
 						</div>
 					</div>
@@ -203,21 +217,21 @@ export default async function ContactPage() {
 					<div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
 						{/* Left: contact details */}
 						<div className="order-1 space-y-8 lg:col-start-1 lg:col-span-5 lg:row-start-1">
-							<InfoCard icon={<IconAddress />} label={CONTENT.info.addressLabel}>
-								<address className="not-italic">{CONTENT.info.address}</address>
+							<InfoCard icon={<IconAddress />} label={contactContent?.addressLabel ?? CONTENT.info.addressLabel}>
+								<address className="not-italic">{contactContent?.address ?? CONTENT.info.address}</address>
 							</InfoCard>
-							<InfoCard icon={<IconPhone />} label={CONTENT.info.phoneLabel}>
+							<InfoCard icon={<IconPhone />} label={contactContent?.phoneLabel ?? CONTENT.info.phoneLabel}>
 								<a href={telHref} className="hover:underline">
-									{CONTENT.info.phone}
+									{contactContent?.phone ?? CONTENT.info.phone}
 								</a>
 							</InfoCard>
-							<InfoCard icon={<IconEmail />} label={CONTENT.info.emailLabel}>
-								<a href={`mailto:${CONTENT.info.email}`} className="hover:underline">
-									{CONTENT.info.email}
+							<InfoCard icon={<IconEmail />} label={contactContent?.emailLabel ?? CONTENT.info.emailLabel}>
+								<a href={`mailto:${contactContent?.email ?? CONTENT.info.email}`} className="hover:underline">
+									{contactContent?.email ?? CONTENT.info.email}
 								</a>
 							</InfoCard>
-							<InfoCard icon={<IconHours />} label={CONTENT.info.hoursLabel}>
-								{CONTENT.info.hours}
+							<InfoCard icon={<IconHours />} label={contactContent?.hoursLabel ?? CONTENT.info.hoursLabel}>
+								{contactContent?.hours ?? CONTENT.info.hours}
 							</InfoCard>
 						</div>
 
@@ -231,18 +245,18 @@ export default async function ContactPage() {
 
 						<figure className="order-3 relative mt-2 aspect-[3/4] w-full overflow-hidden bg-[#d8d6d0] sm:aspect-[4/5] lg:col-start-1 lg:col-span-5 lg:row-start-2 lg:mt-0 lg:max-w-[410px]">
 							<Image
-								src="/contact/status.png"
-								alt="Statue de la justice devant la façade d’un bâtiment à Aix-en-Provence"
+								src={getContactQuoteImage(contactContent)?.src ?? "/contact/status.png"}
+								alt={getContactQuoteImage(contactContent)?.alt ?? "Statue de la justice devant la façade d’un bâtiment à Aix-en-Provence"}
 								fill
 								sizes="(max-width: 1023px) 100vw, 410px"
 								className="object-cover object-center grayscale"
 							/>
 							<figcaption className="absolute bottom-4 left-4 right-4 bg-[#f1f1f7]/95 px-6 py-5 text-[#687183] sm:bottom-6 sm:left-6 sm:right-6 sm:px-8 sm:py-7">
 								<blockquote className="font-serif text-sm italic leading-relaxed text-[#353841] sm:text-base">
-									“La précision dans la pratique, l’autorité dans le conseil. Notre étude reflète les normes rigoureuses que nous appliquons à chaque dossier juridique.”
+									{contactContent?.quoteText ?? '“La précision dans la pratique, l’autorité dans le conseil. Notre étude reflète les normes rigoureuses que nous appliquons à chaque dossier juridique.”'}
 								</blockquote>
 								<cite className="mt-4 block not-italic text-xs uppercase tracking-[0.08em] text-[#687183] sm:text-sm">
-									— Droit Notaires
+									— {contactContent?.quoteCite ?? 'Droit Notaires'}
 								</cite>
 							</figcaption>
 						</figure>
@@ -252,9 +266,9 @@ export default async function ContactPage() {
 				{/* Map */}
 				<section aria-labelledby="map-title" className="mx-auto max-w-6xl px-6 py-20 sm:px-12">
 					<div className="mb-8 flex items-end justify-between gap-6">
-						<h2 id="map-title" className="text-base font-normal text-black">{CONTENT.map.heading}</h2>
+						<h2 id="map-title" className="text-base font-normal text-black">{mapBand?.heading ?? CONTENT.map.heading}</h2>
 						<a
-							href={CONTENT.map.mapsLink}
+							href={contactContent?.mapsLink ?? CONTENT.map.mapsLink}
 							target="_blank"
 							rel="noreferrer"
 							className="border-b border-gray-600 pb-1 text-right text-sm text-gray-600 hover:text-gray-800"
@@ -265,8 +279,8 @@ export default async function ContactPage() {
 					<div className="relative h-96 overflow-hidden border border-white/10">
 						{CONTENT.map.embedUrl ? (
 							<iframe
-								title={CONTENT.map.heading}
-								src={CONTENT.map.embedUrl}
+								title={mapBand?.heading ?? CONTENT.map.heading}
+								src={contactContent?.mapEmbedUrl ?? CONTENT.map.embedUrl}
 								className="h-full w-full border-0"
 								loading="lazy"
 								referrerPolicy="strict-origin-when-cross-origin"
