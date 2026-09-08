@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { HomeFooter } from "../components/homepage/HomeFooter";
-import { getSiteNavItems, HomeHeader } from "../components/homepage/HomeHeader";
-import { getPageBySlug, getPageSection } from "../../lib/payload";
+import { HomeFooter } from "@/app/components/homepage/HomeFooter";
+import { getSiteNavItems, HomeHeader } from "@/app/components/homepage/HomeHeader";
+import { getPageBySlug, getPageSection } from "@/lib/payload";
 
 import {
   ServiceIcon,
   ToolIcon,
   type ServiceIconName,
   type ToolIconName,
-} from "../components/icons/ServicesIcons";
+} from "@/app/components/icons/ServicesIcons";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 

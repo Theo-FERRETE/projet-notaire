@@ -1,4 +1,14 @@
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
+
+const slugify = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
@@ -18,6 +28,11 @@ export const Articles: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      hooks: {
+        beforeValidate: [
+          ({ value }) => (typeof value === 'string' ? slugify(value) : value),
+        ],
+      },
       label: 'Slug',
     },
     {
@@ -28,6 +43,7 @@ export const Articles: CollectionConfig = {
     {
       name: 'content',
       type: 'richText',
+      editor: lexicalEditor(),
       label: 'Contenu',
     },
     {

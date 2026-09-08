@@ -1,4 +1,4 @@
-import { HomePage } from './components/homepage/HomePage'
+import { HomePage } from '@/app/components/homepage/HomePage'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
