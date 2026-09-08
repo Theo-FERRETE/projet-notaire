@@ -27,7 +27,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
       className={`relative text-[#1b1b1b] ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-screen overflow-visible'}`}
       style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
     >
-      {!compact ? <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" /> : null}
+      {!compact ? <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" /> : null}
       {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
 
       <div className="relative z-50 flex min-h-[70px] items-center justify-between gap-3 border-b border-white/20 bg-[#fdfcf7]/30 px-[4.6vw] backdrop-blur-sm sm:gap-6">

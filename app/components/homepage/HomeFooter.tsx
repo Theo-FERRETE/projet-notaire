@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 type FooterLinks = { navigation: string[]; legal: string[] }
 
 const defaultFooterLinks: FooterLinks = {
@@ -31,7 +33,7 @@ export function HomeFooter({ footerLinks = defaultFooterLinks }: { footerLinks?:
 	return (
 		<footer className="grid gap-14 border-t border-black/10 bg-[#f4f1e6] px-8 pb-20 pt-16 lg:grid-cols-[1.5fr_.7fr_.7fr]" id="contact">
 			<div>
-				<img src={portrait} alt="" className="mb-5 h-16 w-16 rounded-full object-cover" />
+				<Image src={portrait} alt="" width={64} height={64} className="mb-5 h-16 w-16 rounded-full object-cover" />
 				<p className="max-w-[320px] text-[16px] leading-[1.6] text-[var(--gold-accessible)]">Cabinet d’avocats indépendant situé au cœur d’Aix-en-Provence, dédié à l’excellence juridique et au conseil personnalisé.</p>
 				<address className="mt-6 grid gap-3 text-[15px] not-italic text-[var(--gold-accessible)]">
 					{/* <span className="flex items-center gap-2"><img src={assets.location} alt="" className="h-3.5 w-3.5" />34 cours Mirabeau, Aix-en-Provence</span> */}
