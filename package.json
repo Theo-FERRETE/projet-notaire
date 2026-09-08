@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "payload:generate:importmap": "node node_modules/payload/bin.js --use-swc generate:importmap",
-    "payload:seed:pages": "node --env-file=.env.local --import tsx scripts/seed-pages.ts"
+    "payload:seed:pages": "node --env-file=.env.local --import tsx scripts/seed-pages.ts",
+    "test": "NODE_ENV=test node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.88.0",

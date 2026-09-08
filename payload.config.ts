@@ -32,5 +32,9 @@ export default buildConfig({
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
+    // Évite la régénération automatique des types en tâche de fond pendant
+    // les tests (processus isolés) : chaque processus écrirait payload-types.ts
+    // en parallèle au lancement de Payload.
+    autoGenerate: process.env.NODE_ENV !== 'test',
   },
 })
