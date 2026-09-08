@@ -334,6 +334,8 @@ export interface Page {
     quoteImage?: (number | null) | Media;
     quoteText?: string | null;
     quoteCite?: string | null;
+    formHeading?: string | null;
+    mapsLinkLabel?: string | null;
   };
   seo?: {
     metaTitle?: string | null;
@@ -551,6 +553,8 @@ export interface PagesSelect<T extends boolean = true> {
         quoteImage?: T;
         quoteText?: T;
         quoteCite?: T;
+        formHeading?: T;
+        mapsLinkLabel?: T;
       };
   seo?:
     | T

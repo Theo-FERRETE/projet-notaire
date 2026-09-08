@@ -1,4 +1,4 @@
-const quoteMark = 'https://www.figma.com/api/mcp/asset/0a9d266b-2bca-4bdc-b210-f3f3bc096bf3.svg'
+const quoteMark = '/qui-suis-je/quote-mark.svg'
 
 export function QuoteSection() {
   return (

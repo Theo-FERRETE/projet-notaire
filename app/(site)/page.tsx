@@ -10,7 +10,7 @@ export default function Page() {
     description:
       'Étude notariale à Aix-en-Provence proposant un accompagnement humain et rigoureux pour les projets de vie, le patrimoine et les transmissions.',
     url: siteUrl,
-    image: 'https://www.figma.com/api/mcp/asset/bc507d92-6017-4cda-ba85-4892fd8079f5.png',
+    image: `${siteUrl}/qui-suis-je/home-hero.png`,
     areaServed: { '@type': 'City', name: 'Aix-en-Provence' },
     address: {
       '@type': 'PostalAddress',
