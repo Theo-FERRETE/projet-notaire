@@ -1,5 +1,6 @@
+import Image from 'next/image'
+
 const studioImage = '/qui-suis-je/expertise-notariale.png'
-const brandMark = '/contact/notaire-logo.svg'
 
 export function AboutSection({ heading, image, backgroundColor, textColor }: { heading?: string; image?: string; backgroundColor?: string | null; textColor?: string | null }) {
   return (
@@ -14,9 +15,8 @@ export function AboutSection({ heading, image, backgroundColor, textColor }: { h
         </div>
       </div>
       <div className="relative mx-auto w-full max-w-[520px] border border-black/10 bg-[#f8f5ed] p-[18px]">
-        <img src={image ?? studioImage} alt="Le cabinet" className="h-[600px] w-full object-cover" />
-        <div className="absolute -bottom-6 -left-6 grid h-32 w-32 place-items-center border border-black/10 bg-[#fdfcf7]/95">
-          <img src={brandMark} alt="" className="h-9 w-9" />
+        <div className="relative h-[600px] w-full">
+          <Image src={image ?? studioImage} alt="Le cabinet" fill sizes="(max-width: 1024px) 100vw, 484px" className="object-cover" />
         </div>
       </div>
     </section>
