@@ -5,7 +5,7 @@ type ServiceCard = { title: string; description: string; icon: string }
 
 const familyImage = '/qui-suis-je/expertise-notariale.png'
 
-export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyImage, backgroundColor, textColor }: { serviceCards: ServiceCard[]; heading?: string; familyImage?: string; backgroundColor?: string | null; textColor?: string | null }) {
+export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyImage, familyImagePosition, backgroundColor, textColor }: { serviceCards: ServiceCard[]; heading?: string; familyImage?: string; familyImagePosition?: string; backgroundColor?: string | null; textColor?: string | null }) {
   const family = serviceCards.find((service) => service.title === 'Famille')
   const patrimoine = serviceCards.find((service) => service.title === 'Patrimoine')
   const immobilier = serviceCards.find((service) => service.title === 'Immobilier')
@@ -34,7 +34,7 @@ export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyI
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {family ? <article className="group relative min-h-[280px] overflow-hidden sm:col-span-2 lg:min-h-[236px]">
-            <Image src={cmsFamilyImage ?? familyImage} alt="Une famille réunie autour d'un projet patrimonial" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+            <Image src={cmsFamilyImage ?? familyImage} alt="Une famille réunie autour d'un projet patrimonial" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.02]" style={{ objectPosition: familyImagePosition ?? undefined }} />
             <div className="absolute inset-0 bg-gradient-to-t from-[#101527]/70 via-transparent to-transparent" />
             <h3 className="absolute bottom-6 left-6 font-serif text-[28px] text-white sm:left-7">{family.title}</h3>
           </article> : null}

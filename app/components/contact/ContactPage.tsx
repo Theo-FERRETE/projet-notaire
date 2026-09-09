@@ -1,4 +1,4 @@
-import { getPageBySlug, getPageSection, getSectionImageUrl } from '@/lib/payload-server'
+import { getPageBySlug, getPageSection, getSectionImageFocalPoint, getSectionImageUrl } from '@/lib/payload-server'
 import { PAGE_SLUGS, SECTION_LABELS } from '@/lib/content-keys'
 import { HomeFooter } from '@/app/components/homepage/HomeFooter'
 import { getSiteNavItems, HomeHeader } from '@/app/components/homepage/HomeHeader'
@@ -33,6 +33,10 @@ export async function ContactPage() {
 			? {
 					src: contactContent.quoteImage.url ?? undefined,
 					alt: contactContent.quoteImage.alt ?? undefined,
+					position:
+						contactContent.quoteImage.focalX != null && contactContent.quoteImage.focalY != null
+							? `${contactContent.quoteImage.focalX}% ${contactContent.quoteImage.focalY}%`
+							: undefined,
 				}
 			: null
 
@@ -56,6 +60,7 @@ export async function ContactPage() {
 					heading={hero?.heading}
 					intro={hero?.intro}
 					image={getSectionImageUrl(hero)}
+					imagePosition={getSectionImageFocalPoint(hero)}
 					backgroundColor={hero?.backgroundColor}
 					textColor={hero?.textColor}
 				/>

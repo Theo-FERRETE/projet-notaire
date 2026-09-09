@@ -457,6 +457,9 @@ for (const page of pages) {
 		} else {
 			console.log(`Page déjà présente : ${page.title}`)
 		}
+
+		const refreshed = await payload.findByID({ collection: 'pages', id: currentPage.id })
+		await ensurePageContent(payload, page, refreshed)
 		continue
 	}
 
