@@ -1,7 +1,7 @@
 'use client'
 
 import type { FormEvent } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 type ContactFormProps = {
@@ -11,8 +11,22 @@ type ContactFormProps = {
 type FormStatus = 'idle' | 'sending' | 'sent' | 'error'
 
 export function ContactForm({ privacyHref }: ContactFormProps) {
+  const [mounted, setMounted] = useState(false)
   const [status, setStatus] = useState<FormStatus>('idle')
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Le formulaire est monté uniquement côté client : les navigateurs et
+  // extensions (remplissage automatique, gestionnaires de mots de passe)
+  // injectent des styles et des nœuds dans les champs avant l'hydratation,
+  // ce qui déclenche « Hydration failed ». Comme l'envoi repose sur fetch,
+  // le rendu serveur du formulaire n'apporte rien et est donc omis.
+  if (!mounted) {
+    return null
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
