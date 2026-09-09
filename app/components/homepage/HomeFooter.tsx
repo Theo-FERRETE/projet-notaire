@@ -3,7 +3,7 @@ import Image from 'next/image'
 type FooterLinks = { navigation: string[]; legal: string[] }
 
 const defaultFooterLinks: FooterLinks = {
-	navigation: ['Accueil', 'Services', 'Bio', 'Blog'],
+	navigation: ['Accueil', 'Services', 'Bio', 'Blog', 'Contact'],
 	legal: ['Mentions légales', 'Politique de confidentialité', 'CGV'],
 }
 
@@ -13,6 +13,7 @@ function footerHref(label: string) {
 		Services: '/services',
 		Bio: '/qui-suis-je',
 		Blog: '/blog',
+		Contact: '/contact',
 		'Mentions légales': '/mentions-legales',
 		'Mentions Légales': '/mentions-legales',
 		'Politique de confidentialité': '/confidentialite',
