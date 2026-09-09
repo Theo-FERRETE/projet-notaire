@@ -41,7 +41,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
               </Link>
             ))}
           </nav>
-          <ActionButton header href={compact ? '/contact' : '#contact'}>Consultation</ActionButton>
+          <ActionButton header href="/contact">Consultation</ActionButton>
         </div>
         <div className="relative z-[100] md:hidden">
           <details className="relative z-[100]">
@@ -74,8 +74,8 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
             Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
           </p> */}
           <div className="mt-16 flex flex-col items-start gap-3 sm:mt-20 sm:flex-row sm:flex-wrap sm:gap-5">
-            <ActionButton filled href="#services">Nos services</ActionButton>
-            <ActionButton secondary href="#contact">Prendre rendez-vous</ActionButton>
+            <ActionButton filled href="/services">Nos services</ActionButton>
+            <ActionButton secondary href="/contact">Prendre rendez-vous</ActionButton>
           </div>
         </div>
       </div> : null}

@@ -8,7 +8,7 @@ type ActionButtonProps = {
   href?: string
 }
 
-export function ActionButton({ children, secondary = false, filled = false, header = false, href = '#contact' }: ActionButtonProps) {
+export function ActionButton({ children, secondary = false, filled = false, header = false, href = '/contact' }: ActionButtonProps) {
   return (
     <a
       className={[
