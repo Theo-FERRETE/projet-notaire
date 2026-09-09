@@ -20,6 +20,9 @@ import {
 } from "@/lib/payload-server";
 import type { Article as PayloadArticle } from "@/payload-types";
 
+// Contenu géré dans /admin : rendu à chaque requête pour éviter de figer une ancienne version au build.
+export const revalidate = 0;
+
 const categoryLabels: Record<PayloadArticle["category"], string> = {
   famille: "Famille",
   immobilier: "Immobilier",

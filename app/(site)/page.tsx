@@ -1,5 +1,8 @@
 import { HomePage } from '@/app/components/homepage/HomePage'
 
+// Contenu géré dans /admin : rendu à chaque requête pour éviter de figer une ancienne version au build.
+export const revalidate = 0
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 export default function Page() {
