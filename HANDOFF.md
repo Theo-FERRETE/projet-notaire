@@ -24,6 +24,30 @@ DATABASE_URL=file:./payload.db
 
 Ne jamais committer `.env.local`, `payload.db` ou une vraie valeur de `PAYLOAD_SECRET`.
 
+### Envoi d'emails (formulaire de contact et emails Payload)
+
+L'adaptateur nodemailer n'est activé que si `SMTP_HOST` est défini. Sans cette
+variable, Payload écrit les emails dans la console et le formulaire de contact
+répond `503` plutôt que de faire croire au visiteur que son message est parti.
+
+```env
+SMTP_HOST=smtp.exemple.fr
+SMTP_PORT=587
+SMTP_SECURE=false          # true uniquement sur le port 465 (TLS implicite)
+SMTP_USER=identifiant
+SMTP_PASSWORD=mot-de-passe
+SMTP_FROM=no-reply@exemple.fr
+SMTP_FROM_NAME=Étude Laïla Gssime
+CONTACT_TO=                # facultatif : surcharge le destinataire du formulaire
+```
+
+Sans `CONTACT_TO`, les messages partent vers l'adresse saisie dans `/admin` →
+page Contact → groupe « contactContent » → champ E-mail. Elle reste donc
+modifiable sans redéploiement.
+
+Pour tester sans vrai serveur SMTP, [Ethereal](https://ethereal.email) fournit
+des identifiants jetables et une boîte de réception consultable en ligne.
+
 ## Commandes utiles
 
 ```bash
