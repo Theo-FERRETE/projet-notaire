@@ -1,7 +1,7 @@
 'use client'
 
 import type { FormEvent } from 'react'
-import { useEffect, useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 
 type ContactFormProps = {
@@ -10,14 +10,13 @@ type ContactFormProps = {
 
 type FormStatus = 'idle' | 'sending' | 'sent' | 'error'
 
+const noopSubscribe = () => () => {}
+
 export function ContactForm({ privacyHref }: ContactFormProps) {
-  const [mounted, setMounted] = useState(false)
+  // true uniquement après l'hydratation côté client, sans passer par un effet qui déclenche un rendu en cascade.
+  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false)
   const [status, setStatus] = useState<FormStatus>('idle')
   const [error, setError] = useState('')
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   // Le formulaire est monté uniquement côté client : les navigateurs et
   // extensions (remplissage automatique, gestionnaires de mots de passe)

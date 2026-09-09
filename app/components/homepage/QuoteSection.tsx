@@ -1,4 +1,3 @@
-const quoteMark = '/qui-suis-je/quote-mark.svg'
 export function QuoteSection() {
 	return (
 		<section className="flex flex-col items-center bg-[#f4f1e6] px-8 py-28 text-center" id="team">
