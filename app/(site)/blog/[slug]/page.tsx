@@ -17,7 +17,7 @@ import {
 import {
   getPublishedArticleBySlug,
   getPublishedArticles,
-} from "@/lib/payload";
+} from "@/lib/payload-server";
 import type { Article as PayloadArticle } from "@/payload-types";
 
 const categoryLabels: Record<PayloadArticle["category"], string> = {

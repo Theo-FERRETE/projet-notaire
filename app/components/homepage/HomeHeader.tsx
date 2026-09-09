@@ -35,7 +35,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
         <div className="hidden items-center gap-8 md:flex">
           <nav aria-label="Navigation principale" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8">
             {navItems.map((item) => (
-              <Link key={item.label} href={item.href} className={`transition-colors hover:text-[#0d0070] ${item.active ? 'text-[#716c61]' : 'text-[#8c877d]'}`}>
+              <Link prefetch={false} key={item.label} href={item.href} className={`transition-colors hover:text-[#0d0070] ${item.active ? 'text-[#716c61]' : 'text-[#8c877d]'}`}>
                 <span className="text-[10px] font-bold uppercase tracking-[1.5px]">{item.label}</span>
                 {item.active ? <span className="mx-auto mt-1.5 block h-1 w-1 rounded-full bg-[#c4a000]" /> : null}
               </Link>
@@ -57,7 +57,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
             </summary>
             <nav aria-label="Navigation mobile" className="absolute right-0 top-14 z-[110] grid min-w-[min(14rem,calc(100vw-2rem))] gap-1 border border-black/10 bg-[#fdfcf7] p-2 text-right shadow-[0_14px_35px_rgba(27,27,27,0.18)]">
               {navItems.map((item) => (
-                <Link key={item.label} href={item.href} className={`block px-4 py-3 text-[11px] font-bold uppercase tracking-[1.5px] ${item.active ? 'bg-[#f4f1e6] text-[#1b1b1b]' : 'text-[#716c61]'}`}>
+                <Link prefetch={false} key={item.label} href={item.href} className={`block px-4 py-3 text-[11px] font-bold uppercase tracking-[1.5px] ${item.active ? 'bg-[#f4f1e6] text-[#1b1b1b]' : 'text-[#716c61]'}`}>
                   {item.label}
                 </Link>
               ))}

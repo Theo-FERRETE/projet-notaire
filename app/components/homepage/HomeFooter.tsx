@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 type FooterLinks = { navigation: string[]; legal: string[] }
 
@@ -26,7 +27,7 @@ function footerHref(label: string) {
 const portrait = '/logo-notaire.png';
 
 function FooterColumn({ title, links }: { title: string; links: string[] }) {
-	return <div><h3 className="mb-5 text-[11px] font-bold uppercase tracking-[1.2px] text-black/50">{title}</h3><ul className="grid gap-3 text-[15px] text-[var(--gold-accessible)]">{links.map((link) => <li key={link}><a href={footerHref(link)}>{link}</a></li>)}</ul></div>
+	return <div><h3 className="mb-5 text-[11px] font-bold uppercase tracking-[1.2px] text-[#4d4732]">{title}</h3><ul className="grid gap-3 text-[15px] text-[var(--gold-accessible)]">{links.map((link) => <li key={link}><Link prefetch={false} href={footerHref(link)}>{link}</Link></li>)}</ul></div>
 }
 
 export function HomeFooter({ footerLinks = defaultFooterLinks }: { footerLinks?: FooterLinks }) {

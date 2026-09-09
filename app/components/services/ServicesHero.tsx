@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { FALLBACK_SERVICES_HERO } from "./services-data";
 
 type ServicesHeroProps = {
@@ -54,7 +56,14 @@ export function ServicesHero({
 					color: textColor ?? undefined,
 				}}
 			>
-				<img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+				<Image
+					src={image}
+					alt=""
+					aria-hidden="true"
+					fill
+					sizes="100vw"
+					className="object-cover"
+				/>
 				<div aria-hidden="true" className="absolute inset-0 bg-white/90" />
 				<div className="relative z-10 mx-auto w-full max-w-[1280px] px-8">
 					{content}
