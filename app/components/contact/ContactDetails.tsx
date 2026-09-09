@@ -40,7 +40,7 @@ const InfoCard = ({
 		<div className="shrink-0 pt-1">{icon}</div>
 		<div>
 			<h2 className="text-sm font-normal uppercase tracking-wider text-black">{label}</h2>
-			<p className="mt-2 text-base leading-relaxed text-[#c5a059]">{children}</p>
+			<div className="mt-2 text-base leading-relaxed text-[#c5a059]">{children}</div>
 		</div>
 	</div>
 )
