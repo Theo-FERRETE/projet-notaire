@@ -1,4 +1,4 @@
-import { getPageBySlug, getPageSection, getSectionImageUrl } from '../../../lib/payload-server'
+import { getPageBySlug, getPageSection, getSectionImageFocalPoint, getSectionImageUrl } from '../../../lib/payload-server'
 import { AboutSection } from './AboutSection'
 import { HomeFooter } from './HomeFooter'
 import { HomeHeader } from './HomeHeader'
@@ -13,6 +13,9 @@ export async function HomePage() {
   const about = getPageSection(page, 'À propos')
   const expertise = getPageSection(page, 'Domaines d’expertise')
   const heroImage = getSectionImageUrl(hero)
+  const heroImagePosition = getSectionImageFocalPoint(hero)
+  const aboutImagePosition = getSectionImageFocalPoint(about)
+  const expertiseImagePosition = getSectionImageFocalPoint(expertise)
 
   return (
     <div className="min-h-screen w-full bg-[#fdfcf7] text-[#1b1b1b]">
@@ -20,6 +23,7 @@ export async function HomePage() {
         navItems={navItems}
         heroHeading={hero?.heading ?? undefined}
         heroImage={heroImage}
+        heroImagePosition={heroImagePosition}
         backgroundColor={hero?.backgroundColor ?? undefined}
         textColor={hero?.textColor ?? undefined}
       />
@@ -27,6 +31,7 @@ export async function HomePage() {
         <AboutSection
           heading={about?.heading ?? undefined}
           image={getSectionImageUrl(about)}
+          imagePosition={aboutImagePosition}
           backgroundColor={about?.backgroundColor ?? undefined}
           textColor={about?.textColor ?? undefined}
         />
@@ -34,6 +39,7 @@ export async function HomePage() {
           serviceCards={serviceCards}
           heading={expertise?.heading ?? undefined}
           familyImage={getSectionImageUrl(expertise) ?? heroImage}
+          familyImagePosition={expertiseImagePosition ?? heroImagePosition}
           backgroundColor={expertise?.backgroundColor ?? undefined}
           textColor={expertise?.textColor ?? undefined}
         />

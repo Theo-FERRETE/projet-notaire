@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const studioImage = '/qui-suis-je/expertise-notariale.png'
 
-export function AboutSection({ heading, image, backgroundColor, textColor }: { heading?: string; image?: string; backgroundColor?: string | null; textColor?: string | null }) {
+export function AboutSection({ heading, image, imagePosition, backgroundColor, textColor }: { heading?: string; image?: string; imagePosition?: string; backgroundColor?: string | null; textColor?: string | null }) {
   return (
     <section className="grid items-center gap-16 bg-[#fdfcf7] px-8 py-28 lg:grid-cols-2" id="office" style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}>
       <div>
@@ -16,7 +16,7 @@ export function AboutSection({ heading, image, backgroundColor, textColor }: { h
       </div>
       <div className="relative mx-auto w-full max-w-[520px] border border-black/10 bg-[#f8f5ed] p-[18px]">
         <div className="relative h-[600px] w-full">
-          <Image src={image ?? studioImage} alt="Le cabinet" fill sizes="(max-width: 1024px) 100vw, 484px" className="object-cover" />
+          <Image src={image ?? studioImage} alt="Le cabinet" fill sizes="(max-width: 1024px) 100vw, 484px" className="object-cover" style={{ objectPosition: imagePosition ?? undefined }} />
         </div>
       </div>
     </section>

@@ -56,6 +56,7 @@ export type ContactInfoView = {
 	quote: {
 		imageSrc: string
 		imageAlt: string
+		imagePosition?: string
 		text: string
 		cite: string
 	}
@@ -83,7 +84,7 @@ export type ContactContentRow = {
 	mapEmbedUrl?: string | null
 	mapsLink?: string | null
 	mapsLinkLabel?: string | null
-	quoteImage?: { url?: string | null; alt?: string | null } | number | null
+	quoteImage?: { url?: string | null; alt?: string | null; focalX?: number | null; focalY?: number | null } | number | null
 	quoteText?: string | null
 	quoteCite?: string | null
 }
@@ -94,7 +95,7 @@ export type ContactContentRow = {
  */
 export function buildContactInfoView(
 	content?: ContactContentRow | null,
-	quoteImage: { src?: string; alt?: string } | null = null,
+	quoteImage: { src?: string; alt?: string; position?: string } | null = null,
 ): ContactInfoView {
 	const fallback = CONTACT_FALLBACK
 	return {
@@ -111,6 +112,7 @@ export function buildContactInfoView(
 		quote: {
 			imageSrc: quoteImage?.src ?? fallback.quote.imageSrc,
 			imageAlt: quoteImage?.alt ?? fallback.quote.imageAlt,
+			imagePosition: quoteImage?.position,
 			text: content?.quoteText ?? fallback.quote.text,
 			cite: content?.quoteCite ?? fallback.quote.cite,
 		},

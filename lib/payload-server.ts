@@ -34,6 +34,14 @@ export function getSectionImageUrl(section: ReturnType<typeof getPageSection>) {
   return section.image.url ?? undefined
 }
 
+// Point focal choisi dans l'admin Payload, utilisé pour cadrer les recadrages `object-cover`.
+export function getSectionImageFocalPoint(section: ReturnType<typeof getPageSection>) {
+  if (!section?.image || typeof section.image === 'number') return undefined
+  const { focalX, focalY } = section.image
+  if (focalX == null || focalY == null) return undefined
+  return `${focalX}% ${focalY}%`
+}
+
 function getMediaUrl(image: PayloadArticle['image']) {
   if (!image || typeof image === 'number') return undefined
   return (image as Media).url ?? undefined

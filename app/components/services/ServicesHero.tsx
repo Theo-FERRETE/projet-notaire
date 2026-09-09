@@ -7,6 +7,7 @@ type ServicesHeroProps = {
 	heading?: string | null;
 	intro?: string | null;
 	image?: string | null;
+	imagePosition?: string;
 	backgroundColor?: string | null;
 	textColor?: string | null;
 };
@@ -21,6 +22,7 @@ export function ServicesHero({
 	heading,
 	intro,
 	image,
+	imagePosition,
 	backgroundColor,
 	textColor,
 }: ServicesHeroProps) {
@@ -63,6 +65,7 @@ export function ServicesHero({
 					fill
 					sizes="100vw"
 					className="object-cover"
+					style={{ objectPosition: imagePosition ?? undefined }}
 				/>
 				<div aria-hidden="true" className="absolute inset-0 bg-white/90" />
 				<div className="relative z-10 mx-auto w-full max-w-[1280px] px-8">

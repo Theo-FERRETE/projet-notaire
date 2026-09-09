@@ -91,7 +91,8 @@ export function ContactDetails({ view }: { view: ContactInfoView }) {
 						alt={view.quote.imageAlt}
 						fill
 						sizes="(max-width: 1023px) 100vw, 410px"
-						className="object-cover object-center grayscale"
+						className="object-cover grayscale"
+						style={{ objectPosition: view.quote.imagePosition ?? undefined }}
 					/>
 					<figcaption className="absolute bottom-4 left-4 right-4 bg-[#f1f1f7]/95 px-6 py-5 text-[#687183] sm:bottom-6 sm:left-6 sm:right-6 sm:px-8 sm:py-7">
 						<blockquote className="font-serif text-sm italic leading-relaxed text-[#353841] sm:text-base">

@@ -15,6 +15,7 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: path.resolve(dirname, '../media'),
     mimeTypes: ['image/*'],
+    focalPoint: true,
   },
   admin: {
     useAsTitle: 'alt',

@@ -7,6 +7,7 @@ type ContactHeroProps = {
 	heading?: string | null
 	intro?: string | null
 	image?: string | null
+	imagePosition?: string
 	backgroundColor?: string | null
 	textColor?: string | null
 }
@@ -21,6 +22,7 @@ export function ContactHero({
 	heading,
 	intro,
 	image,
+	imagePosition,
 	backgroundColor,
 	textColor,
 }: ContactHeroProps) {
@@ -56,6 +58,7 @@ export function ContactHero({
 					fill
 					sizes="100vw"
 					className="object-cover"
+					style={{ objectPosition: imagePosition ?? undefined }}
 				/>
 				<div aria-hidden="true" className="absolute inset-0 bg-white/90" />
 				<div className="relative z-10 mx-auto max-w-6xl px-6 sm:px-12">{content}</div>
