@@ -15,7 +15,7 @@ export function getHomePageData() {
         { title: 'Droit international privé', description: 'Réglementation et sécurisation des situations transfrontalières et internationales.', icon: '◍' },
       ],
       footerLinks: {
-        navigation: ['Accueil', 'Services', 'Bio', 'Blog'],
+        navigation: ['Accueil', 'Services', 'Bio', 'Blog', 'Contact'],
         legal: ['Mentions légales', 'Politique de confidentialité', 'CGV'],
       },
   }
