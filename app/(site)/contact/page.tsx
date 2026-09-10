@@ -5,6 +5,9 @@ import {
 	CONTACT_FALLBACK,
 } from '@/app/components/contact/contact-data'
 
+// Contenu géré dans /admin : rendu à chaque requête pour éviter de figer une ancienne version au build.
+export const revalidate = 0
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 export const metadata: Metadata = {

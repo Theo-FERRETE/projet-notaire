@@ -8,7 +8,18 @@ import {
 	SECTION_LABELS,
 } from '../lib/content-keys'
 
-type PageSeed = Pick<Page, 'title' | 'slug' | 'sections' | 'servicesContent' | 'contactContent' | 'seo'>
+type PageSeed = Pick<Page, 'title' | 'slug' | 'sections' | 'methodologyContent' | 'servicesContent' | 'contactContent' | 'seo'>
+
+const methodologyContentSeed: NonNullable<Page['methodologyContent']> = {
+	label: 'Méthodologie',
+	heading: 'Le droit, rendu plus lisible',
+	steps: [
+		{ number: '01', title: 'Premier échange', description: 'Comprendre votre projet et vos objectifs dès le premier rendez-vous.' },
+		{ number: '02', title: 'Analyse & Conseil', description: 'Explications claires des options possibles adaptées à votre situation.' },
+		{ number: '03', title: 'Rédaction', description: "Élaboration d'actes conformes et juridiquement solides pour vous protéger." },
+		{ number: '04', title: 'Signature & Suivi', description: "Accompagnement jusqu'à la finalisation. Vous avancez en toute sérénité." },
+	],
+}
 
 // ---- Contenus de la page Services (copiés à l'identique du site statique) ----
 
@@ -195,6 +206,7 @@ const pages: PageSeed[] = [
 	{
 		title: 'Accueil',
 		slug: 'home',
+		methodologyContent: methodologyContentSeed,
 		sections: [
 			{
 				label: 'Excellence juridique',
@@ -348,6 +360,11 @@ async function ensurePageContent(payload: Payload, seed: PageSeed, page: Page) {
 		return changed ? next : section
 	})
 	if (sectionsChanged) data.sections = sections
+
+	// --- Page Accueil : méthodologie initiale si le groupe est absent ---
+	if (seed.slug === 'home' && seed.methodologyContent && !page.methodologyContent) {
+		data.methodologyContent = seed.methodologyContent
+	}
 
 	// --- Page Services : domaines d'intervention & outils manquants ---
 	if (seed.slug === 'services' && seed.servicesContent) {

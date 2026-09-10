@@ -7,6 +7,9 @@ import {
   getBlogCategory,
 } from "@/app/components/blog/blog-data";
 
+// Contenu géré dans /admin : rendu à chaque requête pour éviter de figer une ancienne version au build.
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Blog juridique | Maître Laïla GSSIME — Notaire",
   description:
