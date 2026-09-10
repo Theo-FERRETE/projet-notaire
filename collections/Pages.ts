@@ -132,6 +132,55 @@ export const Pages: CollectionConfig = {
       ],
     },
     {
+      name: 'methodologyContent',
+      type: 'group',
+      label: 'Accueil — méthodologie',
+      admin: {
+        condition: (data) => data?.slug === 'home',
+        description: 'Contenu éditable de la section Méthodologie affichée sur la page d’accueil.',
+      },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          defaultValue: 'Méthodologie',
+          label: 'Petit titre',
+        },
+        {
+          name: 'heading',
+          type: 'text',
+          defaultValue: 'Le droit, rendu plus lisible',
+          label: 'Titre',
+        },
+        {
+          name: 'steps',
+          type: 'array',
+          minRows: 1,
+          labels: { singular: 'Étape', plural: 'Étapes' },
+          fields: [
+            {
+              name: 'number',
+              type: 'text',
+              required: true,
+              label: 'Numéro',
+            },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              label: 'Titre de l’étape',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              required: true,
+              label: 'Description',
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'servicesContent',
       type: 'group',
       label: 'Services de l’étude',

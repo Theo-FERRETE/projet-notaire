@@ -251,6 +251,21 @@ export interface Page {
       }[]
     | null;
   /**
+   * Contenu éditable de la section Méthodologie affichée sur la page d’accueil.
+   */
+  methodologyContent?: {
+    label?: string | null;
+    heading?: string | null;
+    steps?:
+      | {
+          number: string;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
    * Contenu propre à la page Services : les 7 domaines d'intervention et les outils & simulateurs.
    */
   servicesContent?: {
@@ -514,6 +529,20 @@ export interface PagesSelect<T extends boolean = true> {
         textColor?: T;
         enabled?: T;
         id?: T;
+      };
+  methodologyContent?:
+    | T
+    | {
+        label?: T;
+        heading?: T;
+        steps?:
+          | T
+          | {
+              number?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
       };
   servicesContent?:
     | T

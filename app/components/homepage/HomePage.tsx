@@ -43,7 +43,7 @@ export async function HomePage() {
           backgroundColor={expertise?.backgroundColor ?? undefined}
           textColor={expertise?.textColor ?? undefined}
         />
-        <QuoteSection />
+        <QuoteSection content={page?.methodologyContent} />
       </main>
       <HomeFooter footerLinks={footerLinks} />
     </div>
