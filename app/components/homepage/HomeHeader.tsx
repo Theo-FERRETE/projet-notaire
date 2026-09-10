@@ -65,14 +65,14 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
         </div>
       </div>
 
-      {!compact ? <div className="relative z-10 flex w-full flex-1 items-center px-[4.6vw] pb-28 pt-10 sm:pt-0">
+      {!compact ? <div className="relative z-10 flex w-full flex-1 items-center px-[4.6vw] pt-10 sm:pt-0">
         <div className="w-full max-w-[760px] min-w-0">
           <div className="text-brass"><SectionLabel>Excellence juridique</SectionLabel></div>
-          <h1 className="font-display mt-8 max-w-[760px] text-[clamp(42px,5.8vw,74px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
+          <h1 className="font-display mt-[min(2rem,4vh)] max-w-[760px] text-[clamp(42px,5.8vw,74px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
           {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
             Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
           </p> */}
-          <div className="mt-20 flex flex-col items-start gap-3 sm:mt-24 sm:flex-row sm:flex-wrap sm:gap-5">
+          <div className="mt-[min(6rem,10vh)] flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:gap-5">
             <ActionButton filled href="/services">Nos services</ActionButton>
             <ActionButton secondary href="/contact">Prendre rendez-vous</ActionButton>
           </div>
