@@ -18,30 +18,24 @@ export async function HomePage() {
   const expertiseImagePosition = getSectionImageFocalPoint(expertise)
 
   return (
-    <div className="min-h-screen w-full bg-[#fdfcf7] text-[#1b1b1b]">
+    <div className="min-h-screen w-full bg-[#fdfcf7] text-ink">
       <HomeHeader
         navItems={navItems}
         heroHeading={hero?.heading ?? undefined}
         heroImage={heroImage}
         heroImagePosition={heroImagePosition}
-        backgroundColor={hero?.backgroundColor ?? undefined}
-        textColor={hero?.textColor ?? undefined}
       />
       <main>
         <AboutSection
           heading={about?.heading ?? undefined}
           image={getSectionImageUrl(about)}
           imagePosition={aboutImagePosition}
-          backgroundColor={about?.backgroundColor ?? undefined}
-          textColor={about?.textColor ?? undefined}
         />
         <ServicesSection
           serviceCards={serviceCards}
           heading={expertise?.heading ?? undefined}
           familyImage={getSectionImageUrl(expertise) ?? heroImage}
           familyImagePosition={expertiseImagePosition ?? heroImagePosition}
-          backgroundColor={expertise?.backgroundColor ?? undefined}
-          textColor={expertise?.textColor ?? undefined}
         />
         <QuoteSection content={page?.methodologyContent} />
       </main>

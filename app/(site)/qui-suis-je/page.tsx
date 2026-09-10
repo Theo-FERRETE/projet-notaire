@@ -58,7 +58,7 @@ export default async function QuiSuisJePage() {
             <p className="text-center font-bold uppercase leading-[16.8px] tracking-[2.4px] text-gold text-[12px]">
               L&apos;excellence au service de l&apos;humain
             </p>
-            <h1 className="text-center font-serif text-[40px] leading-tight tracking-[-1.28px] text-black sm:text-[52px] lg:text-[64px] lg:leading-[80px]">
+            <h1 className="text-center font-serif text-[40px] leading-tight tracking-[-1.28px] text-ink sm:text-[52px] lg:text-[64px] lg:leading-[80px]">
               {hero?.heading ?? "Maître Laïla GSSIME"}
             </h1>
             <span aria-hidden className="h-px w-24 bg-gold" />
@@ -73,7 +73,7 @@ export default async function QuiSuisJePage() {
         <section className="bg-sand px-8 py-[120px]">
           <div className="mx-auto grid w-full max-w-[1280px] gap-8 lg:grid-cols-12">
             <div className="flex flex-col gap-6 self-start lg:col-span-4">
-              <h2 className="font-serif text-[40px] leading-[1.2] text-black lg:text-[48px] lg:leading-[57.6px]">
+              <h2 className="font-serif text-[40px] leading-[1.2] text-ink lg:text-[48px] lg:leading-[57.6px]">
                 Un Parcours de
                 <br />
                 Rigueur.
@@ -93,14 +93,14 @@ export default async function QuiSuisJePage() {
 
             <div className="flex flex-col gap-16 lg:col-span-7 lg:col-start-6">
               <div className="flex flex-col gap-6">
-                <blockquote className="border-l-2 border-[rgba(118,90,38,0.3)] py-4 pl-8 text-[18px] leading-[29.25px] text-black">
+                <blockquote className="border-l-2 border-[rgba(118,90,38,0.3)] py-4 pl-8 text-[18px] leading-[29.25px] text-ink">
                   «&nbsp;Mon rôle dépasse la simple rédaction d&apos;actes ; il
                   s&apos;agit de bâtir une relation de confiance durable, ancrée
                   dans la clarté et la compréhension profonde de vos
                   enjeux.&nbsp;»
                 </blockquote>
 
-                <p className="text-base leading-[25.6px] text-black">
+                <p className="text-base leading-[25.6px] text-ink">
                   Spécialisée en droit patrimonial de la famille et en droit
                   international privé, j&apos;accompagne mes clients dans les
                   moments charnières de leur vie. Mon approche se distingue par
@@ -118,7 +118,7 @@ export default async function QuiSuisJePage() {
                     <h3 className="text-xs font-bold uppercase leading-[16.8px] tracking-[1.2px] text-gold">
                       {expertise.titre}
                     </h3>
-                    <p className="text-base leading-[25.6px] text-black">
+                    <p className="text-base leading-[25.6px] text-ink">
                       {expertise.texte}
                     </p>
                   </div>
@@ -144,7 +144,7 @@ export default async function QuiSuisJePage() {
         {/* Engagement */}
         <section className="px-8 py-[120px] lg:px-[192px]">
           <div className="mx-auto flex w-full max-w-[896px] flex-col items-center gap-[23px] border-y border-line py-[65px]">
-            <h2 className="text-center font-serif text-[28px] italic leading-[41.6px] text-black lg:text-[32px]">
+            <h2 className="text-center font-serif text-[28px] italic leading-[41.6px] text-ink lg:text-[32px]">
               L&apos;Engagement de l&apos;Étude
             </h2>
             <p className="max-w-[768px] pb-10 text-center text-[18px] leading-[29.25px] text-slate-muted">

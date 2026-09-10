@@ -18,24 +18,23 @@ export function getSiteNavItems(active: string) {
 
 const heroImage = '/qui-suis-je/expertise-notariale.png'
 
-export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, heroImagePosition, backgroundColor, textColor }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; heroImagePosition?: string; backgroundColor?: string | null; textColor?: string | null }) {
+export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, heroImagePosition }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; heroImagePosition?: string }) {
   const heading = heroHeading ?? 'Un notariat humain et de proximité au cœur d’Aix En Provence'
   const image = cmsHeroImage ?? heroImage
 
   return (
     <header
-      className={`relative text-[#1b1b1b] ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-[85vh] overflow-visible sm:min-h-screen'}`}
-      style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
+      className={`relative text-ink ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-[85vh] overflow-visible sm:min-h-screen'}`}
     >
       {!compact ? <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: heroImagePosition ?? undefined }} /> : null}
       {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
 
       <div className="relative z-50 flex min-h-[70px] items-center justify-between gap-3 border-b border-white/20 bg-[#fdfcf7]/30 px-[4.6vw] backdrop-blur-sm sm:gap-6">
-        <Link href="/" className="font-classic shrink-0 whitespace-nowrap text-[18px] font-medium uppercase tracking-[-.5px] text-[#77736b] sm:text-[25px] sm:tracking-[-1px]">Laila Gssime</Link>
+        <Link href="/" className="font-classic shrink-0 whitespace-nowrap text-[18px] font-medium uppercase tracking-[-.5px] text-citation sm:text-[25px] sm:tracking-[-1px]">Laila Gssime</Link>
         <div className="hidden items-center gap-8 md:flex">
           <nav aria-label="Navigation principale" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8">
             {navItems.map((item) => (
-              <Link prefetch={false} key={item.label} href={item.href} className={`transition-colors hover:text-[#0d0070] ${item.active ? 'text-[#716c61]' : 'text-[#8c877d]'}`}>
+              <Link prefetch={false} key={item.label} href={item.href} className={`transition-colors hover:text-navy ${item.active ? 'text-warm-gray' : 'text-warm-gray-light'}`}>
                 <span className="text-[10px] font-bold uppercase tracking-[1.5px]">{item.label}</span>
                 {item.active ? <span className="mx-auto mt-1.5 block h-1 w-1 rounded-full bg-[#c4a000]" /> : null}
               </Link>
@@ -57,7 +56,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
             </summary>
             <nav aria-label="Navigation mobile" className="absolute right-0 top-14 z-[110] grid min-w-[min(14rem,calc(100vw-2rem))] gap-1 border border-black/10 bg-[#fdfcf7] p-2 text-right shadow-[0_14px_35px_rgba(27,27,27,0.18)]">
               {navItems.map((item) => (
-                <Link prefetch={false} key={item.label} href={item.href} className={`block px-4 py-3 text-[11px] font-bold uppercase tracking-[1.5px] ${item.active ? 'bg-[#f4f1e6] text-[#1b1b1b]' : 'text-[#716c61]'}`}>
+                <Link prefetch={false} key={item.label} href={item.href} className={`block px-4 py-3 text-[11px] font-bold uppercase tracking-[1.5px] ${item.active ? 'bg-[#f4f1e6] text-ink' : 'text-warm-gray'}`}>
                   {item.label}
                 </Link>
               ))}
@@ -68,9 +67,9 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
 
       {!compact ? <div className="relative z-10 w-full px-[4.6vw] pb-32 pt-12 sm:pt-16">
         <div className="w-full max-w-[760px] min-w-0">
-          <div className="text-[#c4a000]"><SectionLabel>Excellence juridique</SectionLabel></div>
+          <div className="text-brass"><SectionLabel>Excellence juridique</SectionLabel></div>
           <h1 className="font-display mt-6 max-w-[700px] text-[clamp(38px,5.2vw,64px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
-          {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-[#252525]">
+          {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
             Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
           </p> */}
           <div className="mt-16 flex flex-col items-start gap-3 sm:mt-20 sm:flex-row sm:flex-wrap sm:gap-5">

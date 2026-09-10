@@ -2,11 +2,10 @@
 
 :root {
   --background: #fcf9f5;
-  --foreground: #1b1b1b;
-  --gold-accessible: #806800;
+  --foreground: #10286e;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -16,11 +15,29 @@
   --color-stone: #f0ede9;
   --color-gold: #765a26;
   --color-brass: #c4a000;
-  --color-ink: #1b1b1b;
-  --color-ink-soft: #1c1c1a;
-  --color-slate-muted: #444748;
+  --color-ink: #10286e;
+  --color-ink-soft: #10286e;
+  --color-slate-muted: #414d6b;
   --color-olive: #4d4732;
   --color-line: rgb(196 199 199 / 0.3);
+
+  /* Couleurs de texte */
+  --color-gold-accessible: #806800;
+  --color-gold-muted: #c5a059;
+  --color-gold-light: #e3c68e;
+  --color-navy: #0d0070;
+  --color-slate-blue: #687183;
+  --color-slate-dark: #353841;
+  --color-slate-soft: #c3c6d0;
+  --color-warm-gray: #525d7a;
+  --color-warm-gray-light: #5f6a88;
+  --color-cream-light: #f5eee2;
+  --color-status: #4a5560;
+  --color-citation: #082476;
+  --color-focus: #082476;
+  --color-error: #9b2c2c;
+  --color-selection: #fcd353;
+  --color-selection-text: #725a00;
 
   --font-sans: var(--font-manrope);
   --font-serif: var(--font-libre-caslon);
@@ -40,7 +57,7 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid #0d0070;
+  outline: 3px solid var(--color-focus);
   outline-offset: 4px;
 }
 

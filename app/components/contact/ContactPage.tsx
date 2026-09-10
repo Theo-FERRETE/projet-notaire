@@ -61,17 +61,11 @@ export async function ContactPage() {
 					intro={hero?.intro}
 					image={getSectionImageUrl(hero)}
 					imagePosition={getSectionImageFocalPoint(hero)}
-					backgroundColor={hero?.backgroundColor}
-					textColor={hero?.textColor}
 				/>
 
 				<ContactDetails view={infoView} />
 
-				<ContactMap
-					view={mapView}
-					backgroundColor={mapBand?.backgroundColor}
-					textColor={mapBand?.textColor}
-				/>
+				<ContactMap view={mapView} />
 			</main>
 
 			<HomeFooter />

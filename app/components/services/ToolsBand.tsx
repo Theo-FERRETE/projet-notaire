@@ -7,8 +7,6 @@ type ToolsBandProps = {
 	heading?: string | null;
 	intro?: string | null;
 	tools: ToolView[];
-	backgroundColor?: string | null;
-	textColor?: string | null;
 };
 
 /**
@@ -23,8 +21,6 @@ export function ToolsBand({
 	heading,
 	intro,
 	tools,
-	backgroundColor,
-	textColor,
 }: ToolsBandProps) {
 	const eyebrow = label ?? "Expertise digitale";
 	const title = heading ?? "Outils et Simulateurs";
@@ -34,10 +30,6 @@ export function ToolsBand({
 		<section
 			aria-labelledby="tools-title"
 			className="border-t border-[#c7c7bf] bg-[#f2eee2] py-[120px]"
-			style={{
-				backgroundColor: backgroundColor ?? undefined,
-				color: textColor ?? undefined,
-			}}
 		>
 			<div className="mx-auto max-w-[1280px] px-8">
 				<div className="mb-16 text-center md:mb-20">

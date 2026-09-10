@@ -69,15 +69,15 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
 
   if (status === 'sent') {
     return (
-      <p role="status" className="border border-black/10 bg-[#f6f3ea] px-4 py-3 text-sm leading-relaxed text-[#4a5560]">
+      <p role="status" className="border border-black/10 bg-[#f6f3ea] px-4 py-3 text-sm leading-relaxed text-status">
         Merci, votre message a bien été envoyé. Nous vous répondrons rapidement.
       </p>
     )
   }
 
   const fieldClass =
-    'mt-2 block w-full border-0 border-b border-gray-400 bg-transparent px-0 py-2 text-base text-black outline-none transition focus:border-b-2 focus:border-gray-700 focus:ring-0'
-  const labelClass = 'text-xs font-normal uppercase tracking-wider text-gray-700'
+    'mt-2 block w-full border-0 border-b border-slate-blue bg-transparent px-2 py-2.5 text-base text-ink outline-none transition focus:border-b-2 focus:border-focus focus:ring-2 focus:ring-focus/25 focus:ring-offset-0'
+  const labelClass = 'text-xs font-normal uppercase tracking-wider text-slate-muted'
 
   return (
     <form onSubmit={handleSubmit} className="max-w-xl space-y-6" noValidate>
@@ -126,11 +126,11 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
       </div>
 
       <div className="flex items-start gap-2">
-        <input id="contact-consent" name="consent" type="checkbox" required className="mt-1 size-4 rounded-none border-gray-400 text-gray-700 focus:ring-gray-700" />
-        <label htmlFor="contact-consent" className="text-xs leading-relaxed text-gray-600">
+        <input id="contact-consent" name="consent" type="checkbox" required className="mt-1 size-4 rounded-none border-slate-blue text-navy focus:ring-2 focus:ring-focus focus:ring-offset-1" />
+        <label htmlFor="contact-consent" className="text-xs leading-relaxed text-slate-muted">
           J’accepte que mes informations soient utilisées pour me recontacter.{' '}
           {privacyHref ? (
-            <Link href={privacyHref} className="underline underline-offset-2 hover:text-black">
+            <Link href={privacyHref} className="underline underline-offset-2 hover:text-ink">
               Politique de confidentialité
             </Link>
           ) : null}
@@ -138,7 +138,7 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
       </div>
 
       {status === 'error' ? (
-        <p role="alert" className="text-sm font-medium text-[#9b2c2c]">
+        <p role="alert" className="text-sm font-medium text-error">
           {error}
         </p>
       ) : null}
@@ -146,7 +146,7 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="inline-block bg-[#70798a] px-8 py-3 text-xs uppercase tracking-[1.8px] text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-block bg-ink px-8 py-3 text-xs uppercase tracking-[1.8px] text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-navy hover:shadow-md active:translate-y-0 active:shadow-none disabled:cursor-not-allowed disabled:opacity-70 disabled:shadow-none"
       >
         {status === 'sending' ? 'Envoi…' : 'Envoyer'}
       </button>
