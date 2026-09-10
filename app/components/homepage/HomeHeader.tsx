@@ -24,7 +24,7 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
 
   return (
     <header
-      className={`relative text-ink ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-[85vh] overflow-visible sm:min-h-screen'}`}
+      className={`relative text-ink ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'flex min-h-[85vh] flex-col overflow-visible sm:min-h-screen'}`}
     >
       {!compact ? <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: heroImagePosition ?? undefined }} /> : null}
       {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
@@ -65,14 +65,14 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
         </div>
       </div>
 
-      {!compact ? <div className="relative z-10 w-full px-[4.6vw] pb-32 pt-12 sm:pt-16">
+      {!compact ? <div className="relative z-10 flex w-full flex-1 items-center px-[4.6vw] pb-28 pt-10 sm:pt-0">
         <div className="w-full max-w-[760px] min-w-0">
           <div className="text-brass"><SectionLabel>Excellence juridique</SectionLabel></div>
-          <h1 className="font-display mt-6 max-w-[700px] text-[clamp(38px,5.2vw,64px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
+          <h1 className="font-display mt-8 max-w-[760px] text-[clamp(42px,5.8vw,74px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
           {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
             Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
           </p> */}
-          <div className="mt-16 flex flex-col items-start gap-3 sm:mt-20 sm:flex-row sm:flex-wrap sm:gap-5">
+          <div className="mt-20 flex flex-col items-start gap-3 sm:mt-24 sm:flex-row sm:flex-wrap sm:gap-5">
             <ActionButton filled href="/services">Nos services</ActionButton>
             <ActionButton secondary href="/contact">Prendre rendez-vous</ActionButton>
           </div>
