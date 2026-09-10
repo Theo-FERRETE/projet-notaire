@@ -29,15 +29,23 @@ export function QuoteSection({ content }: { content?: MethodologyContent | null 
 	const steps = content?.steps?.length ? content.steps : fallbackSteps
 
 	return (
-		<section className="flex flex-col items-center bg-[#f4f1e6] px-8 py-28 text-center" id="team">
-			{/* Guillemet de la maquette (42x30) : viewBox calee sur la bbox du glyphe Libre Caslon a 100px */}
-			<svg aria-hidden="true" viewBox="5 -83 34 28" className="mb-7 h-[30px] w-[42px] fill-[#c4a000]">
-				<text x="0" y="0" fontSize="100" className="font-serif">&rdquo;</text>
-			</svg>
-			<blockquote className="max-w-[900px] font-serif text-[clamp(25px,3vw,36px)] italic leading-[1.25]">
-				"Le notaire n'est pas seulement le garant du contrat, il est l'artisan de la paix durable entre les parties. Notre mission est de traduire vos intentions en actes inattaquables."
-			</blockquote>
-			<cite className="mt-7 text-[11px] font-bold uppercase tracking-[2.5px] text-gold-accessible not-italic">Me. Alexandre Girard — Fondateur</cite>
+		<section className="bg-[#f4f1e6] px-6 py-16 sm:px-8 sm:py-24 lg:px-8 lg:py-[118px]" id="methodologie">
+			<div className="mx-auto max-w-[1216px]">
+				<div className="mb-16 text-center sm:mb-20 lg:mb-[82px]">
+					<p className="mb-4 text-[11px] font-bold uppercase tracking-[1.8px] text-gold">{content?.label ?? 'Méthodologie'}</p>
+					<h2 className="font-serif text-[21px] leading-[1.25] text-ink sm:text-[25px] lg:text-[34px]">{content?.heading ?? 'Le droit, rendu plus lisible'}</h2>
+				</div>
+
+				<div className="mx-auto max-w-[720px] bg-cream lg:grid lg:grid-cols-4 lg:max-w-none lg:border-t lg:border-ink lg:bg-transparent">
+					{steps.map((step) => (
+						<article key={step.number} className="min-h-[248px] border-b border-[#e8e4e1] px-10 py-11 last:border-b-0 sm:min-h-[250px] sm:px-10 sm:py-11 lg:min-h-[242px] lg:border-b-0 lg:border-r lg:border-[#d9d6cf] lg:px-8 lg:py-9 lg:last:border-r-0">
+							<p className="font-serif text-[17px] leading-none text-slate-soft">{step.number}</p>
+							<h3 className="mt-10 font-serif text-[18px] leading-[1.25] text-ink">{step.title}</h3>
+							<p className="mt-5 max-w-[570px] text-[16px] leading-[1.5] tracking-[.2px] text-ink">{step.description}</p>
+						</article>
+					))}
+				</div>
+			</div>
 		</section>
 	)
 }
