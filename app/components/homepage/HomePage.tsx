@@ -3,6 +3,7 @@ import { AboutSection } from './AboutSection'
 import { HomeFooter } from './HomeFooter'
 import { HomeHeader } from './HomeHeader'
 import { QuoteSection } from './QuoteSection'
+import { ValuesSection } from './ValuesSection'
 import { ServicesSection } from './ServicesSection'
 import { getHomePageData } from './useHomePageData'
 
@@ -37,6 +38,7 @@ export async function HomePage() {
           familyImage={getSectionImageUrl(expertise) ?? heroImage}
           familyImagePosition={expertiseImagePosition ?? heroImagePosition}
         />
+        <ValuesSection content={page?.valuesContent} />
         <QuoteSection content={page?.methodologyContent} />
       </main>
       <HomeFooter footerLinks={footerLinks} />
