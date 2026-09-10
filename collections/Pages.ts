@@ -22,6 +22,13 @@ const SERVICE_ICON_OPTIONS = [
   { label: 'Document', value: 'file-text' },
 ]
 
+const VALUES_ICON_OPTIONS = [
+  { label: 'Document (rigueur)', value: 'document' },
+  { label: 'Balance (clarté)', value: 'balance' },
+  { label: 'Personne (écoute)', value: 'person' },
+  { label: 'Poignée de main (confiance)', value: 'handshake' },
+]
+
 const TOOL_ICON_OPTIONS = [
   { label: 'Calculatrice (prêt)', value: 'simulateur-pret' },
   { label: 'Cadenas (mainlevée)', value: 'frais-mainlevee' },
@@ -175,6 +182,61 @@ export const Pages: CollectionConfig = {
               type: 'textarea',
               required: true,
               label: 'Description',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'valuesContent',
+      type: 'group',
+      label: 'Accueil — nos valeurs',
+      admin: {
+        condition: (data) => data?.slug === 'home',
+        description: 'Contenu éditable de la section Nos Valeurs affichée sur la page d’accueil.',
+      },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          defaultValue: 'Nos valeurs',
+          label: 'Petit titre',
+        },
+        {
+          name: 'heading',
+          type: 'text',
+          defaultValue: 'Des valeurs au service de votre confiance',
+          label: 'Titre',
+        },
+        {
+          name: 'values',
+          type: 'array',
+          minRows: 1,
+          labels: { singular: 'Valeur', plural: 'Valeurs' },
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              label: 'Titre de la valeur',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              required: true,
+              label: 'Description',
+            },
+            {
+              name: 'icon',
+              type: 'select',
+              required: false,
+              defaultValue: 'document',
+              options: VALUES_ICON_OPTIONS,
+              label: 'Icône',
+              admin: {
+                description:
+                  'Choix parmi les icônes SVG existantes du site (aucun upload).',
+              },
             },
           ],
         },

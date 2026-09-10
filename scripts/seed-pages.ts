@@ -8,7 +8,7 @@ import {
 	SECTION_LABELS,
 } from '../lib/content-keys'
 
-type PageSeed = Pick<Page, 'title' | 'slug' | 'sections' | 'methodologyContent' | 'servicesContent' | 'contactContent' | 'seo'>
+type PageSeed = Pick<Page, 'title' | 'slug' | 'sections' | 'methodologyContent' | 'valuesContent' | 'servicesContent' | 'contactContent' | 'seo'>
 
 const methodologyContentSeed: NonNullable<Page['methodologyContent']> = {
 	label: 'Méthodologie',
@@ -18,6 +18,17 @@ const methodologyContentSeed: NonNullable<Page['methodologyContent']> = {
 		{ number: '02', title: 'Analyse & Conseil', description: 'Explications claires des options possibles adaptées à votre situation.' },
 		{ number: '03', title: 'Rédaction', description: "Élaboration d'actes conformes et juridiquement solides pour vous protéger." },
 		{ number: '04', title: 'Signature & Suivi', description: "Accompagnement jusqu'à la finalisation. Vous avancez en toute sérénité." },
+	],
+}
+
+const valuesContentSeed: NonNullable<Page['valuesContent']> = {
+	label: 'Nos valeurs',
+	heading: 'Nos Valeurs',
+	values: [
+		{ title: 'Rigueur', icon: 'document', description: 'Une exigence constante de précision et de sécurité juridique pour chaque dossier.' },
+		{ title: 'Clarté', icon: 'balance', description: 'Des informations juridiques expliquées de manière simple, structurée et accessible.' },
+		{ title: 'Écoute', icon: 'person', description: 'Une attention portée à chaque situation afin d’apporter des réponses adaptées.' },
+		{ title: 'Confiance', icon: 'handshake', description: 'Une relation durable fondée sur la transparence et le respect du cadre déontologique.' },
 	],
 }
 
@@ -207,6 +218,7 @@ const pages: PageSeed[] = [
 		title: 'Accueil',
 		slug: 'home',
 		methodologyContent: methodologyContentSeed,
+		valuesContent: valuesContentSeed,
 		sections: [
 			{
 				label: 'Excellence juridique',
@@ -364,6 +376,18 @@ async function ensurePageContent(payload: Payload, seed: PageSeed, page: Page) {
 	// --- Page Accueil : méthodologie initiale si le groupe est absent ---
 	if (seed.slug === 'home' && seed.methodologyContent && !page.methodologyContent) {
 		data.methodologyContent = seed.methodologyContent
+	}
+
+	// --- Page Accueil : valeurs initiales si le groupe (ou la liste) est vide ---
+	// Le groupe peut exister à vide : l'ajout du champ crée la colonne avec les
+	// valeurs par défaut mais sans lignes.
+	if (seed.slug === 'home' && seed.valuesContent) {
+		const current = page.valuesContent
+		if (!current) {
+			data.valuesContent = seed.valuesContent
+		} else if (!current.values?.length) {
+			data.valuesContent = { ...current, values: seed.valuesContent.values }
+		}
 	}
 
 	// --- Page Services : domaines d'intervention & outils manquants ---

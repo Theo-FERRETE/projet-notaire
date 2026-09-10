@@ -266,6 +266,24 @@ export interface Page {
       | null;
   };
   /**
+   * Contenu éditable de la section Nos Valeurs affichée sur la page d’accueil.
+   */
+  valuesContent?: {
+    label?: string | null;
+    heading?: string | null;
+    values?:
+      | {
+          title: string;
+          description: string;
+          /**
+           * Choix parmi les icônes SVG existantes du site (aucun upload).
+           */
+          icon?: ('document' | 'balance' | 'person' | 'handshake') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
    * Contenu propre à la page Services : les 7 domaines d'intervention et les outils & simulateurs.
    */
   servicesContent?: {
@@ -541,6 +559,20 @@ export interface PagesSelect<T extends boolean = true> {
               number?: T;
               title?: T;
               description?: T;
+              id?: T;
+            };
+      };
+  valuesContent?:
+    | T
+    | {
+        label?: T;
+        heading?: T;
+        values?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              icon?: T;
               id?: T;
             };
       };
