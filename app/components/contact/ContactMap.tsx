@@ -2,8 +2,6 @@ import type { ContactMapView } from './contact-data'
 
 type ContactMapProps = {
 	view: ContactMapView
-	backgroundColor?: string | null
-	textColor?: string | null
 }
 
 /**
@@ -13,15 +11,11 @@ type ContactMapProps = {
  * fond et couleur de texte sont éditables dans le CMS et s'appliquent à
  * toute la largeur du bandeau (comme sur la page d'accueil).
  */
-export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps) {
+export function ContactMap({ view }: ContactMapProps) {
 	return (
 		<section
 			aria-labelledby="map-title"
 			className="w-full"
-			style={{
-				backgroundColor: backgroundColor ?? undefined,
-				color: textColor ?? undefined,
-			}}
 		>
 			<div className="mx-auto max-w-6xl px-6 py-20 sm:px-12">
 				<div className="mb-8 flex items-end justify-between gap-6">
@@ -32,7 +26,7 @@ export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps
 						href={view.mapsLink}
 						target="_blank"
 						rel="noreferrer"
-						className="border-b border-gray-600 pb-1 text-right text-sm text-gray-600 hover:text-gray-800"
+						className="border-b border-slate-blue pb-1 text-right text-sm text-slate-muted hover:text-navy"
 					>
 						{view.mapsLinkLabel}
 					</a>
@@ -48,8 +42,8 @@ export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps
 							allowFullScreen
 						/>
 					) : (
-						<div className="flex h-full w-full items-center justify-center bg-gray-200">
-							<p className="text-gray-600">Carte non disponible</p>
+						<div className="flex h-full w-full items-center justify-center bg-[#e4e7f0]">
+							<p className="text-slate-muted">Carte non disponible</p>
 						</div>
 					)}
 				</div>

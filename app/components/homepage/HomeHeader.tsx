@@ -18,20 +18,19 @@ export function getSiteNavItems(active: string) {
 
 const heroImage = '/qui-suis-je/expertise-notariale.png'
 
-export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, heroImagePosition, backgroundColor, textColor }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; heroImagePosition?: string; backgroundColor?: string | null; textColor?: string | null }) {
+export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, heroImagePosition }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; heroImagePosition?: string }) {
   const heading = heroHeading ?? 'Un notariat humain et de proximité au cœur d’Aix En Provence'
   const image = cmsHeroImage ?? heroImage
 
   return (
     <header
       className={`relative text-ink ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'min-h-[85vh] overflow-visible sm:min-h-screen'}`}
-      style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
     >
       {!compact ? <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: heroImagePosition ?? undefined }} /> : null}
       {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
 
       <div className="relative z-50 flex min-h-[70px] items-center justify-between gap-3 border-b border-white/20 bg-[#fdfcf7]/30 px-[4.6vw] backdrop-blur-sm sm:gap-6">
-        <Link href="/" className="font-classic shrink-0 whitespace-nowrap text-[18px] font-medium uppercase tracking-[-.5px] text-warm-gray sm:text-[25px] sm:tracking-[-1px]">Laila Gssime</Link>
+        <Link href="/" className="font-classic shrink-0 whitespace-nowrap text-[18px] font-medium uppercase tracking-[-.5px] text-citation sm:text-[25px] sm:tracking-[-1px]">Laila Gssime</Link>
         <div className="hidden items-center gap-8 md:flex">
           <nav aria-label="Navigation principale" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8">
             {navItems.map((item) => (

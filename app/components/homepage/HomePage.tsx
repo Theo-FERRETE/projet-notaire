@@ -24,24 +24,18 @@ export async function HomePage() {
         heroHeading={hero?.heading ?? undefined}
         heroImage={heroImage}
         heroImagePosition={heroImagePosition}
-        backgroundColor={hero?.backgroundColor ?? undefined}
-        textColor={hero?.textColor ?? undefined}
       />
       <main>
         <AboutSection
           heading={about?.heading ?? undefined}
           image={getSectionImageUrl(about)}
           imagePosition={aboutImagePosition}
-          backgroundColor={about?.backgroundColor ?? undefined}
-          textColor={about?.textColor ?? undefined}
         />
         <ServicesSection
           serviceCards={serviceCards}
           heading={expertise?.heading ?? undefined}
           familyImage={getSectionImageUrl(expertise) ?? heroImage}
           familyImagePosition={expertiseImagePosition ?? heroImagePosition}
-          backgroundColor={expertise?.backgroundColor ?? undefined}
-          textColor={expertise?.textColor ?? undefined}
         />
         <QuoteSection content={page?.methodologyContent} />
       </main>
