@@ -39,8 +39,8 @@ const InfoCard = ({
 	<div className="flex gap-4">
 		<div className="shrink-0 pt-1">{icon}</div>
 		<div>
-			<h2 className="text-sm font-normal uppercase tracking-wider text-black">{label}</h2>
-			<div className="mt-2 text-base leading-relaxed text-[#c5a059]">{children}</div>
+			<h2 className="text-sm font-normal uppercase tracking-wider text-ink">{label}</h2>
+			<div className="mt-2 text-base leading-relaxed text-gold-muted">{children}</div>
 		</div>
 	</div>
 )
@@ -79,7 +79,7 @@ export function ContactDetails({ view }: { view: ContactInfoView }) {
 
 				{/* Right: form */}
 				<section aria-labelledby="contact-form-heading" className="order-2 border border-white/10 bg-white p-6 sm:p-12 lg:col-start-6 lg:col-span-7 lg:row-start-1 lg:row-span-2">
-					<h2 id="contact-form-heading" className="mb-8 text-base font-normal text-black">
+					<h2 id="contact-form-heading" className="mb-8 text-base font-normal text-ink">
 						{view.formHeading}
 					</h2>
 					<ContactForm privacyHref={view.privacyHref} />
@@ -94,11 +94,11 @@ export function ContactDetails({ view }: { view: ContactInfoView }) {
 						className="object-cover grayscale"
 						style={{ objectPosition: view.quote.imagePosition ?? undefined }}
 					/>
-					<figcaption className="absolute bottom-4 left-4 right-4 bg-[#f1f1f7]/95 px-6 py-5 text-[#687183] sm:bottom-6 sm:left-6 sm:right-6 sm:px-8 sm:py-7">
-						<blockquote className="font-serif text-sm italic leading-relaxed text-[#353841] sm:text-base">
+					<figcaption className="absolute bottom-4 left-4 right-4 bg-[#f1f1f7]/95 px-6 py-5 text-slate-blue sm:bottom-6 sm:left-6 sm:right-6 sm:px-8 sm:py-7">
+						<blockquote className="font-serif text-sm italic leading-relaxed text-slate-dark sm:text-base">
 							{view.quote.text}
 						</blockquote>
-						<cite className="mt-4 block not-italic text-xs uppercase tracking-[0.08em] text-[#687183] sm:text-sm">
+						<cite className="mt-4 block not-italic text-xs uppercase tracking-[0.08em] text-slate-blue sm:text-sm">
 							— {view.quote.cite}
 						</cite>
 					</figcaption>

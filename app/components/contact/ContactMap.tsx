@@ -25,7 +25,7 @@ export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps
 		>
 			<div className="mx-auto max-w-6xl px-6 py-20 sm:px-12">
 				<div className="mb-8 flex items-end justify-between gap-6">
-					<h2 id="map-title" className="text-base font-normal text-black">
+					<h2 id="map-title" className="text-base font-normal text-ink">
 						{view.heading}
 					</h2>
 					<a

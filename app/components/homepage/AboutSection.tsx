@@ -9,7 +9,7 @@ export function AboutSection({ heading, image, imagePosition, backgroundColor, t
         <h2 className="mb-8 font-serif text-[clamp(34px,4vw,46px)] font-medium leading-[1.25]">
           {heading ?? <><span>La rigueur du droit,</span><br /><em className="font-normal">l’élégance du service.</em></>}
         </h2>
-        <div className="max-w-[520px] space-y-6 text-[16px] leading-[1.6] text-[#4d4732]">
+        <div className="max-w-[520px] space-y-6 text-[16px] leading-[1.6] text-olive">
           <p>Fondée sur des valeurs de transparence et de proximité, notre étude accompagne particuliers et entreprises dans toutes les étapes juridiques de leur développement.</p>
           <p>Située au cœur de la capitale, notre structure à taille humaine privilégie le contact direct et la réactivité pour une sécurité juridique sans compromis.</p>
         </div>

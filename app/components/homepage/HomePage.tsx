@@ -18,7 +18,7 @@ export async function HomePage() {
   const expertiseImagePosition = getSectionImageFocalPoint(expertise)
 
   return (
-    <div className="min-h-screen w-full bg-[#fdfcf7] text-[#1b1b1b]">
+    <div className="min-h-screen w-full bg-[#fdfcf7] text-ink">
       <HomeHeader
         navItems={navItems}
         heroHeading={hero?.heading ?? undefined}

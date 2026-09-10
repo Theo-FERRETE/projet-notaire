@@ -36,7 +36,7 @@ export async function ServicesPage() {
 	const tools = toolCards && toolCards.length > 0 ? toToolViews(toolCards) : FALLBACK_TOOLS;
 
 	return (
-		<div className="min-h-screen bg-cream text-ink selection:bg-[#fcd353] selection:text-[#725a00]">
+		<div className="min-h-screen bg-cream text-ink selection:bg-selection selection:text-selection-text">
 			<HomeHeader compact navItems={getSiteNavItems("Services")} />
 
 			<main id="content">

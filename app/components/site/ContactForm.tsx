@@ -69,14 +69,14 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
 
   if (status === 'sent') {
     return (
-      <p role="status" className="border border-black/10 bg-[#f6f3ea] px-4 py-3 text-sm leading-relaxed text-[#4a5560]">
+      <p role="status" className="border border-black/10 bg-[#f6f3ea] px-4 py-3 text-sm leading-relaxed text-status">
         Merci, votre message a bien été envoyé. Nous vous répondrons rapidement.
       </p>
     )
   }
 
   const fieldClass =
-    'mt-2 block w-full border-0 border-b border-gray-400 bg-transparent px-0 py-2 text-base text-black outline-none transition focus:border-b-2 focus:border-gray-700 focus:ring-0'
+    'mt-2 block w-full border-0 border-b border-gray-400 bg-transparent px-0 py-2 text-base text-ink outline-none transition focus:border-b-2 focus:border-gray-700 focus:ring-0'
   const labelClass = 'text-xs font-normal uppercase tracking-wider text-gray-700'
 
   return (
@@ -130,7 +130,7 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
         <label htmlFor="contact-consent" className="text-xs leading-relaxed text-gray-600">
           J’accepte que mes informations soient utilisées pour me recontacter.{' '}
           {privacyHref ? (
-            <Link href={privacyHref} className="underline underline-offset-2 hover:text-black">
+            <Link href={privacyHref} className="underline underline-offset-2 hover:text-ink">
               Politique de confidentialité
             </Link>
           ) : null}
@@ -138,7 +138,7 @@ export function ContactForm({ privacyHref }: ContactFormProps) {
       </div>
 
       {status === 'error' ? (
-        <p role="alert" className="text-sm font-medium text-[#9b2c2c]">
+        <p role="alert" className="text-sm font-medium text-error">
           {error}
         </p>
       ) : null}

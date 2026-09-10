@@ -33,11 +33,11 @@ export function ContactHero({
 	const content = (
 		<div className="space-y-4">
 			<p className="text-sm font-normal uppercase tracking-[0.1em] text-gray-500">{eyebrow}</p>
-			<h1 id="contact-title" className="font-serif text-5xl font-normal leading-tight text-black sm:text-6xl">
+			<h1 id="contact-title" className="font-serif text-5xl font-normal leading-tight text-ink sm:text-6xl">
 				{title}
 			</h1>
 			<div aria-hidden="true" className="h-px w-24 bg-gray-500" />
-			<p className="max-w-2xl text-base leading-relaxed text-[#c5a059]">{description}</p>
+			<p className="max-w-2xl text-base leading-relaxed text-gold-muted">{description}</p>
 		</div>
 	)
 

@@ -14,22 +14,22 @@ export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyI
 
   const textCard = (service: ServiceCard | undefined, className: string) => service ? (
     <article className={`flex min-h-[168px] flex-col justify-center border border-white/[.12] bg-[#12172b] p-6 sm:p-7 ${className}`}>
-      <span className="mb-5 text-2xl leading-none text-[#e3c68e]" aria-hidden="true">{service.icon}</span>
-      <h3 className="font-serif text-[22px] leading-[1.2] text-[#f5eee2]">{service.title}</h3>
-      <p className="mt-4 max-w-[290px] text-[13px] leading-[1.55] text-[#c3c6d0]">{service.description}</p>
+      <span className="mb-5 text-2xl leading-none text-gold-light" aria-hidden="true">{service.icon}</span>
+      <h3 className="font-serif text-[22px] leading-[1.2] text-cream-light">{service.title}</h3>
+      <p className="mt-4 max-w-[290px] text-[13px] leading-[1.55] text-slate-soft">{service.description}</p>
     </article>
   ) : null
 
   return (
-    <section className="bg-[#2A254E] px-6 py-20 text-[#f5eee2] sm:px-8 sm:py-24 lg:px-12" id="services" style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}>
+    <section className="bg-[#2A254E] px-6 py-20 text-cream-light sm:px-8 sm:py-24 lg:px-12" id="services" style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}>
       <div className="mx-auto max-w-[1280px]">
         <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.2px] text-[#e3c68e]">Domaines d’expertise</p>
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.2px] text-gold-light">Domaines d’expertise</p>
           <h2 className="font-serif text-[clamp(32px,4vw,46px)] font-medium leading-[1.2]">{heading ?? 'Sécuriser vos projets avec rigueur et clarté.'}</h2>
-          <p className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-[#c3c6d0]">Nous collaborons avec d&apos;autres spécialistes et professionnels du droit afin de garantir une approche globale et cohérente.</p>
+          <p className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-slate-soft">Nous collaborons avec d&apos;autres spécialistes et professionnels du droit afin de garantir une approche globale et cohérente.</p>
         </div>
-        <Link href="/services" className="w-fit text-[11px] font-bold uppercase tracking-[1px] text-[#e3c68e] transition-colors hover:text-white lg:mb-1">Voir tous les services <span aria-hidden="true">→</span></Link>
+        <Link href="/services" className="w-fit text-[11px] font-bold uppercase tracking-[1px] text-gold-light transition-colors hover:text-white lg:mb-1">Voir tous les services <span aria-hidden="true">→</span></Link>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
