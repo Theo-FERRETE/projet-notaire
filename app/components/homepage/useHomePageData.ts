@@ -16,7 +16,7 @@ export function getHomePageData() {
       ],
       footerLinks: {
         navigation: ['Accueil', 'Services', 'Bio', 'Blog', 'Contact'],
-        legal: ['Mentions légales', 'Politique de confidentialité', 'CGV'],
+        legal: ['Mentions légales', 'Politique de confidentialité'],
       },
   }
 }
