@@ -34,9 +34,50 @@ const MAX_LENGTHS = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+// Limite en mémoire (process `next start` unique, pas de Redis en place) :
+// une IP ne peut pas dépasser RATE_LIMIT_MAX envois par fenêtre.
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX = 5
+const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>()
+
+function getClientIp(request: Request) {
+  const forwardedFor = request.headers.get('x-forwarded-for')
+  if (forwardedFor) return forwardedFor.split(',')[0].trim()
+  return request.headers.get('x-real-ip') ?? 'unknown'
+}
+
+function isRateLimited(ip: string) {
+  const now = Date.now()
+
+  // Purge les entrées expirées à l'occasion pour ne pas laisser grossir la
+  // map indéfiniment (une IP par bot ayant déjà tapé une fois suffit à créer
+  // une entrée).
+  for (const [key, bucket] of rateLimitBuckets) {
+    if (bucket.resetAt <= now) rateLimitBuckets.delete(key)
+  }
+
+  const bucket = rateLimitBuckets.get(ip)
+
+  if (!bucket) {
+    rateLimitBuckets.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
+    return false
+  }
+
+  bucket.count += 1
+  return bucket.count > RATE_LIMIT_MAX
+}
+
+// Retire les caractères de contrôle (dont CR/LF) : sans ça, un champ comme
+// firstName pourrait injecter des en-têtes SMTP supplémentaires (ex. Bcc)
+// une fois réutilisé dans le sujet de l'email envoyé par nodemailer.
+function stripControlChars(value: string) {
+  // eslint-disable-next-line no-control-regex
+  return value.replace(/[\x00-\x1f\x7f]/g, '')
+}
+
 function readString(source: Record<string, unknown>, key: string) {
   const value = source[key]
-  return typeof value === 'string' ? value.trim() : ''
+  return typeof value === 'string' ? stripControlChars(value.trim()) : ''
 }
 
 function parseBody(raw: unknown): { body: ContactBody } | { error: string } {
@@ -81,6 +122,7 @@ function escapeHtml(value: string) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 async function resolveRecipient() {
@@ -98,6 +140,13 @@ async function resolveRecipient() {
 }
 
 export async function POST(request: Request) {
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: 'Trop de tentatives. Merci de réessayer dans quelques minutes.' },
+      { status: 429 },
+    )
+  }
+
   let raw: unknown
   try {
     raw = await request.json()
