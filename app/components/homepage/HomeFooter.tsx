@@ -5,7 +5,7 @@ type FooterLinks = { navigation: string[]; legal: string[] }
 
 const defaultFooterLinks: FooterLinks = {
 	navigation: ['Accueil', 'Services', 'Bio', 'Blog', 'Contact'],
-	legal: ['Mentions légales', 'Politique de confidentialité', 'CGV'],
+	legal: ['Mentions légales', 'Politique de confidentialité'],
 }
 
 function footerHref(label: string) {
@@ -19,7 +19,7 @@ function footerHref(label: string) {
 		'Mentions Légales': '/mentions-legales',
 		'Politique de confidentialité': '/confidentialite',
 		Confidentialité: '/confidentialite',
-		CGV: '/contact',
+		
 	}
 
 	return links[label] ?? '/contact'

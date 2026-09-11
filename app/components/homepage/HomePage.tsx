@@ -41,7 +41,7 @@ export async function HomePage() {
         <ValuesSection content={page?.valuesContent} />
         <QuoteSection content={page?.methodologyContent} />
       </main>
-      <HomeFooter footerLinks={footerLinks} />
+      <HomeFooter/>
     </div>
   )
 }
