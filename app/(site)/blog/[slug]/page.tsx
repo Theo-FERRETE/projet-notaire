@@ -256,6 +256,12 @@ export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
                         priority
                         sizes="(max-width: 896px) 100vw, 896px"
                         className="object-cover"
+                        style={{
+                          objectPosition:
+                            media.focalX != null && media.focalY != null
+                              ? `${media.focalX}% ${media.focalY}%`
+                              : undefined,
+                        }}
                       />
                     </div>
                   </div>
@@ -324,6 +330,7 @@ export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 373px"
                             className="object-cover"
+                            style={{ objectPosition: autre.imagePosition ?? undefined }}
                           />
                         ) : null}
                       </div>

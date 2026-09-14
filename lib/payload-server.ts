@@ -47,6 +47,13 @@ function getMediaUrl(image: PayloadArticle['image']) {
   return (image as Media).url ?? undefined
 }
 
+function getMediaFocalPoint(image: PayloadArticle['image']) {
+  if (!image || typeof image === 'number') return undefined
+  const { focalX, focalY } = image as Media
+  if (focalX == null || focalY == null) return undefined
+  return `${focalX}% ${focalY}%`
+}
+
 const categoryLabels: Record<PayloadArticle['category'], Article['category']> = {
   famille: 'Famille', immobilier: 'Immobilier', patrimoine: 'Patrimoine', international: 'International',
 }
@@ -64,6 +71,7 @@ export async function getPublishedArticles(category?: BlogCategory) {
       title: article.title,
       excerpt: article.excerpt ?? '',
       image: getMediaUrl(article.image),
+      imagePosition: getMediaFocalPoint(article.image),
     }))
   } catch (error) {
     return payloadUnavailable('les articles', error)
