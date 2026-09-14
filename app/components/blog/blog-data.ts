@@ -9,6 +9,7 @@ export type Article = {
   title: string;
   excerpt: string;
   image?: string;
+  imagePosition?: string;
 };
 
 export const articles: Article[] = [

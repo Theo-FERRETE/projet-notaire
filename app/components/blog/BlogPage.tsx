@@ -90,7 +90,7 @@ export default function BlogPage({
               <article key={article.slug} className="group">
                 <Link href={`/blog/${article.slug}`} className="block">
                 <div className="relative mb-6 aspect-[1.45] overflow-hidden bg-sand">
-                  {article.image ? <Image src={article.image} alt={`Illustration de l'article « ${article.title} »`} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" /> : <ArticleImage alt={`Illustration de l'article « ${article.title} »`} />}
+                  {article.image ? <Image src={article.image} alt={`Illustration de l'article « ${article.title} »`} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" style={{ objectPosition: article.imagePosition ?? undefined }} /> : <ArticleImage alt={`Illustration de l'article « ${article.title} »`} />}
                   <span className="absolute left-4 top-4 bg-cream px-3 py-2 text-[9px] font-bold uppercase tracking-[1.1px] text-gold">
                     {article.category}
                   </span>
