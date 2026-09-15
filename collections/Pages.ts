@@ -68,6 +68,7 @@ export const Pages: CollectionConfig = {
         { label: 'Qui suis-je', value: 'qui-suis-je' },
         { label: 'Services', value: 'services' },
         { label: 'Contact', value: 'contact' },
+        { label: 'Politique de confidentialité', value: 'confidentialite' },
       ],
       label: 'Page publique',
     },

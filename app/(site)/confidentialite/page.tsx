@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 import { HomeFooter } from '@/app/components/homepage/HomeFooter'
 import { getSiteNavItems, HomeHeader } from '@/app/components/homepage/HomeHeader'
+import { getPageBySlug } from '@/lib/payload-server'
 
 export const revalidate = 0
 
@@ -122,7 +124,21 @@ const sections = [
   },
 ]
 
-export default function ConfidentialitePage() {
+const richTextStyles = [
+  'flex flex-col gap-5',
+  '[&_p]:text-base [&_p]:leading-[1.75] [&_p]:text-slate-muted',
+  '[&_h2]:pt-8 [&_h2]:font-serif [&_h2]:text-[26px] [&_h2]:leading-[1.25] [&_h2]:text-ink sm:[&_h2]:text-[32px]',
+  '[&_a]:text-gold-accessible [&_a]:underline [&_a]:underline-offset-2',
+  '[&_ul]:ml-5 [&_ul]:list-disc [&_ul]:space-y-2',
+].join(' ')
+
+export default async function ConfidentialitePage() {
+  const page = await getPageBySlug('confidentialite')
+  const payloadSection = page?.sections?.find(
+    (section) => section.label === 'Politique de confidentialité' && section.enabled !== false,
+  )
+  const payloadBody = payloadSection?.body ?? null
+
   return (
     <div className="flex min-h-screen flex-col bg-cream text-ink">
       <HomeHeader compact navItems={getSiteNavItems('')} />
@@ -138,11 +154,18 @@ export default function ConfidentialitePage() {
         </section>
 
         <article className="mx-auto w-full max-w-[896px] px-8 py-16 lg:py-24">
-          <div className="space-y-6 text-base leading-[1.75] text-ink">
-            <p>L’office notarial de Maître Laïla GSSIME, en tant que Responsable de traitement, est sensible à la protection de vos données à caractère personnel. À ce titre, la présente politique de confidentialité a pour objet de vous informer de la manière dont vos données sont traitées et vous assurer du respect de la réglementation établie notamment par le Règlement Européen UE2016/679 du 27 avril 2016 ainsi que de la loi 78-17 Informatique et Libertés modifiée du 6 janvier 1978.</p>
-            <p>Cette politique de confidentialité est applicable à l’ensemble des sites internet, applications et services, édités et utilisés par l’office notarial. Cette politique étant vouée à être mise à jour selon les dispositions légales et les services proposés par l’office notarial, nous vous invitons à la consulter le plus fréquemment possible.</p>
-          </div>
+          {!payloadBody ? (
+            <div className="space-y-6 text-base leading-[1.75] text-ink">
+              <p>L’office notarial de Maître Laïla GSSIME, en tant que Responsable de traitement, est sensible à la protection de vos données à caractère personnel. À ce titre, la présente politique de confidentialité a pour objet de vous informer de la manière dont vos données sont traitées et vous assurer du respect de la réglementation établie notamment par le Règlement Européen UE2016/679 du 27 avril 2016 ainsi que de la loi 78-17 Informatique et Libertés modifiée du 6 janvier 1978.</p>
+              <p>Cette politique de confidentialité est applicable à l’ensemble des sites internet, applications et services, édités et utilisés par l’office notarial. Cette politique étant vouée à être mise à jour selon les dispositions légales et les services proposés par l’office notarial, nous vous invitons à la consulter le plus fréquemment possible.</p>
+            </div>
+          ) : null}
 
+          {payloadBody ? (
+            <div className={`mt-14 lg:mt-20 ${richTextStyles}`}>
+              <RichText data={payloadBody} />
+            </div>
+          ) : (
           <div className="mt-14 space-y-14 lg:mt-20 lg:space-y-16">
             {sections.map((section) => (
               <section key={section.number} aria-labelledby={`privacy-section-${section.number}`}>
@@ -154,6 +177,7 @@ export default function ConfidentialitePage() {
               </section>
             ))}
           </div>
+          )}
 
           <div className="mt-16 border-t border-line pt-6 text-sm leading-relaxed text-slate-muted">
             <p>Dernière mise à jour le 15/09/2026</p>

@@ -213,6 +213,67 @@ const contactContentSeed: NonNullable<Page['contactContent']> = {
 	mapsLinkLabel: 'Ouvrir dans Google Maps',
 }
 
+const privacyTextNode = (text: string) => ({
+	type: 'text' as const,
+	version: 1,
+	text,
+	detail: 0,
+	format: 0,
+	mode: 'normal' as const,
+	style: '',
+})
+
+const privacyParagraph = (text: string) => ({
+	type: 'paragraph' as const,
+	version: 1,
+	children: [privacyTextNode(text)],
+	direction: null,
+	format: '' as const,
+	indent: 0,
+})
+
+const privacyHeading = (text: string) => ({
+	type: 'heading' as const,
+	tag: 'h2' as const,
+	version: 1,
+	children: [privacyTextNode(text)],
+	direction: null,
+	format: '' as const,
+	indent: 0,
+})
+
+const privacyPolicyBody: NonNullable<Page['sections']>[number]['body'] = {
+	root: {
+		type: 'root',
+		children: [
+			privacyParagraph('L’office notarial de Maître Laïla GSSIME, en tant que Responsable de traitement, est sensible à la protection de vos données à caractère personnel. À ce titre, la présente politique de confidentialité a pour objet de vous informer de la manière dont vos données sont traitées et vous assurer du respect de la réglementation établie notamment par le Règlement Européen UE2016/679 du 27 avril 2016 ainsi que de la loi 78-17 Informatique et Libertés modifiée du 6 janvier 1978.'),
+			privacyParagraph('Cette politique de confidentialité est applicable à l’ensemble des sites internet, applications et services, édités et utilisés par l’office notarial. Cette politique étant vouée à être mise à jour selon les dispositions légales et les services proposés par l’office notarial, nous vous invitons à la consulter le plus fréquemment possible.'),
+			privacyHeading('1. Quelles données personnelles sont collectées ?'),
+			privacyParagraph('Plusieurs types de données à caractère personnel peuvent être collectés sur le site et autres solutions digitales, notamment : • Les données relatives à l’identité ; • Les coordonnées de contact.'),
+			privacyHeading('2. Pourquoi certaines de mes données sont-elles collectées ?'),
+			privacyParagraph('Vos données personnelles, recueillies par l’office notarial, nous permettent de vous fournir des services : réponse aux demandes de contact, envoi de documentations ou d’informations, prise de rendez-vous.'),
+			privacyHeading('3. Combien de temps mes données sont-elles conservées ?'),
+			privacyParagraph('Les données collectées seront traitées et conservées pendant la durée nécessaire au regard des finalités pour lesquelles elles sont traitées, dans le respect des normes, règlements et textes en vigueur. Néanmoins et conformément à l’article 5 du RGPD, certaines données à caractère personnel pourront être « conservées pour des durées plus longues dans la mesure où elles seront traitées exclusivement à des fins archivistiques dans l’intérêt public, à des fins de recherche scientifique ou historique ou à des fins statistiques ». '),
+			privacyHeading('5. Sur quels fondements juridiques reposent les traitements de mes données ?'),
+			privacyParagraph('Les traitements de vos données collectées ont pour bases légales : • L’intérêt légitime lié à nos activités et à notre mission ; • Le consentement (formulaire de contact) ; • L’obligation légale selon les circonstances de la collecte des données.'),
+			privacyHeading('6. Quels sont les destinataires de mes données ?'),
+			privacyParagraph('Les données personnelles vous concernant ne seront destinées qu’aux services et personnes habilitées à les traiter, conformément aux finalités déterminées. Ces données peuvent également être communiquées aux sous-traitants habilités pour la réalisation des finalités du traitement.'),
+			privacyHeading('7. Mes données sortiront-elles de l’Union Européenne ?'),
+			privacyParagraph('Vos données personnelles seront hébergées au sein de l’Union Européenne. Pour autant, restant libre du choix de ses relations techniques et/ou commerciales, l’office notarial se réserve ainsi le droit d’héberger ou de transférer certaines données auprès de sous-traitants établis en dehors de l’Union Européenne à la condition qu’ils présentent les garanties suffisantes au regard des exigences du RGPD, notamment si les pays présentent un niveau adéquat de protection, conformément aux articles 44 et suivants du Règlement Européen UE2016/679 du 27 avril 2016.'),
+			privacyHeading('8. Mes données sont-elles sécurisées lors de leurs traitements ?'),
+			privacyParagraph('Toutes les personnes ayant accès à vos données sont habilitées et tenues par une obligation de confidentialité. À ce titre et conformément à l’article 32 du RGPD, l’office notarial ainsi que l’ensemble des sous-traitants s’engagent à mettre en œuvre toutes les mesures techniques et organisationnelles nécessaires en vue de garantir la sécurité ainsi que la confidentialité des données traitées.'),
+			privacyHeading('9. Je possède différents droits, comment puis-je les exercer ?'),
+			privacyParagraph('Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée, et au Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016, vous disposez des droits d’accès, de rectification, d’effacement et de portabilité des données personnelles vous concernant. Vous pouvez également obtenir la limitation du traitement de vos données ou vous opposer à leur traitement pour un motif légitime.'),
+			privacyParagraph('Vous pouvez exercer vos droits par e-mail à : laila.gssime@notaires.fr ou par courrier postal à l’adresse suivante : 34 cours Mirabeau, 13100 Aix-en-Provence. Vous pouvez également contacter notre délégué à la protection des données personnelles : Data Vigi Protection – dpo.notaires@datavigiprotection.fr. Réclamation CNIL : https://www.cnil.fr/plaintes.'),
+			privacyParagraph('Dernière mise à jour le 15/09/2026.'),
+		],
+		direction: null,
+		format: '' as const,
+		indent: 0,
+		version: 1,
+	},
+}
+
 const pages: PageSeed[] = [
 	{
 		title: 'Accueil',
@@ -329,6 +390,24 @@ const pages: PageSeed[] = [
 			metaTitle: 'Contact | Maître Laïla GSSIME',
 			metaDescription:
 				'Contactez l’étude notariale de Maître Laïla GSSIME à Aix-en-Provence.',
+		},
+	},
+	{
+		title: 'Politique de confidentialité',
+		slug: 'confidentialite',
+		sections: [
+			{
+				label: 'Politique de confidentialité',
+				heading: 'Politique de confidentialité',
+				body: privacyPolicyBody,
+				backgroundColor: '#FCF9F5',
+				textColor: '#1B1B1B',
+				enabled: true,
+			},
+		],
+		seo: {
+			metaTitle: 'Politique de confidentialité | Maître Laïla GSSIME',
+			metaDescription: 'Politique de confidentialité de l’office notarial de Maître Laïla GSSIME.',
 		},
 	},
 ]
