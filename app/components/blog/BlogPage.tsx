@@ -9,13 +9,14 @@ import {
   type BlogCategory,
 } from "./blog-data";
 
-function ArticleImage({ alt, src }: { alt: string; src?: string }) {
+function ArticleImage({ alt, src, priority = false }: { alt: string; src?: string; priority?: boolean }) {
   return (
     <Image
       src={src ?? "/qui-suis-je/expertise-notariale.png"}
       alt={alt}
       width={640}
       height={420}
+      priority={priority}
       className="h-full w-full object-cover"
     />
   );
@@ -65,6 +66,7 @@ export default function BlogPage({
                 <ArticleImage
                   alt={`Illustration de l'article « ${featuredArticle.title} »`}
                   src={featuredArticle.image}
+                  priority
                 />
               </div>
               <div className="flex flex-col justify-center gap-5 p-6 sm:gap-6 sm:p-12">
