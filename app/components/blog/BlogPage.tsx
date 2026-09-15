@@ -9,19 +9,10 @@ import {
   type BlogCategory,
 } from "./blog-data";
 
-const featuredArticle = {
-  category: "À la une · International",
-  date: "",
-  title: "L'anticipation successorale en contexte international",
-  excerpt:
-    "Naviguer entre les législations nationales et les conventions internationales requiert une expertise précise.",
-  slug: "anticipation-successorale-contexte-international",
-};
-
-function ArticleImage({ alt }: { alt: string }) {
+function ArticleImage({ alt, src }: { alt: string; src?: string }) {
   return (
     <Image
-      src="/qui-suis-je/expertise-notariale.png"
+      src={src ?? "/qui-suis-je/expertise-notariale.png"}
       alt={alt}
       width={640}
       height={420}
@@ -37,6 +28,8 @@ export default function BlogPage({
   articles: Article[];
   activeCategory: BlogCategory;
 }) {
+  const featuredArticle = articles[0];
+
   return (
     <div className="flex min-h-full flex-col bg-cream text-ink">
       <HomeHeader compact navItems={getSiteNavItems("Blog")} />
@@ -66,24 +59,30 @@ export default function BlogPage({
             </nav>
           </div>
 
-          <article className="grid overflow-hidden bg-stone shadow-[0_12px_30px_rgba(27,27,27,0.06)] md:grid-cols-[1.25fr_0.9fr]">
-            <div className="aspect-[1.25] bg-sand sm:aspect-[1.5] md:aspect-auto md:min-h-[430px]">
-              <ArticleImage alt="Illustration de l'actualité successorale internationale" />
-            </div>
-            <div className="flex flex-col justify-center gap-5 p-6 sm:gap-6 sm:p-12">
-              <p className="text-[10px] font-bold uppercase tracking-[1.7px] text-gold">{featuredArticle.category}</p>
-              <h2 className="max-w-[420px] font-serif text-[32px] leading-[1.08] sm:text-[43px]">
-                {featuredArticle.title}
-              </h2>
-              <p className="max-w-[390px] text-[14px] leading-6 text-slate-muted">{featuredArticle.excerpt}</p>
-              <Link
-                href={`/blog/${featuredArticle.slug}`}
-                className="w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px] transition-colors hover:text-gold"
-              >
-                Lire l&apos;article <span className="ml-2 text-gold">→</span>
-              </Link>
-            </div>
-          </article>
+          {featuredArticle ? (
+            <article className="grid overflow-hidden bg-stone shadow-[0_12px_30px_rgba(27,27,27,0.06)] md:grid-cols-[1.25fr_0.9fr]">
+              <div className="aspect-[1.25] bg-sand sm:aspect-[1.5] md:aspect-auto md:min-h-[430px]">
+                <ArticleImage
+                  alt={`Illustration de l'article « ${featuredArticle.title} »`}
+                  src={featuredArticle.image}
+                />
+              </div>
+              <div className="flex flex-col justify-center gap-5 p-6 sm:gap-6 sm:p-12">
+                <p className="text-[10px] font-bold uppercase tracking-[1.7px]">À la une · {featuredArticle.category}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[1.2px] text-slate-muted">{featuredArticle.date}</p>
+                <h2 className="max-w-[420px] font-serif text-[32px] leading-[1.08] sm:text-[43px]">
+                  {featuredArticle.title}
+                </h2>
+                <p className="max-w-[390px] text-[14px] leading-6 text-slate-muted">{featuredArticle.excerpt}</p>
+                <Link
+                  href={`/blog/${featuredArticle.slug}`}
+                  className="w-fit border-b border-ink pb-1 text-[10px] font-bold uppercase tracking-[1.1px] transition-colors hover:text-gold"
+                >
+                  Lire l&apos;article <span className="ml-2 text-gold">→</span>
+                </Link>
+              </div>
+            </article>
+          ) : null}
 
           <section id="articles" className="grid gap-10 pt-2 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 md:grid-cols-3 md:gap-8">
             {articles.map((article) => (

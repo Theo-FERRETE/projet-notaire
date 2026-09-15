@@ -30,7 +30,16 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
       {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
 
       <div className="relative z-50 flex min-h-[70px] items-center justify-between gap-3 border-b border-white/20 bg-[#fdfcf7]/30 px-[4.6vw] backdrop-blur-sm sm:gap-6">
-        <Link href="/" className="font-classic shrink-0 whitespace-nowrap text-[18px] font-medium uppercase tracking-[-.5px] text-citation sm:text-[25px] sm:tracking-[-1px]">Laila Gssime</Link>
+        <Link href="/" className="flex h-14 w-28 shrink-0 items-center sm:h-16 sm:w-36" aria-label="Accueil - Laila Gssime">
+          <Image
+            src="/logo-notaire.png"
+            alt="Notaire"
+            width={150}
+            height={150}
+            className="h-full w-full object-contain"
+            priority
+          />
+        </Link>
         <div className="hidden items-center gap-8 md:flex">
           <nav aria-label="Navigation principale" className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8">
             {navItems.map((item) => (
