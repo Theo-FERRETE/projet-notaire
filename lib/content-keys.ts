@@ -15,6 +15,9 @@ export const SECTION_LABELS = {
   servicesToolsBand: 'Expertise digitale', // page Services, section 2
   contactHero: 'Entrer en relation', // page Contact, section 1
   contactMapBand: 'Nous trouver', // page Contact, section 2
+  quiSuisJeHero: 'L’excellence au service de l’humain', // page Qui suis-je, section 1
+  quiSuisJeParcours: 'Un parcours de rigueur', // page Qui suis-je, section 2 (libellé déjà seedé)
+  quiSuisJeEngagement: 'Engagement', // page Qui suis-je, section 3
 } as const
 
 export const LEGACY_SEEDED_HEADINGS = {
@@ -36,4 +39,10 @@ export const SECTION_INTROS = {
     'Préparez vos projets avec nos outils de calcul en ligne pour une vision claire de votre patrimoine.',
   contactHero:
     'Nous sommes à votre disposition pour répondre à vos questions et vous accompagner dans votre projet.',
+  quiSuisJeHero:
+    "Plus de vingt années d'expertise juridique dédiées à la protection et à la transmission de votre patrimoine.",
+  quiSuisJeParcours:
+    "Mon rôle dépasse la simple rédaction d'actes ; il s'agit de bâtir une relation de confiance durable, ancrée dans la clarté et la compréhension profonde de vos enjeux.",
+  quiSuisJeEngagement:
+    "Sous l'impulsion de Maître Laïla GSSIME, notre étude s'engage sur trois piliers fondamentaux : la Rigueur absolue du conseil, la Disponibilité de l'écoute et la Modernité de nos outils de gestion pour un service fluide et transparent.",
 } as const

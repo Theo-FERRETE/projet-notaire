@@ -25,6 +25,22 @@ export async function getPageBySlug(slug: Page['slug']) {
   }
 }
 
+// Type manuel : évite une dépendance dure à payload-types.ts tant que le global n'a pas été régénéré.
+export type SiteSettings = {
+  footerDescription?: string | null
+  footerAddress?: string | null
+  footerEmail?: string | null
+}
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  try {
+    const payload = await getPayload({ config })
+    return (await payload.findGlobal({ slug: 'site-settings' })) as SiteSettings
+  } catch (error) {
+    return payloadUnavailable('les réglages du site', error)
+  }
+}
+
 export function getPageSection(page: Page | null, label: string) {
   return page?.sections?.find((section) => section.label === label && section.enabled !== false) ?? null
 }

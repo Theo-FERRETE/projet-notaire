@@ -46,6 +46,8 @@ export async function ServicesPage() {
 					intro={hero?.intro}
 					image={getSectionImageUrl(hero)}
 					imagePosition={getSectionImageFocalPoint(hero)}
+					backgroundColor={hero?.backgroundColor}
+					textColor={hero?.textColor}
 				/>
 
 				<ServicesList services={services} />
@@ -55,6 +57,8 @@ export async function ServicesPage() {
 					heading={toolsBand?.heading}
 					intro={toolsBand?.intro}
 					tools={tools}
+					backgroundColor={toolsBand?.backgroundColor}
+					textColor={toolsBand?.textColor}
 				/>
 			</main>
 

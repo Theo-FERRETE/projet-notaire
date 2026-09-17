@@ -18,7 +18,7 @@ export function getSiteNavItems(active: string) {
 
 const heroImage = '/qui-suis-je/expertise-notariale.png'
 
-export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, heroImagePosition }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; heroImagePosition?: string }) {
+export function HomeHeader({ navItems, compact = false, heroHeading, heroIntro, heroImage: cmsHeroImage, heroImagePosition }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroIntro?: string; heroImage?: string; heroImagePosition?: string }) {
   const heading = heroHeading ?? 'Un notariat humain et de proximité au cœur d’Aix En Provence'
   const image = cmsHeroImage ?? heroImage
 
@@ -78,9 +78,11 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
         <div className="w-full max-w-[760px] min-w-0">
           <div className="text-brass"><SectionLabel>Excellence juridique</SectionLabel></div>
           <h1 className="font-display mt-[min(2rem,4vh)] max-w-[760px] text-[clamp(42px,5.8vw,74px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
-          {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
-            Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
-          </p> */}
+          {heroIntro ? (
+            <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
+              {heroIntro}
+            </p>
+          ) : null}
           <div className="mt-[min(6rem,10vh)] flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:gap-5">
             <ActionButton filled href="/services">Nos services</ActionButton>
             <ActionButton secondary href="/contact">Prendre rendez-vous</ActionButton>

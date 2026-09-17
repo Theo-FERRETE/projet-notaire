@@ -10,6 +10,7 @@ import sharp from 'sharp'
 import { Articles } from './collections/Articles'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { SiteSettings } from './collections/SiteSettings'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
@@ -48,6 +49,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Articles, Pages],
+  globals: [SiteSettings],
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || 'file:./payload.db',

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 import { HomeFooter } from "@/app/components/homepage/HomeFooter";
 import { getSiteNavItems, HomeHeader } from "@/app/components/homepage/HomeHeader";
-import { getPageBySlug, getPageSection } from "@/lib/payload-server";
+import { getPageBySlug, getPageSection, getSectionImageFocalPoint, getSectionImageUrl } from "@/lib/payload-server";
+import { SECTION_LABELS } from "@/lib/content-keys";
 
 // Contenu géré dans /admin : rendu à chaque requête pour éviter de figer une ancienne version au build.
 export const revalidate = 0;
@@ -32,7 +34,11 @@ const motsCles = ["Patrimoine", "Famille", "Avenir", "Sérénité"];
 
 export default async function QuiSuisJePage() {
   const page = await getPageBySlug("qui-suis-je");
-  const hero = getPageSection(page, "L’excellence au service de l’humain");
+  const hero = getPageSection(page, SECTION_LABELS.quiSuisJeHero);
+  const parcours = getPageSection(page, SECTION_LABELS.quiSuisJeParcours);
+  const engagement = getPageSection(page, SECTION_LABELS.quiSuisJeEngagement);
+  const parcoursImage = getSectionImageUrl(parcours);
+  const parcoursImagePosition = getSectionImageFocalPoint(parcours);
 
   return (
     <div className="flex flex-1 flex-col bg-cream text-ink">
@@ -63,20 +69,24 @@ export default async function QuiSuisJePage() {
             </h1>
             <span aria-hidden className="h-px w-24 bg-gold" />
             <p className="max-w-[672px] text-center text-[18px] leading-[28.8px] text-slate-muted">
-              Plus de vingt années d&apos;expertise juridique dédiées à la
-              protection et à la transmission de votre patrimoine.
+              {hero?.intro ??
+                "Plus de vingt années d'expertise juridique dédiées à la protection et à la transmission de votre patrimoine."}
             </p>
           </div>
         </section>
 
         {/* Un parcours de rigueur */}
-        <section className="bg-sand px-8 py-[120px]">
+        <section
+          className="px-8 py-[120px]"
+          style={{
+            backgroundColor: parcours?.backgroundColor ?? '#f2eee2',
+            color: parcours?.textColor ?? undefined,
+          }}
+        >
           <div className="mx-auto grid w-full max-w-[1280px] gap-8 lg:grid-cols-12">
             <div className="flex flex-col gap-6 self-start lg:col-span-4">
-              <h2 className="font-serif text-[40px] leading-[1.2] text-ink lg:text-[48px] lg:leading-[57.6px]">
-                Un Parcours de
-                <br />
-                Rigueur.
+              <h2 className="font-serif text-[40px] leading-[1.2] lg:text-[48px] lg:leading-[57.6px]">
+                {parcours?.heading ?? "Un Parcours de Rigueur."}
               </h2>
 
               <div
@@ -93,20 +103,24 @@ export default async function QuiSuisJePage() {
 
             <div className="flex flex-col gap-16 lg:col-span-7 lg:col-start-6">
               <div className="flex flex-col gap-6">
-                <blockquote className="border-l-2 border-[rgba(118,90,38,0.3)] py-4 pl-8 text-[18px] leading-[29.25px] text-ink">
-                  «&nbsp;Mon rôle dépasse la simple rédaction d&apos;actes ; il
-                  s&apos;agit de bâtir une relation de confiance durable, ancrée
-                  dans la clarté et la compréhension profonde de vos
-                  enjeux.&nbsp;»
+                <blockquote className="border-l-2 border-[rgba(118,90,38,0.3)] py-4 pl-8 text-[18px] leading-[29.25px]">
+                  «&nbsp;{parcours?.intro ??
+                    "Mon rôle dépasse la simple rédaction d'actes ; il s'agit de bâtir une relation de confiance durable, ancrée dans la clarté et la compréhension profonde de vos enjeux."}&nbsp;»
                 </blockquote>
 
-                <p className="text-base leading-[25.6px] text-ink">
-                  Spécialisée en droit patrimonial de la famille et en droit
-                  international privé, j&apos;accompagne mes clients dans les
-                  moments charnières de leur vie. Mon approche se distingue par
-                  une volonté farouche de rendre le droit accessible, sans
-                  jamais en sacrifier la précision technique.
-                </p>
+                {parcours?.body ? (
+                  <div className="space-y-4 text-base leading-[25.6px] [&_p]:leading-[25.6px]">
+                    <RichText data={parcours.body} />
+                  </div>
+                ) : (
+                  <p className="text-base leading-[25.6px]">
+                    Spécialisée en droit patrimonial de la famille et en droit
+                    international privé, j&apos;accompagne mes clients dans les
+                    moments charnières de leur vie. Mon approche se distingue par
+                    une volonté farouche de rendre le droit accessible, sans
+                    jamais en sacrifier la précision technique.
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col gap-16 pt-[23px] sm:flex-row sm:justify-center">
@@ -130,11 +144,12 @@ export default async function QuiSuisJePage() {
                 style={{ aspectRatio: "696 / 494.81" }}
               >
                 <Image
-                  src="/qui-suis-je/expertise-notariale.png"
+                  src={parcoursImage ?? "/qui-suis-je/expertise-notariale.png"}
                   alt="Illustration de l'expertise notariale"
                   width={1792}
                   height={2390}
                   className="absolute left-0 top-0 h-auto w-full"
+                  style={{ objectPosition: parcoursImagePosition ?? undefined }}
                 />
               </div>
             </div>
@@ -142,18 +157,25 @@ export default async function QuiSuisJePage() {
         </section>
 
         {/* Engagement */}
-        <section className="px-8 py-[120px] lg:px-[192px]">
+        <section
+          className="px-8 py-[120px] lg:px-[192px]"
+          style={{ backgroundColor: engagement?.backgroundColor ?? undefined, color: engagement?.textColor ?? undefined }}
+        >
           <div className="mx-auto flex w-full max-w-[896px] flex-col items-center gap-[23px] border-y border-line py-[65px]">
-            <h2 className="text-center font-serif text-[28px] italic leading-[41.6px] text-ink lg:text-[32px]">
-              L&apos;Engagement de l&apos;Étude
+            <h2 className="text-center font-serif text-[28px] italic leading-[41.6px] lg:text-[32px]">
+              {engagement?.heading ?? "L'Engagement de l'Étude"}
             </h2>
             <p className="max-w-[768px] pb-10 text-center text-[18px] leading-[29.25px] text-slate-muted">
-              Sous l&apos;impulsion de Maître Laïla GSSIME, notre étude
-              s&apos;engage sur trois piliers fondamentaux : la{" "}
-              <strong className="font-bold">Rigueur</strong> absolue du conseil,
-              la <strong className="font-bold">Disponibilité</strong> de
-              l&apos;écoute et la <strong className="font-bold">Modernité</strong>{" "}
-              de nos outils de gestion pour un service fluide et transparent.
+              {engagement?.intro ?? (
+                <>
+                  Sous l&apos;impulsion de Maître Laïla GSSIME, notre étude
+                  s&apos;engage sur trois piliers fondamentaux : la{" "}
+                  <strong className="font-bold">Rigueur</strong> absolue du conseil,
+                  la <strong className="font-bold">Disponibilité</strong> de
+                  l&apos;écoute et la <strong className="font-bold">Modernité</strong>{" "}
+                  de nos outils de gestion pour un service fluide et transparent.
+                </>
+              )}
             </p>
             <Link
               href="/contact"

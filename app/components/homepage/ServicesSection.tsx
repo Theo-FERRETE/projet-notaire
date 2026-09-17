@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 
 type ServiceCard = { title: string; description: string; icon: string }
 
 const familyImage = '/qui-suis-je/expertise-notariale.png'
 
-export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyImage, familyImagePosition }: { serviceCards: ServiceCard[]; heading?: string; familyImage?: string; familyImagePosition?: string }) {
+export function ServicesSection({ serviceCards, heading, intro, body, familyImage: cmsFamilyImage, familyImagePosition, backgroundColor, textColor }: { serviceCards: ServiceCard[]; heading?: string; intro?: string; body?: DefaultTypedEditorState | null; familyImage?: string; familyImagePosition?: string; backgroundColor?: string; textColor?: string }) {
   const family = serviceCards.find((service) => service.title === 'Famille')
   const patrimoine = serviceCards.find((service) => service.title === 'Patrimoine')
   const immobilier = serviceCards.find((service) => service.title === 'Immobilier')
@@ -21,13 +23,21 @@ export function ServicesSection({ serviceCards, heading, familyImage: cmsFamilyI
   ) : null
 
   return (
-    <section className="bg-[#fdfcf7] px-6 py-20 text-ink sm:px-8 sm:py-24 lg:px-12" id="services">
+    <section className="px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ backgroundColor: backgroundColor ?? '#fdfcf7', color: textColor ?? undefined }} id="services">
       <div className="mx-auto max-w-[1280px]">
         <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="mb-4 text-[11px] font-bold uppercase tracking-[1.2px] text-gold">Domaines d’expertise</p>
           <h2 className="font-serif text-[clamp(32px,4vw,46px)] font-medium leading-[1.2]">{heading ?? 'Sécuriser vos projets avec rigueur et clarté.'}</h2>
-          <p className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-slate-muted">Nous collaborons avec d&apos;autres spécialistes et professionnels du droit afin de garantir une approche globale et cohérente.</p>
+          {body ? (
+            <div className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-slate-muted">
+              <RichText data={body} />
+            </div>
+          ) : (
+            <p className="mt-5 max-w-[620px] text-[15px] leading-[1.55] text-slate-muted">
+              {intro ?? "Nous collaborons avec d'autres spécialistes et professionnels du droit afin de garantir une approche globale et cohérente."}
+            </p>
+          )}
         </div>
         <Link href="/services" className="w-fit text-[11px] font-bold uppercase tracking-[1px] text-gold transition-colors hover:text-navy lg:mb-1">Voir tous les services <span aria-hidden="true">→</span></Link>
         </div>

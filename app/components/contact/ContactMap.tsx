@@ -2,6 +2,8 @@ import type { ContactMapView } from './contact-data'
 
 type ContactMapProps = {
 	view: ContactMapView
+	backgroundColor?: string | null
+	textColor?: string | null
 }
 
 /**
@@ -11,11 +13,12 @@ type ContactMapProps = {
  * fond et couleur de texte sont éditables dans le CMS et s'appliquent à
  * toute la largeur du bandeau (comme sur la page d'accueil).
  */
-export function ContactMap({ view }: ContactMapProps) {
+export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps) {
 	return (
 		<section
 			aria-labelledby="map-title"
 			className="w-full"
+			style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
 		>
 			<div className="mx-auto max-w-6xl px-6 py-10 sm:px-12">
 				<div className="mb-4 flex items-end justify-between gap-6">

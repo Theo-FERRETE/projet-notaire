@@ -189,6 +189,47 @@ export const Pages: CollectionConfig = {
       ],
     },
     {
+      name: 'expertiseContent',
+      type: 'group',
+      label: 'Accueil — domaines d’expertise',
+      admin: {
+        condition: (data) => data?.slug === 'home',
+        description:
+          'Cartes affichées dans la section « Domaines d’expertise » de la page d’accueil.',
+      },
+      fields: [
+        {
+          name: 'cards',
+          type: 'array',
+          minRows: 1,
+          labels: { singular: 'Carte', plural: 'Cartes' },
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              label: 'Titre',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              required: true,
+              label: 'Description',
+            },
+            {
+              name: 'icon',
+              type: 'text',
+              defaultValue: '✦',
+              label: 'Icône (caractère)',
+              admin: {
+                description: 'Caractère ou symbole affiché sur la carte, ex. ✦ ▣ ▦ ◈ ◍.',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'valuesContent',
       type: 'group',
       label: 'Accueil — nos valeurs',

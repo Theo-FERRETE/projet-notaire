@@ -8,7 +8,7 @@ import { ServicesSection } from './ServicesSection'
 import { getHomePageData } from './useHomePageData'
 
 export async function HomePage() {
-  const { navItems, serviceCards, footerLinks } = getHomePageData()
+  const { navItems, serviceCards } = getHomePageData()
   const page = await getPageBySlug('home')
   const hero = getPageSection(page, 'Excellence juridique')
   const about = getPageSection(page, 'À propos')
@@ -17,6 +17,11 @@ export async function HomePage() {
   const heroImagePosition = getSectionImageFocalPoint(hero)
   const aboutImagePosition = getSectionImageFocalPoint(about)
   const expertiseImagePosition = getSectionImageFocalPoint(expertise)
+  const cmsServiceCards = page?.expertiseContent?.cards
+  const services =
+    cmsServiceCards && cmsServiceCards.length > 0
+      ? cmsServiceCards.map((card) => ({ title: card.title, description: card.description, icon: card.icon ?? '✦' }))
+      : serviceCards
 
   return (
     <div className="min-h-screen w-full bg-[#fdfcf7] text-ink">
@@ -31,12 +36,16 @@ export async function HomePage() {
           heading={about?.heading ?? undefined}
           image={getSectionImageUrl(about)}
           imagePosition={aboutImagePosition}
+          backgroundColor={about?.backgroundColor ?? undefined}
+          textColor={about?.textColor ?? undefined}
         />
         <ServicesSection
-          serviceCards={serviceCards}
+          serviceCards={services}
           heading={expertise?.heading ?? undefined}
           familyImage={getSectionImageUrl(expertise) ?? heroImage}
           familyImagePosition={expertiseImagePosition ?? heroImagePosition}
+          backgroundColor={expertise?.backgroundColor ?? undefined}
+          textColor={expertise?.textColor ?? undefined}
         />
         <ValuesSection content={page?.valuesContent} />
         <QuoteSection content={page?.methodologyContent} />

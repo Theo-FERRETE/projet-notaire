@@ -91,8 +91,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -261,6 +265,22 @@ export interface Page {
           number: string;
           title: string;
           description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Cartes affichées dans la section « Domaines d’expertise » de la page d’accueil.
+   */
+  expertiseContent?: {
+    cards?:
+      | {
+          title: string;
+          description: string;
+          /**
+           * Caractère ou symbole affiché sur la carte, ex. ✦ ▣ ▦ ◈ ◍.
+           */
+          icon?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -562,6 +582,18 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  expertiseContent?:
+    | T
+    | {
+        cards?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
   valuesContent?:
     | T
     | {
@@ -678,6 +710,32 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Contenu commun affiché sur toutes les pages (pied de page).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  footerDescription?: string | null;
+  footerAddress?: string | null;
+  footerEmail?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  footerDescription?: T;
+  footerAddress?: T;
+  footerEmail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

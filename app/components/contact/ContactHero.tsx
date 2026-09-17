@@ -8,6 +8,8 @@ type ContactHeroProps = {
 	intro?: string | null
 	image?: string | null
 	imagePosition?: string
+	backgroundColor?: string | null
+	textColor?: string | null
 }
 
 /**
@@ -21,6 +23,8 @@ export function ContactHero({
 	intro,
 	image,
 	imagePosition,
+	backgroundColor,
+	textColor,
 }: ContactHeroProps) {
 	const eyebrow = label ?? CONTACT_FALLBACK.hero.eyebrow
 	const title = heading ?? CONTACT_FALLBACK.hero.heading
@@ -42,6 +46,7 @@ export function ContactHero({
 			<section
 				aria-labelledby="contact-title"
 				className="relative w-full overflow-hidden py-20"
+				style={{ color: textColor ?? undefined }}
 			>
 				<Image
 					src={image}
@@ -62,6 +67,7 @@ export function ContactHero({
 		<section
 			aria-labelledby="contact-title"
 			className="relative py-20"
+			style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
 		>
 			<div className="mx-auto max-w-6xl px-6 sm:px-12">{content}</div>
 		</section>

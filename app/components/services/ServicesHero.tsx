@@ -8,6 +8,8 @@ type ServicesHeroProps = {
 	intro?: string | null;
 	image?: string | null;
 	imagePosition?: string;
+	backgroundColor?: string | null;
+	textColor?: string | null;
 };
 
 /**
@@ -21,6 +23,8 @@ export function ServicesHero({
 	intro,
 	image,
 	imagePosition,
+	backgroundColor,
+	textColor,
 }: ServicesHeroProps) {
 	const eyebrow = label ?? FALLBACK_SERVICES_HERO.eyebrow;
 	const title = heading ?? FALLBACK_SERVICES_HERO.heading;
@@ -49,6 +53,7 @@ export function ServicesHero({
 			<section
 				aria-labelledby="services-title"
 				className="relative w-full overflow-hidden py-16 text-center md:py-20"
+				style={{ color: textColor ?? undefined }}
 			>
 				<Image
 					src={image}
@@ -71,6 +76,7 @@ export function ServicesHero({
 		<section
 			aria-labelledby="services-title"
 			className="relative mx-auto max-w-[1280px] px-8 py-16 text-center md:py-20"
+			style={{ backgroundColor: backgroundColor ?? undefined, color: textColor ?? undefined }}
 		>
 			{content}
 		</section>
