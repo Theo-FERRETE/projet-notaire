@@ -1,7 +1,12 @@
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
+
 import type { ContactMapView } from './contact-data'
 
 type ContactMapProps = {
 	view: ContactMapView
+	intro?: string | null
+	body?: DefaultTypedEditorState | null
 	backgroundColor?: string | null
 	textColor?: string | null
 }
@@ -13,7 +18,7 @@ type ContactMapProps = {
  * fond et couleur de texte sont éditables dans le CMS et s'appliquent à
  * toute la largeur du bandeau (comme sur la page d'accueil).
  */
-export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps) {
+export function ContactMap({ view, intro, body, backgroundColor, textColor }: ContactMapProps) {
 	return (
 		<section
 			aria-labelledby="map-title"
@@ -34,6 +39,12 @@ export function ContactMap({ view, backgroundColor, textColor }: ContactMapProps
 						{view.mapsLinkLabel}
 					</a>
 				</div>
+				{intro ? <p className="mb-4 text-sm text-slate-muted">{intro}</p> : null}
+				{body ? (
+					<div className="mb-4 text-sm text-slate-muted">
+						<RichText data={body} />
+					</div>
+				) : null}
 				<div className="relative h-24 overflow-hidden border border-white/10">
 					<div className="flex h-full w-full items-center justify-center bg-[#e4e7f0] p-3 text-center">
 						<a

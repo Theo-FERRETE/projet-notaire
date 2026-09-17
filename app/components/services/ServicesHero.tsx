@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 
 import { FALLBACK_SERVICES_HERO } from "./services-data";
 
@@ -6,6 +8,7 @@ type ServicesHeroProps = {
 	label?: string | null;
 	heading?: string | null;
 	intro?: string | null;
+	body?: DefaultTypedEditorState | null;
 	image?: string | null;
 	imagePosition?: string;
 	backgroundColor?: string | null;
@@ -21,6 +24,7 @@ export function ServicesHero({
 	label,
 	heading,
 	intro,
+	body,
 	image,
 	imagePosition,
 	backgroundColor,
@@ -45,6 +49,11 @@ export function ServicesHero({
 			<p className="mx-auto max-w-3xl font-sans text-lg italic leading-relaxed text-slate-muted">
 				{description}
 			</p>
+			{body ? (
+				<div className="mx-auto mt-6 max-w-3xl text-left font-sans text-base leading-relaxed text-slate-muted">
+					<RichText data={body} />
+				</div>
+			) : null}
 		</>
 	);
 

@@ -1,4 +1,6 @@
 import { ToolIcon } from "@/app/components/icons/ServicesIcons";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 import { FALLBACK_TOOLS_INTRO } from "./services-data";
 import type { ToolView } from "./services-data";
 
@@ -6,6 +8,7 @@ type ToolsBandProps = {
 	label?: string | null;
 	heading?: string | null;
 	intro?: string | null;
+	body?: DefaultTypedEditorState | null;
 	tools: ToolView[];
 	backgroundColor?: string | null;
 	textColor?: string | null;
@@ -22,6 +25,7 @@ export function ToolsBand({
 	label,
 	heading,
 	intro,
+	body,
 	tools,
 	backgroundColor,
 	textColor,
@@ -51,6 +55,11 @@ export function ToolsBand({
 					<p className="mx-auto max-w-xl font-sans text-base leading-relaxed text-slate-muted">
 						{description}
 					</p>
+					{body ? (
+						<div className="mx-auto mt-4 max-w-xl text-left font-sans text-base leading-relaxed text-slate-muted">
+							<RichText data={body} />
+						</div>
+					) : null}
 				</div>
 
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-3">

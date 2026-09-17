@@ -44,6 +44,7 @@ export async function ServicesPage() {
 					label={hero?.label}
 					heading={hero?.heading}
 					intro={hero?.intro}
+					body={hero?.body}
 					image={getSectionImageUrl(hero)}
 					imagePosition={getSectionImageFocalPoint(hero)}
 					backgroundColor={hero?.backgroundColor}
@@ -56,6 +57,7 @@ export async function ServicesPage() {
 					label={toolsBand?.label}
 					heading={toolsBand?.heading}
 					intro={toolsBand?.intro}
+					body={toolsBand?.body}
 					tools={tools}
 					backgroundColor={toolsBand?.backgroundColor}
 					textColor={toolsBand?.textColor}

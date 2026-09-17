@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 
 import { CONTACT_FALLBACK } from './contact-data'
 
@@ -6,6 +8,7 @@ type ContactHeroProps = {
 	label?: string | null
 	heading?: string | null
 	intro?: string | null
+	body?: DefaultTypedEditorState | null
 	image?: string | null
 	imagePosition?: string
 	backgroundColor?: string | null
@@ -21,6 +24,7 @@ export function ContactHero({
 	label,
 	heading,
 	intro,
+	body,
 	image,
 	imagePosition,
 	backgroundColor,
@@ -38,6 +42,11 @@ export function ContactHero({
 			</h1>
 			<div aria-hidden="true" className="h-px w-24 bg-slate-blue" />
 			<p className="max-w-2xl text-base leading-relaxed text-gold-muted">{description}</p>
+			{body ? (
+				<div className="max-w-2xl text-base leading-relaxed text-gold-muted">
+					<RichText data={body} />
+				</div>
+			) : null}
 		</div>
 	)
 

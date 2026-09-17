@@ -28,12 +28,15 @@ export async function HomePage() {
       <HomeHeader
         navItems={navItems}
         heroHeading={hero?.heading ?? undefined}
+        heroIntro={hero?.intro ?? undefined}
         heroImage={heroImage}
         heroImagePosition={heroImagePosition}
       />
       <main>
         <AboutSection
           heading={about?.heading ?? undefined}
+          intro={about?.intro ?? undefined}
+          body={about?.body ?? undefined}
           image={getSectionImageUrl(about)}
           imagePosition={aboutImagePosition}
           backgroundColor={about?.backgroundColor ?? undefined}
@@ -42,6 +45,8 @@ export async function HomePage() {
         <ServicesSection
           serviceCards={services}
           heading={expertise?.heading ?? undefined}
+          intro={expertise?.intro ?? undefined}
+          body={expertise?.body ?? undefined}
           familyImage={getSectionImageUrl(expertise) ?? heroImage}
           familyImagePosition={expertiseImagePosition ?? heroImagePosition}
           backgroundColor={expertise?.backgroundColor ?? undefined}

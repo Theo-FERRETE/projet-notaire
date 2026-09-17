@@ -62,7 +62,7 @@ export default async function QuiSuisJePage() {
 
           <div className="relative flex w-full max-w-[896px] flex-col items-center gap-[23.4px]">
             <p className="text-center font-bold uppercase leading-[16.8px] tracking-[2.4px] text-gold text-[12px]">
-              L&apos;excellence au service de l&apos;humain
+              {hero?.label ?? "L'excellence au service de l'humain"}
             </p>
             <h1 className="text-center font-serif text-[40px] leading-tight tracking-[-1.28px] text-ink sm:text-[52px] lg:text-[64px] lg:leading-[80px]">
               {hero?.heading ?? "Maître Laïla GSSIME"}
@@ -72,6 +72,11 @@ export default async function QuiSuisJePage() {
               {hero?.intro ??
                 "Plus de vingt années d'expertise juridique dédiées à la protection et à la transmission de votre patrimoine."}
             </p>
+            {hero?.body ? (
+              <div className="max-w-[672px] text-center text-[16px] leading-[25.6px] text-slate-muted">
+                <RichText data={hero.body} />
+              </div>
+            ) : null}
           </div>
         </section>
 
@@ -177,6 +182,11 @@ export default async function QuiSuisJePage() {
                 </>
               )}
             </p>
+            {engagement?.body ? (
+              <div className="max-w-[768px] pb-10 text-center text-[16px] leading-[25.6px] text-slate-muted">
+                <RichText data={engagement.body} />
+              </div>
+            ) : null}
             <Link
               href="/contact"
               className="border border-gold px-[49px] py-[17px] text-center text-xs font-bold uppercase leading-[16.8px] tracking-[1.2px] text-gold transition-colors hover:bg-gold hover:text-cream"
