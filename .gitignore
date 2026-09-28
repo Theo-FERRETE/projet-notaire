@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# base de donnees locale Payload (peut contenir des donnees personnelles)
+*.db
+*.db-*
+
 # debug
 npm-debug.log*
 yarn-debug.log*

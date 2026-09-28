@@ -92,11 +92,11 @@ export async function generateMetadata(
   props: PageProps<"/blog/[slug]">,
 ): Promise<Metadata> {
   const { slug } = await props.params;
-  const article = getArticleDetail(slug);
+  // Un article publié dans Payload prime sur un article de démonstration au même slug.
+  const payloadArticle = await getPublishedArticleBySlug(slug);
+  const article = payloadArticle ? null : getArticleDetail(slug);
 
   if (!article) {
-    const payloadArticle = await getPublishedArticleBySlug(slug);
-
     if (!payloadArticle) {
       return { title: "Article introuvable" };
     }
@@ -142,11 +142,11 @@ export async function generateMetadata(
 
 export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
-  const article = getArticleDetail(slug);
+  // Un article publié dans Payload prime sur un article de démonstration au même slug.
+  const payloadArticle = await getPublishedArticleBySlug(slug);
+  const article = payloadArticle ? null : getArticleDetail(slug);
 
   if (!article) {
-    const payloadArticle = await getPublishedArticleBySlug(slug);
-
     if (!payloadArticle) {
       notFound();
     }
