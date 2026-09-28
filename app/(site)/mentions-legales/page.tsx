@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: 'Hébergement',
-    content: <p>Le nom et les coordonnées de l’hébergeur seront renseignés après confirmation du prestataire d’hébergement : <strong>[À compléter]</strong>.</p>,
+    content: <p>Le nom et les coordonnées de l’hébergeur seront renseignés après confirmation du prestataire d’hébergement : <strong>[À compléter par l'office]</strong>.</p>,
   },
   {
     title: 'Propriété intellectuelle',
