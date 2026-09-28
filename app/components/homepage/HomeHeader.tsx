@@ -16,7 +16,7 @@ export function getSiteNavItems(active: string) {
   ]
 }
 
-const heroImage = '/accueil/gemini_hero_section.png'
+const heroImage = '/qui-suis-je/expertise-notariale.png'
 
 export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: cmsHeroImage, heroImagePosition }: { navItems: NavItem[]; compact?: boolean; heroHeading?: string; heroImage?: string; heroImagePosition?: string }) {
   const heading = heroHeading ?? 'Un notariat humain et de proximité au cœur d’Aix En Provence'
@@ -24,8 +24,11 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
 
   return (
     <header
-      className={`relative text-ink ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'flex flex-col overflow-visible bg-[#fdfcf7]'}`}
+      className={`relative text-ink ${compact ? 'overflow-visible border-b border-black/10 bg-[#fdfcf7]' : 'flex min-h-[85vh] flex-col overflow-visible sm:min-h-screen'}`}
     >
+      {!compact ? <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: heroImagePosition ?? undefined }} /> : null}
+      {!compact ? <div className="absolute inset-0 bg-white/5" /> : null}
+
       <div className="relative z-50 flex min-h-[70px] items-center justify-between gap-3 border-b border-white/20 bg-[#fdfcf7]/30 px-[4.6vw] backdrop-blur-sm sm:gap-6">
         <Link href="/" className="flex h-14 w-28 shrink-0 items-center sm:h-16 sm:w-36" aria-label="Accueil - Laila Gssime">
           <Image
@@ -71,35 +74,22 @@ export function HomeHeader({ navItems, compact = false, heroHeading, heroImage: 
         </div>
       </div>
 
-      {!compact ? (
-        <div className="relative z-10 grid w-full flex-1 items-center gap-10 px-[4.6vw] py-12 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
-          <div className="min-w-0">
-            <div className="text-brass"><SectionLabel>Excellence juridique</SectionLabel></div>
-            <h1 className="font-display mt-[min(2rem,4vh)] max-w-[760px] text-[clamp(42px,5.8vw,74px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
-            {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
-              Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
-            </p> */}
-            <div className="mt-[min(6rem,10vh)] flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:gap-5">
-              <ActionButton filled href="/services">Nos services</ActionButton>
-              <ActionButton secondary href="/contact">Prendre rendez-vous</ActionButton>
-            </div>
-          </div>
-
-          <div className="relative h-[280px] w-full overflow-hidden rounded-2xl sm:h-[380px] lg:h-[480px]">
-            <Image
-              src={image}
-              alt="Étude notariale Aix-en-Provence"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="rounded-2xl object-cover"
-              style={{ objectPosition: heroImagePosition ?? undefined }}
-            />
+      {!compact ? <div className="relative z-10 flex w-full flex-1 items-center px-[4.6vw] pt-10 sm:pt-0">
+        <div className="w-full max-w-[760px] min-w-0">
+          <div className="text-brass"><SectionLabel>Excellence juridique</SectionLabel></div>
+          <h1 className="font-display mt-[min(2rem,4vh)] max-w-[760px] text-[clamp(42px,5.8vw,74px)] font-semibold leading-[1.12] tracking-[-1.5px]">{heading}</h1>
+          {/* <p className="mt-7 max-w-[570px] text-[16px] font-semibold leading-[1.55] text-ink">
+            Accompagnement sur-mesure et expertise rigoureuse pour sécuriser vos projets de vie et de transmission.
+          </p> */}
+          <div className="mt-[min(6rem,10vh)] flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:gap-5">
+            <ActionButton filled href="/services">Nos services</ActionButton>
+            <ActionButton secondary href="/contact">Prendre rendez-vous</ActionButton>
           </div>
         </div>
-      ) : null}
+      </div> : null}
 
-      {!compact ? <div className="relative z-10 flex justify-center gap-3 pb-8 opacity-70" aria-hidden="true">
+      {!compact ? <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 opacity-70" aria-hidden="true">
+        <span className="rotate-90 text-[10px] uppercase tracking-[1px]">Scroll</span>
         <span className="h-12 w-px bg-gradient-to-b from-[#c4a000] to-transparent" />
       </div> : null}
     </header>
