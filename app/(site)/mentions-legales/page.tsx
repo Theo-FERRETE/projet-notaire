@@ -21,7 +21,7 @@ const sections = [
           <br />
           E-mail : <a href="mailto:laila.gssime@notaires.fr">laila.gssime@notaires.fr</a>
         </p>
-        <p>Forme juridique, numéro SIREN/SIRET et numéro d’identification de l’office : <strong>[À compléter par l’office]</strong></p>
+        <p>Forme juridique, numéro SIREN/SIRET et numéro d’identification de l’office : <strong>Siren : 101082311 / Siret : 10108231100016</strong></p>
       </>
     ),
   },
@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: 'Hébergement',
-    content: <p>Le nom et les coordonnées de l’hébergeur seront renseignés après confirmation du prestataire d’hébergement : <strong>[À compléter par l'office]</strong>.</p>,
+    content: <p>Le nom et les coordonnées de l’hébergeur seront renseignés après confirmation du prestataire d’hébergement : <strong>OVH SAS, 2 rue Kellermann, 59100 Roubaix, France. Téléphone : 1007.</strong>.</p>,
   },
   {
     title: 'Propriété intellectuelle',
