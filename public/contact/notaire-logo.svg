@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 86" role="img" aria-labelledby="title desc">
+  <title id="title">Notaire</title>
+  <desc id="desc">Logo stylisé de l'étude notariale</desc>
+  <g fill="none" stroke="#1687b0" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 42c-7-11-3-23 8-28 9-4 20 1 24 10" stroke-width="3"/>
+    <path d="M38 17c-2-7 3-12 9-14M58 24c6-5 13-3 16 3M24 29c-6-2-11 2-12 8" stroke-width="3"/>
+    <path d="M29 51c8 5 18 5 27-1 8-5 15-6 25-1-6 10-17 17-30 17-11 0-20-5-26-15Z" fill="#1687b0" stroke-width="2"/>
+    <path d="M43 42c4-5 10-7 16-5-2 7-8 11-16 12" fill="#fff" stroke-width="2"/>
+    <path d="M18 54c-4-1-8-4-10-8M70 19l5-5M83 31l6-1" stroke-width="3"/>
+  </g>
+  <text x="48" y="82" text-anchor="middle" fill="#303030" font-family="Georgia, serif" font-size="18" font-style="italic">Notaire</text>
+</svg>

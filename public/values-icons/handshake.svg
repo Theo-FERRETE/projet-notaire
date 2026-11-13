@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Bouclier de protection et de confiance (Bleu marine #10286e) -->
+  <path d="M12 21.5C6.5 19.5 4 14.5 4 8.5V4.75L12 2l8 2.75V8.5c0 6-2.5 11-8 13z" stroke="#10286e" stroke-width="1.5"/>
+  <!-- Coche / Sceau de validation juridique au centre (Doré d'origine #c9b287) -->
+  <path d="m8.5 11.5 2.5 2.5 5-5" stroke="#c9b287" stroke-width="1.75"/>
+</svg>
